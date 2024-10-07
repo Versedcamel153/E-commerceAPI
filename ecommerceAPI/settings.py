@@ -24,7 +24,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-50gy@vu6nwh@c_w#t%kezab4whf_-605@8=fhw3f8oj2fpebu7'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = FALSE
+DEBUG = False
 
 ALLOWED_HOSTS = ['django-ecommerce-api-9n1o.onrender.com']
 
