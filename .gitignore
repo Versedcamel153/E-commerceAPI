@@ -1,0 +1,6 @@
+.venv/
+*.bat
+build/
+source/
+Makefile
+*.yaml

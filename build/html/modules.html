@@ -1,0 +1,505 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Products &mdash; EcommerceAPI 0 documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=19f00094" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="_static/jquery.js?v=5d32c60e"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="_static/documentation_options.js?v=8dde47fa"></script>
+        <script src="_static/doctools.js?v=9a2dae69"></script>
+        <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="prev" title="EcommerceAPI documentation" href="index.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            EcommerceAPI
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Products</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#products.views.AddToCartView"><code class="docutils literal notranslate"><span class="pre">AddToCartView</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#products.views.CartDetailView"><code class="docutils literal notranslate"><span class="pre">CartDetailView</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#products.views.CartDetailView.get_object"><code class="docutils literal notranslate"><span class="pre">CartDetailView.get_object()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#products.views.CartDetailView.serializer_class"><code class="docutils literal notranslate"><span class="pre">CartDetailView.serializer_class</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#products.views.CategoryListCreateView"><code class="docutils literal notranslate"><span class="pre">CategoryListCreateView</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#products.views.CategoryListCreateView.serializer_class"><code class="docutils literal notranslate"><span class="pre">CategoryListCreateView.serializer_class</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#products.views.CategoryRetrieveUpdateDestroyView"><code class="docutils literal notranslate"><span class="pre">CategoryRetrieveUpdateDestroyView</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#products.views.CategoryRetrieveUpdateDestroyView.serializer_class"><code class="docutils literal notranslate"><span class="pre">CategoryRetrieveUpdateDestroyView.serializer_class</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#products.views.CustomPagination"><code class="docutils literal notranslate"><span class="pre">CustomPagination</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#products.views.DecreaseCartItemQuantityView"><code class="docutils literal notranslate"><span class="pre">DecreaseCartItemQuantityView</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#products.views.OrderCreateView"><code class="docutils literal notranslate"><span class="pre">OrderCreateView</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#products.views.OrderCreateView.perform_create"><code class="docutils literal notranslate"><span class="pre">OrderCreateView.perform_create()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#products.views.OrderCreateView.serializer_class"><code class="docutils literal notranslate"><span class="pre">OrderCreateView.serializer_class</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#products.views.OrderDetailView"><code class="docutils literal notranslate"><span class="pre">OrderDetailView</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#products.views.OrderDetailView.get_queryset"><code class="docutils literal notranslate"><span class="pre">OrderDetailView.get_queryset()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#products.views.OrderDetailView.serializer_class"><code class="docutils literal notranslate"><span class="pre">OrderDetailView.serializer_class</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#products.views.OrderListView"><code class="docutils literal notranslate"><span class="pre">OrderListView</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#products.views.OrderListView.serializer_class"><code class="docutils literal notranslate"><span class="pre">OrderListView.serializer_class</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#products.views.ProductCreateView"><code class="docutils literal notranslate"><span class="pre">ProductCreateView</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#products.views.ProductCreateView.serializer_class"><code class="docutils literal notranslate"><span class="pre">ProductCreateView.serializer_class</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#products.views.ProductDeleteView"><code class="docutils literal notranslate"><span class="pre">ProductDeleteView</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#products.views.ProductDeleteView.serializer_class"><code class="docutils literal notranslate"><span class="pre">ProductDeleteView.serializer_class</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#products.views.ProductDetailView"><code class="docutils literal notranslate"><span class="pre">ProductDetailView</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#products.views.ProductDetailView.serializer_class"><code class="docutils literal notranslate"><span class="pre">ProductDetailView.serializer_class</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#products.views.ProductListView"><code class="docutils literal notranslate"><span class="pre">ProductListView</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#products.views.ProductListView.filterset_class"><code class="docutils literal notranslate"><span class="pre">ProductListView.filterset_class</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#products.views.ProductListView.pagination_class"><code class="docutils literal notranslate"><span class="pre">ProductListView.pagination_class</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#products.views.ProductListView.serializer_class"><code class="docutils literal notranslate"><span class="pre">ProductListView.serializer_class</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#products.views.ProductUpdateView"><code class="docutils literal notranslate"><span class="pre">ProductUpdateView</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#products.views.ProductUpdateView.serializer_class"><code class="docutils literal notranslate"><span class="pre">ProductUpdateView.serializer_class</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#products.views.RemoveCartItemView"><code class="docutils literal notranslate"><span class="pre">RemoveCartItemView</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#products.views.ReviewCreateView"><code class="docutils literal notranslate"><span class="pre">ReviewCreateView</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#products.views.ReviewCreateView.perform_create"><code class="docutils literal notranslate"><span class="pre">ReviewCreateView.perform_create()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#products.views.ReviewCreateView.serializer_class"><code class="docutils literal notranslate"><span class="pre">ReviewCreateView.serializer_class</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#products.views.ReviewDeleteView"><code class="docutils literal notranslate"><span class="pre">ReviewDeleteView</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#products.views.ReviewDeleteView.get_object"><code class="docutils literal notranslate"><span class="pre">ReviewDeleteView.get_object()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#products.views.ReviewDeleteView.serializer_class"><code class="docutils literal notranslate"><span class="pre">ReviewDeleteView.serializer_class</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#products.views.ReviewDetail"><code class="docutils literal notranslate"><span class="pre">ReviewDetail</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#products.views.ReviewDetail.get_object"><code class="docutils literal notranslate"><span class="pre">ReviewDetail.get_object()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#products.views.ReviewDetail.serializer_class"><code class="docutils literal notranslate"><span class="pre">ReviewDetail.serializer_class</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#products.views.ReviewListView"><code class="docutils literal notranslate"><span class="pre">ReviewListView</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#products.views.ReviewListView.get_queryset"><code class="docutils literal notranslate"><span class="pre">ReviewListView.get_queryset()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#products.views.ReviewListView.serializer_class"><code class="docutils literal notranslate"><span class="pre">ReviewListView.serializer_class</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#products.views.ReviewUpdateView"><code class="docutils literal notranslate"><span class="pre">ReviewUpdateView</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#products.views.ReviewUpdateView.get_object"><code class="docutils literal notranslate"><span class="pre">ReviewUpdateView.get_object()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#products.views.ReviewUpdateView.serializer_class"><code class="docutils literal notranslate"><span class="pre">ReviewUpdateView.serializer_class</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="#module-users.views">Users</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#users.views.UserListCreateView"><code class="docutils literal notranslate"><span class="pre">UserListCreateView</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#users.views.UserListCreateView.serializer_class"><code class="docutils literal notranslate"><span class="pre">UserListCreateView.serializer_class</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#users.views.UserRetrieveUpdateDestroyView"><code class="docutils literal notranslate"><span class="pre">UserRetrieveUpdateDestroyView</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#users.views.UserRetrieveUpdateDestroyView.serializer_class"><code class="docutils literal notranslate"><span class="pre">UserRetrieveUpdateDestroyView.serializer_class</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">EcommerceAPI</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Products</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/modules.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="module-products.views">
+<span id="products"></span><h1>Products<a class="headerlink" href="#module-products.views" title="Link to this heading"></a></h1>
+<dl class="py class">
+<dt class="sig sig-object py" id="products.views.AddToCartView">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">products.views.</span></span><span class="sig-name descname"><span class="pre">AddToCartView</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/products/views.html#AddToCartView"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#products.views.AddToCartView" title="Link to this definition"></a></dt>
+<dd><p>View for adding a product to the user’s cart.</p>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="products.views.CartDetailView">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">products.views.</span></span><span class="sig-name descname"><span class="pre">CartDetailView</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/products/views.html#CartDetailView"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#products.views.CartDetailView" title="Link to this definition"></a></dt>
+<dd><p>View for retrieving and updating the user’s cart.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="products.views.CartDetailView.get_object">
+<span class="sig-name descname"><span class="pre">get_object</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/products/views.html#CartDetailView.get_object"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#products.views.CartDetailView.get_object" title="Link to this definition"></a></dt>
+<dd><p>Retrieve the cart associated with the authenticated user.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="products.views.CartDetailView.serializer_class">
+<span class="sig-name descname"><span class="pre">serializer_class</span></span><a class="headerlink" href="#products.views.CartDetailView.serializer_class" title="Link to this definition"></a></dt>
+<dd><p>alias of <code class="xref py py-class docutils literal notranslate"><span class="pre">CartSerializer</span></code></p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="products.views.CategoryListCreateView">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">products.views.</span></span><span class="sig-name descname"><span class="pre">CategoryListCreateView</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/products/views.html#CategoryListCreateView"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#products.views.CategoryListCreateView" title="Link to this definition"></a></dt>
+<dd><p>View for listing all categories and creating a new category.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="products.views.CategoryListCreateView.serializer_class">
+<span class="sig-name descname"><span class="pre">serializer_class</span></span><a class="headerlink" href="#products.views.CategoryListCreateView.serializer_class" title="Link to this definition"></a></dt>
+<dd><p>alias of <code class="xref py py-class docutils literal notranslate"><span class="pre">CategorySerializer</span></code></p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="products.views.CategoryRetrieveUpdateDestroyView">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">products.views.</span></span><span class="sig-name descname"><span class="pre">CategoryRetrieveUpdateDestroyView</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/products/views.html#CategoryRetrieveUpdateDestroyView"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#products.views.CategoryRetrieveUpdateDestroyView" title="Link to this definition"></a></dt>
+<dd><p>View for retrieving, updating, and deleting a specific category.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="products.views.CategoryRetrieveUpdateDestroyView.serializer_class">
+<span class="sig-name descname"><span class="pre">serializer_class</span></span><a class="headerlink" href="#products.views.CategoryRetrieveUpdateDestroyView.serializer_class" title="Link to this definition"></a></dt>
+<dd><p>alias of <code class="xref py py-class docutils literal notranslate"><span class="pre">CategorySerializer</span></code></p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="products.views.CustomPagination">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">products.views.</span></span><span class="sig-name descname"><span class="pre">CustomPagination</span></span><a class="reference internal" href="_modules/products/views.html#CustomPagination"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#products.views.CustomPagination" title="Link to this definition"></a></dt>
+<dd><p>Custom pagination class to define page size settings.</p>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="products.views.DecreaseCartItemQuantityView">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">products.views.</span></span><span class="sig-name descname"><span class="pre">DecreaseCartItemQuantityView</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/products/views.html#DecreaseCartItemQuantityView"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#products.views.DecreaseCartItemQuantityView" title="Link to this definition"></a></dt>
+<dd><p>View for decreasing the quantity of a specific item in the cart.</p>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="products.views.OrderCreateView">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">products.views.</span></span><span class="sig-name descname"><span class="pre">OrderCreateView</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/products/views.html#OrderCreateView"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#products.views.OrderCreateView" title="Link to this definition"></a></dt>
+<dd><p>View for creating a new order.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="products.views.OrderCreateView.perform_create">
+<span class="sig-name descname"><span class="pre">perform_create</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">serializer</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/products/views.html#OrderCreateView.perform_create"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#products.views.OrderCreateView.perform_create" title="Link to this definition"></a></dt>
+<dd><p>Create an order associated with the user’s cart.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="products.views.OrderCreateView.serializer_class">
+<span class="sig-name descname"><span class="pre">serializer_class</span></span><a class="headerlink" href="#products.views.OrderCreateView.serializer_class" title="Link to this definition"></a></dt>
+<dd><p>alias of <code class="xref py py-class docutils literal notranslate"><span class="pre">OrderSerializer</span></code></p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="products.views.OrderDetailView">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">products.views.</span></span><span class="sig-name descname"><span class="pre">OrderDetailView</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/products/views.html#OrderDetailView"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#products.views.OrderDetailView" title="Link to this definition"></a></dt>
+<dd><p>View for retrieving and updating a specific order.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="products.views.OrderDetailView.get_queryset">
+<span class="sig-name descname"><span class="pre">get_queryset</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/products/views.html#OrderDetailView.get_queryset"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#products.views.OrderDetailView.get_queryset" title="Link to this definition"></a></dt>
+<dd><p>Override to filter orders by the authenticated user.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="products.views.OrderDetailView.serializer_class">
+<span class="sig-name descname"><span class="pre">serializer_class</span></span><a class="headerlink" href="#products.views.OrderDetailView.serializer_class" title="Link to this definition"></a></dt>
+<dd><p>alias of <code class="xref py py-class docutils literal notranslate"><span class="pre">OrderSerializer</span></code></p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="products.views.OrderListView">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">products.views.</span></span><span class="sig-name descname"><span class="pre">OrderListView</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/products/views.html#OrderListView"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#products.views.OrderListView" title="Link to this definition"></a></dt>
+<dd><p>View for listing all orders.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="products.views.OrderListView.serializer_class">
+<span class="sig-name descname"><span class="pre">serializer_class</span></span><a class="headerlink" href="#products.views.OrderListView.serializer_class" title="Link to this definition"></a></dt>
+<dd><p>alias of <code class="xref py py-class docutils literal notranslate"><span class="pre">OrderSerializer</span></code></p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="products.views.ProductCreateView">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">products.views.</span></span><span class="sig-name descname"><span class="pre">ProductCreateView</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/products/views.html#ProductCreateView"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#products.views.ProductCreateView" title="Link to this definition"></a></dt>
+<dd><p>View for creating a new product.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="products.views.ProductCreateView.serializer_class">
+<span class="sig-name descname"><span class="pre">serializer_class</span></span><a class="headerlink" href="#products.views.ProductCreateView.serializer_class" title="Link to this definition"></a></dt>
+<dd><p>alias of <code class="xref py py-class docutils literal notranslate"><span class="pre">ProductSerializer</span></code></p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="products.views.ProductDeleteView">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">products.views.</span></span><span class="sig-name descname"><span class="pre">ProductDeleteView</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/products/views.html#ProductDeleteView"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#products.views.ProductDeleteView" title="Link to this definition"></a></dt>
+<dd><p>View for deleting a product.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="products.views.ProductDeleteView.serializer_class">
+<span class="sig-name descname"><span class="pre">serializer_class</span></span><a class="headerlink" href="#products.views.ProductDeleteView.serializer_class" title="Link to this definition"></a></dt>
+<dd><p>alias of <code class="xref py py-class docutils literal notranslate"><span class="pre">ProductSerializer</span></code></p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="products.views.ProductDetailView">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">products.views.</span></span><span class="sig-name descname"><span class="pre">ProductDetailView</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/products/views.html#ProductDetailView"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#products.views.ProductDetailView" title="Link to this definition"></a></dt>
+<dd><p>View for retrieving details of a specific product.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="products.views.ProductDetailView.serializer_class">
+<span class="sig-name descname"><span class="pre">serializer_class</span></span><a class="headerlink" href="#products.views.ProductDetailView.serializer_class" title="Link to this definition"></a></dt>
+<dd><p>alias of <code class="xref py py-class docutils literal notranslate"><span class="pre">ProductSerializer</span></code></p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="products.views.ProductListView">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">products.views.</span></span><span class="sig-name descname"><span class="pre">ProductListView</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/products/views.html#ProductListView"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#products.views.ProductListView" title="Link to this definition"></a></dt>
+<dd><p>View for listing all products with pagination and filtering.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="products.views.ProductListView.filterset_class">
+<span class="sig-name descname"><span class="pre">filterset_class</span></span><a class="headerlink" href="#products.views.ProductListView.filterset_class" title="Link to this definition"></a></dt>
+<dd><p>alias of <code class="xref py py-class docutils literal notranslate"><span class="pre">ProductFilter</span></code></p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="products.views.ProductListView.pagination_class">
+<span class="sig-name descname"><span class="pre">pagination_class</span></span><a class="headerlink" href="#products.views.ProductListView.pagination_class" title="Link to this definition"></a></dt>
+<dd><p>alias of <a class="reference internal" href="#products.views.CustomPagination" title="products.views.CustomPagination"><code class="xref py py-class docutils literal notranslate"><span class="pre">CustomPagination</span></code></a></p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="products.views.ProductListView.serializer_class">
+<span class="sig-name descname"><span class="pre">serializer_class</span></span><a class="headerlink" href="#products.views.ProductListView.serializer_class" title="Link to this definition"></a></dt>
+<dd><p>alias of <code class="xref py py-class docutils literal notranslate"><span class="pre">ProductSerializer</span></code></p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="products.views.ProductUpdateView">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">products.views.</span></span><span class="sig-name descname"><span class="pre">ProductUpdateView</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/products/views.html#ProductUpdateView"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#products.views.ProductUpdateView" title="Link to this definition"></a></dt>
+<dd><p>View for updating an existing product.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="products.views.ProductUpdateView.serializer_class">
+<span class="sig-name descname"><span class="pre">serializer_class</span></span><a class="headerlink" href="#products.views.ProductUpdateView.serializer_class" title="Link to this definition"></a></dt>
+<dd><p>alias of <code class="xref py py-class docutils literal notranslate"><span class="pre">ProductSerializer</span></code></p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="products.views.RemoveCartItemView">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">products.views.</span></span><span class="sig-name descname"><span class="pre">RemoveCartItemView</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/products/views.html#RemoveCartItemView"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#products.views.RemoveCartItemView" title="Link to this definition"></a></dt>
+<dd><p>View for removing a specific item from the cart.</p>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="products.views.ReviewCreateView">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">products.views.</span></span><span class="sig-name descname"><span class="pre">ReviewCreateView</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/products/views.html#ReviewCreateView"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#products.views.ReviewCreateView" title="Link to this definition"></a></dt>
+<dd><p>View for creating a new review for a specific product.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="products.views.ReviewCreateView.perform_create">
+<span class="sig-name descname"><span class="pre">perform_create</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">serializer</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/products/views.html#ReviewCreateView.perform_create"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#products.views.ReviewCreateView.perform_create" title="Link to this definition"></a></dt>
+<dd><p>Associate the review with the product and user upon creation.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="products.views.ReviewCreateView.serializer_class">
+<span class="sig-name descname"><span class="pre">serializer_class</span></span><a class="headerlink" href="#products.views.ReviewCreateView.serializer_class" title="Link to this definition"></a></dt>
+<dd><p>alias of <code class="xref py py-class docutils literal notranslate"><span class="pre">ReviewSerializer</span></code></p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="products.views.ReviewDeleteView">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">products.views.</span></span><span class="sig-name descname"><span class="pre">ReviewDeleteView</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/products/views.html#ReviewDeleteView"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#products.views.ReviewDeleteView" title="Link to this definition"></a></dt>
+<dd><p>View for deleting a specific review.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="products.views.ReviewDeleteView.get_object">
+<span class="sig-name descname"><span class="pre">get_object</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/products/views.html#ReviewDeleteView.get_object"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#products.views.ReviewDeleteView.get_object" title="Link to this definition"></a></dt>
+<dd><p>Override to retrieve review by product and review ID for deletion.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="products.views.ReviewDeleteView.serializer_class">
+<span class="sig-name descname"><span class="pre">serializer_class</span></span><a class="headerlink" href="#products.views.ReviewDeleteView.serializer_class" title="Link to this definition"></a></dt>
+<dd><p>alias of <code class="xref py py-class docutils literal notranslate"><span class="pre">ReviewSerializer</span></code></p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="products.views.ReviewDetail">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">products.views.</span></span><span class="sig-name descname"><span class="pre">ReviewDetail</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/products/views.html#ReviewDetail"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#products.views.ReviewDetail" title="Link to this definition"></a></dt>
+<dd><p>View for retrieving a specific review.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="products.views.ReviewDetail.get_object">
+<span class="sig-name descname"><span class="pre">get_object</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/products/views.html#ReviewDetail.get_object"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#products.views.ReviewDetail.get_object" title="Link to this definition"></a></dt>
+<dd><p>Override to retrieve review by product and review ID.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="products.views.ReviewDetail.serializer_class">
+<span class="sig-name descname"><span class="pre">serializer_class</span></span><a class="headerlink" href="#products.views.ReviewDetail.serializer_class" title="Link to this definition"></a></dt>
+<dd><p>alias of <code class="xref py py-class docutils literal notranslate"><span class="pre">ReviewSerializer</span></code></p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="products.views.ReviewListView">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">products.views.</span></span><span class="sig-name descname"><span class="pre">ReviewListView</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/products/views.html#ReviewListView"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#products.views.ReviewListView" title="Link to this definition"></a></dt>
+<dd><p>View for listing all reviews for a specific product.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="products.views.ReviewListView.get_queryset">
+<span class="sig-name descname"><span class="pre">get_queryset</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/products/views.html#ReviewListView.get_queryset"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#products.views.ReviewListView.get_queryset" title="Link to this definition"></a></dt>
+<dd><p>Override to filter reviews by product ID.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="products.views.ReviewListView.serializer_class">
+<span class="sig-name descname"><span class="pre">serializer_class</span></span><a class="headerlink" href="#products.views.ReviewListView.serializer_class" title="Link to this definition"></a></dt>
+<dd><p>alias of <code class="xref py py-class docutils literal notranslate"><span class="pre">ReviewSerializer</span></code></p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="products.views.ReviewUpdateView">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">products.views.</span></span><span class="sig-name descname"><span class="pre">ReviewUpdateView</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/products/views.html#ReviewUpdateView"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#products.views.ReviewUpdateView" title="Link to this definition"></a></dt>
+<dd><p>View for updating a specific review.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="products.views.ReviewUpdateView.get_object">
+<span class="sig-name descname"><span class="pre">get_object</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/products/views.html#ReviewUpdateView.get_object"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#products.views.ReviewUpdateView.get_object" title="Link to this definition"></a></dt>
+<dd><p>Override to retrieve review by product and review ID for update.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="products.views.ReviewUpdateView.serializer_class">
+<span class="sig-name descname"><span class="pre">serializer_class</span></span><a class="headerlink" href="#products.views.ReviewUpdateView.serializer_class" title="Link to this definition"></a></dt>
+<dd><p>alias of <code class="xref py py-class docutils literal notranslate"><span class="pre">ReviewSerializer</span></code></p>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-users.views">
+<span id="users"></span><h1>Users<a class="headerlink" href="#module-users.views" title="Link to this heading"></a></h1>
+<dl class="py class">
+<dt class="sig sig-object py" id="users.views.UserListCreateView">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">users.views.</span></span><span class="sig-name descname"><span class="pre">UserListCreateView</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/users/views.html#UserListCreateView"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#users.views.UserListCreateView" title="Link to this definition"></a></dt>
+<dd><p>View to list all users or create a new user.
+Accessible only to authenticated users.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="users.views.UserListCreateView.serializer_class">
+<span class="sig-name descname"><span class="pre">serializer_class</span></span><a class="headerlink" href="#users.views.UserListCreateView.serializer_class" title="Link to this definition"></a></dt>
+<dd><p>alias of <code class="xref py py-class docutils literal notranslate"><span class="pre">UserSerializer</span></code></p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="users.views.UserRetrieveUpdateDestroyView">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">users.views.</span></span><span class="sig-name descname"><span class="pre">UserRetrieveUpdateDestroyView</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/users/views.html#UserRetrieveUpdateDestroyView"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#users.views.UserRetrieveUpdateDestroyView" title="Link to this definition"></a></dt>
+<dd><p>View to retrieve, update, or delete a user by ID.
+Accessible only to authenticated users.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="users.views.UserRetrieveUpdateDestroyView.serializer_class">
+<span class="sig-name descname"><span class="pre">serializer_class</span></span><a class="headerlink" href="#users.views.UserRetrieveUpdateDestroyView.serializer_class" title="Link to this definition"></a></dt>
+<dd><p>alias of <code class="xref py py-class docutils literal notranslate"><span class="pre">UserSerializer</span></code></p>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="index.html" class="btn btn-neutral float-left" title="EcommerceAPI documentation" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, Farid Seidu.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
