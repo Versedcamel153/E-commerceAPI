@@ -53,9 +53,9 @@
 
 ## 2. Product API
 
-### 2.1 List/Create Products
+### 2.1 Create Products
 
-- **Endpoint:** `/products/`
+- **Endpoint:** `/products/create/`
 - **Method:** `GET`, `POST`
 - **Description:** List all products or create a new product.
 
