@@ -1,4 +1,6 @@
 from django.urls import path
+from django.conf import settings
+from django.conf.urls.static import static
 from .views import (
     ProductListView,
     ProductDetailView,
@@ -42,3 +44,5 @@ urlpatterns = [
     path('cart/<int:pk>/remove/', RemoveCartItemView.as_view(), name='remove-cart-item'),
     path('cart/<int:pk>/decrease/', DecreaseCartItemQuantityView.as_view(), name='decrease-cart-item-quantity'),
 ]
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
