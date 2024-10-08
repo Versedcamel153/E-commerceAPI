@@ -5,9 +5,47 @@
 
 ## 1. User API
 
-### 1.1 List/Create Users
+### 1.1 Create Token
 
-- **Endpoint:** `/users/`
+- **Endpoint:** `/users/token/`
+- **Method:** `POST`
+- **Description:** Creates a refresh and access token. You need to provide the access token in the header when accessing endpoints that require **IsAuthenticated** permission.
+
+**Request Body (POST):**
+```json
+{
+    "email": "testuser@email.com",
+    "password": "testuserpassword"
+}
+```
+
+**Response:** 
+ **201 Created** (POST)
+   - Returns refresh and access tokens.
+
+---
+
+### 1.2 Refresh Token
+- **Endpoint:** `/users/token/refresh/`
+- **Method:** `POST`
+- **Description:** Refreshes access token after expiry.
+
+**Request Body (POST):**
+```json
+{
+    "refresh": "refreshtoken"
+}
+```
+
+**Response:**
+- **201 Created** (POST)
+    -Returns a new access token.
+
+---
+
+### 1.2 List/Create Users
+
+- **Endpoints:** `/users/` `/users/create/`
 - **Method:** `GET`, `POST`
 - **Description:** List all users or create a new user.
 
@@ -28,7 +66,7 @@
 
 ---
 
-### 1.2 Retrieve/Update/Delete User
+### 1.3 Retrieve/Update/Delete User
 
 - **Endpoint:** `/users/<int:pk>/`
 - **Method:** `GET`, `PUT`, `DELETE`
@@ -53,9 +91,9 @@
 
 ## 2. Product API
 
-### 2.1 Create Products
+### 2.1 List/Create Products
 
-- **Endpoint:** `/products/create/`
+- **Endpoints:** `/products/` `/products/create/`
 - **Method:** `GET`, `POST`
 - **Description:** List all products or create a new product.
 
@@ -80,7 +118,7 @@
 
 ### 2.2 Retrieve/Update/Delete Product
 
-- **Endpoint:** `/products/<int:pk>/`
+- **Endpoint:** `/products/<int:pk>/` `/products/<int:pk>/update/` `/products/<int:pk>/delete/`
 - **Method:** `GET`, `PUT`, `DELETE`
 - **Description:** Retrieve, update, or delete a specific product by ID.
 
@@ -103,11 +141,42 @@
 
 ---
 
+### 2.3 List/Create Categories
+
+- **Endpoint:** `/products/categories/`
+- **Method:** `GET`, `POST`
+- **Description:** Create or Retrieve a list of categories available.
+
+**Request Body (POST):**
+```json
+{
+    "name": "category",
+    "description": "description"
+}
+ ```
+
+**Response:**
+- **200 OK**
+  - Returns the product list.
+    
+---
+
+ 
+### 2.4 Retrieve Category Details
+
+- **Endpoints:** `/products/categories/<int:pk>/`
+- **Methods:** `GET`, `PATCH`, `DELETE`
+  
+**Response:**
+- **200 OK**
+  - Returns the category object.
+
+
 ## 3. Review API
 
 ### 3.1 List/Create Reviews for a Product
 
-- **Endpoint:** `/products/<int:pk>/reviews/`
+- **Endpoint:** `/products/<int:pk>/reviews/` `/products/<int:pk>/reviews/create/`
 - **Method:** `GET`, `POST`
 - **Description:** List all reviews for a specific product or create a new review.
 
@@ -129,7 +198,7 @@
 
 ### 3.2 Retrieve/Update/Delete Review
 
-- **Endpoint:** `/products/<int:pk>/reviews/<int:review_pk>/`
+- **Endpoint:** `/products/<int:pk>/reviews/<int:review_pk>/`, `/products/<int:pk>/reviews/<int:review_pk>/update/`, `/products/<int:pk>/reviews/<int:review_pk>/delete/`
 - **Method:** `GET`, `PUT`, `DELETE`
 - **Description:** Retrieve, update, or delete a specific review by ID.
 
@@ -193,14 +262,26 @@
 - **204 No Content**
     - Successfully removed the item from the cart.
 
+----
+
+### 4.4 Decrease Cart Item
+
+- **Endpoint:** `cart/<int:pk>/decrease/`
+- **Method:** `PATCH`
+- **Description:** Decreases an item from the user's cart by 1.
+
+**Responses:**
+- **200 OK**
+    - Returns the cart details for the user.
+
 ---
 
 ## 5. Order API
 
-### 5.1 Create Order
+### 5.1 List/Create Order
 
-- **Endpoint:** `/orders/create/`
-- **Method:** `POST`
+- **Endpoint:** `/orders/`, `/orders/create/`
+- **Method:** `GET`, `POST`
 - **Description:** Create a new order from the user's cart.
 
 **Request Body (POST):**
@@ -225,3 +306,6 @@
 **Responses:**
 - **200 OK**
     - Returns the order object.
+
+---
+
