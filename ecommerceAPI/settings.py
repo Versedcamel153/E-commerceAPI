@@ -72,8 +72,8 @@ REST_FRAMEWORK = {
 }
 
 SIMPLE_JWT = {
-    'ACCESS_TOKEN_LIFETIME': timedelta(days=os.getenv("ACCESS_TOKEN_LIFETIME")),  # Set the access token lifespan here
-    'REFRESH_TOKEN_LIFETIME': timedelta(days=os.getenv("REFRESH_TOKEN_LIFETIME")),      # Set the refresh token lifespan here
+    'ACCESS_TOKEN_LIFETIME': timedelta(days=int(os.getenv("ACCESS_TOKEN_LIFETIME"))),  # Set the access token lifespan here
+    'REFRESH_TOKEN_LIFETIME': timedelta(days=int(os.getenv("REFRESH_TOKEN_LIFETIME"))),      # Set the refresh token lifespan here
 }
 
 MIDDLEWARE = [
