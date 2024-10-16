@@ -13,6 +13,9 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 from datetime import timedelta
 from pathlib import Path
 import os
+from dotenv import load_dotenv
+
+load_dotenv()
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -22,12 +25,12 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/5.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-50gy@vu6nwh@c_w#t%kezab4whf_-605@8=fhw3f8oj2fpebu7'
+SECRET_KEY = os.getenv("SECRET_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = os.getenv("DEBUG")
 
-ALLOWED_HOSTS = ['django-ecommerce-api-9n1o.onrender.com']
+ALLOWED_HOSTS = os.getenv("ALLOWED_HOSTS")
 
 
 # Application definition
@@ -69,8 +72,8 @@ REST_FRAMEWORK = {
 }
 
 SIMPLE_JWT = {
-    'ACCESS_TOKEN_LIFETIME': timedelta(days=1),  # Set the access token lifespan here
-    'REFRESH_TOKEN_LIFETIME': timedelta(days=1),      # Set the refresh token lifespan here
+    'ACCESS_TOKEN_LIFETIME': timedelta(days=os.getenv("ACCESS_TOKEN_LIFETIME")),  # Set the access token lifespan here
+    'REFRESH_TOKEN_LIFETIME': timedelta(days=os.getenv("REFRESH_TOKEN_LIFETIME")),      # Set the refresh token lifespan here
 }
 
 MIDDLEWARE = [
