@@ -1,7 +1,2 @@
-.venv/
-*.bat
+.venv
 .env
-build/
-source/
-Makefile
-*.yaml
