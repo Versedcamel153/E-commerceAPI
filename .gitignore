@@ -1,2 +1,4 @@
 .venv
 .env
+schema.yaml
+schema(1).yaml

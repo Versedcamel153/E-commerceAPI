@@ -1,0 +1,82 @@
+{% extends 'developer_auth/docs_base.html' %}
+
+{% block title %}
+    Cart Endpoints
+{% endblock %}
+
+
+{% block content %}
+<div class="px-8">
+    <div class="my-20 space-y-2 w-full" id="up-p">
+        <p class="text-2xl">Update a product</p>
+        <div class="flex items-center">
+            <p class="text-xl">URL: </p>
+            <p class="bg-base-200 rounded-md p-2 mx-2 truncate font-mono font-semibold">
+                <code>https://E-commerceAPI.com/api/products/&lt;slug:slug&gt;/update/</code>
+            </p>
+        </div>
+        <div class="flex items-center">
+            <p class="text-xl">Methods: </p>
+            <p class="bg-base-200 rounded-md p-2 mx-2  font-mono font-semibold">PATCH</p>
+            <p class="bg-base-200 rounded-md p-2 mx-2  font-mono font-semibold">PUT</p>
+        </div>
+        <p class="text-xl">URL Parameters:</p>
+        <p><strong>Slug </strong><i>(String, Required)</i>: The unique identifier for the product. This is usually a URL-friendly version of the product's name (e.g., "rexona-roll-on"). It is automatically generated upon creation of a product.</p>
+        <p class="text-xl">Authentication: </p>
+        
+        <div class="collapse collapse-arrow bg-base-200">
+            <input type="checkbox" />
+            <div class="collapse-title text-md font-medium">Headers</div>
+            <div class="collapse-content overflow-auto">
+                <pre><code>API-Key: {your-APIKEY}</code></pre>
+            </div>
+        </div>
+        <p class="text-xl">Request Body: </p>
+            <div class="bg-base-200 p-4 rounded-2xl overflow-auto">
+                <pre>
+                    <code>
+{
+"images": [],
+"name": "....",
+"description": "...",
+"price": "5",
+"stock_quantity": 100,
+"category": 1
+}
+                    </code>
+                </pre>
+        </div>
+        <p class="text-xl">Response: </p>
+        <div class="flex items-center">
+            <p class="p-2 text-md">Status Code:<span class="bg-green-200 rounded-md p-2 mx-2 text-md font-semibold">200 OK</span></p>
+        </div>
+    
+        <div class="collapse collapse-arrow bg-base-200">
+            <input type="checkbox" />
+            <div class="collapse-title text-md font-medium">Response Body</div>
+            <div class="collapse-content overflow-auto">
+                <pre>
+                    <code>
+{
+"id": 1,
+"reviews": [],
+"images": [],
+"category_id": 1,
+"category_name": "...",
+"average_rating": "No reviews yet",
+"total_reviews": 0,
+"name": "pencil",
+"slug": "pencil",
+"description": "...",
+"price": "5.00",
+"stock_quantity": 100,
+"created_date": "...",
+"category": 1
+}                        
+                    </code>
+                </pre>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

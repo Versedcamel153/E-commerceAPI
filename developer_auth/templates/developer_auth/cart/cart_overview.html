@@ -1,0 +1,113 @@
+{% extends 'developer_auth/docs_base.html' %}
+
+{% block title %}
+    Overview
+{% endblock %}
+
+{% block content %}
+<div class="px-8 mt-8">
+
+    <p class="text-2xl">Cart Enpoint</p>
+    <p class="text-xl">Details:</p>
+    <p class="text-md text-gray-500">This explains the everythin about the cart endpoint.</p>
+    <p class="text-xl mt-8">Response Schema: application/json</p>
+    <div class="flex flex-col border-1 px-1">
+        <div class="flex flex-row">
+            <div class="w-1/3 mx-2">
+                <p class="break-all">id</p>
+            </div>
+            <div class="w-full pl-3 flex flex-col justify-center">  
+                <p class="font-light italic">Integer</p>
+                <p>A unique identifier for the cart.</p>
+                <div class="divider"></div>
+            </div>
+        </div>
+
+        <div class="flex flex-row">
+            <div class="w-1/3 mx-2">
+                <p class="break-all">items</p>
+            </div>
+            <div class="w-full pl-3 flex flex-col justify-center">
+                <p class="font-light italic">Array</p>
+                <p>Items/products in the cart.</p>
+                <div class="divider"></div>
+            </div>
+        </div>
+
+        <div class="flex flex-row">
+            <div class="w-1/3 mx-2">
+                <p class="break-all">total_quantity</p>
+            </div>
+            <div class="w-full pl-3 flex flex-col justify-center">
+                <p class="font-light italic">String</p>
+                <p>Quantity of a product in the cart.</p>
+                <div class="divider"></div>
+            </div>
+        </div>
+
+        <div class="flex flex-row">
+            <div class="w-1/3 mx-2">
+                <p class="break-all">total_price</p>
+            </div>
+            <div class="w-full pl-3 flex flex-col justify-center">
+                <p class="font-light italic">String</p>
+                <p>Total price of a product in the cart.</p>
+                <div class="divider"></div>
+            </div>
+        </div>
+
+        <div class="flex flex-row">
+            <div class="w-1/3 mx-2">
+                <p class="break-all">user_id</p>
+            </div>
+            <div class="w-full pl-3 flex flex-col justify-center">
+                <p class="font-light italic">Integer</p>
+                <p>ID of the user to whom the cart belongs to.</p>
+                <div class="divider"></div>
+            </div>
+        </div>
+
+        <div class="flex flex-row">
+            <div class="w-1/3 mx-2">
+                <p class="break-all">created_at</p>
+            </div>
+            <div class="w-full pl-3 flex flex-col justify-center">
+                <p class="font-light italic">String(date-time)</p>
+                <p>Timestamp when the cart was created.</p>
+                <div class="divider"></div>
+            </div>
+        </div>
+
+    </div>
+    
+    <p class="text-xl mt-8">Request Schema:</p>
+    <div class="flex flex-col border-1 px-1">
+        <div class="flex flex-row">
+            <div class="w-1/3 mx-2">
+                <p class="break-all">product</p>
+                <p class="italic">(<span class="text-red-500">Required</span>)</p>
+            </div>
+            <div class="w-full pl-3 flex flex-col justify-center">  
+                <p class="font-light italic">Integer</p>
+                <p>ID of the product to add to the cart.</p>
+                <div class="divider"></div>
+            </div>
+        </div>
+
+        <div class="flex flex-row">
+            <div class="w-1/3 mx-2">
+                <p class="break-all">quantity</p>
+                <p class="italic">(<span class="text-red-500">Required</span>)</p>
+            </div>
+            <div class="w-full pl-3 flex flex-col justify-center">
+                <p class="font-light italic">Integer</p>
+                <p>QUantity of the product to be added to the cart.</p>
+                <div class="divider"></div>
+            </div>
+        </div>
+
+    </div>
+    
+
+</div>
+{% endblock %}

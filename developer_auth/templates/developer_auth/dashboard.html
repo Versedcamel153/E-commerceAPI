@@ -1,0 +1,50 @@
+{% extends 'developer_auth/docs_base.html' %}
+
+{% block title %}
+    Support And Feedback
+{% endblock %}
+
+{% block content %}
+<div class="px-8 relative w-full h-screen">
+
+   
+        <div class="border shadow-2xl">
+            
+            <form action="{% url 'create-api-key' %}" method="post">
+                {% csrf_token %}
+                <input name="api_key_name" type="text" placeholder="Enter your API key name" class="input input-bordered">
+                <button class="btn btn-primary" type="submit">Generate API key</button>
+            </form>
+        </div>
+        
+    <div>
+                {{key}}
+            </div>
+    
+    
+
+<!-- 
+
+                        <input 
+                            type="text" 
+                            id="key-{{ forloop.counter }}" 
+                            value="{{ key.hashed_key }}" 
+                            readonly 
+                            style="width: 300px; border: none; background-color: transparent; font-size: inherit;"
+                        />
+                        <button class="copy-btn" onclick="copyToClipboard('key-{{ forloop.counter }}')">Copy</button>
+        <script>
+            // Function to copy the key to the clipboard
+            function copyToClipboard(inputId) {
+                const inputElement = document.getElementById(inputId);
+                inputElement.select();
+                inputElement.setSelectionRange(0, 99999); // For mobile devices
+                document.execCommand("copy");
+    
+                alert("Copied the key: " + inputElement.value);
+            }
+        </script> -->
+    
+
+</div>
+{% endblock %}

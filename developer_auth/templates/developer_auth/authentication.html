@@ -1,0 +1,54 @@
+{% extends 'developer_auth/docs_base.html' %}
+
+{% block title %}
+    Documentation(End points)
+{% endblock %}
+
+{% block content %}
+<div class="px-8 h-screen relative w-full">
+
+    <p class="text-3xl mt-10 font-extrabold">Authentication</p>
+    <p class="mt-4 text-justify">Our API uses API Key authentication to secure access. Each developer must generate an API key after signing up and use it to authenticate requests. The API key should be passed as a header <strong>(API-Key)</strong> in every request. Ensure your API key is kept confidential and not exposed in public code repositories. 
+        An API Key is needed to access the all the endpoints. Obtain one from <a class="link link-primary" href="{% url 'create-api-key' %}">here</a>
+    </p>
+
+    <div class="flex justify-between items-center" style="margin-top: 20%;" hx-boost="true">
+        <a href="{% url 'prerequisite' %}" class="btn">
+            <div class="flex flex-row">
+                <label class="flex items-center pr-2">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 19.5 8.25 12l7.5-7.5" />
+                    </svg>
+                </label>
+                <div class="flex flex-col items-center">
+                    <span class="text-sm text-gray-500 w-full text-start">
+                        prev
+                    </span>
+                    <span>
+                        Prerequisite
+                    </span>
+                </div>
+            </div>
+        </a>
+
+        <a href="{% url 'implementation' %}" class="btn">
+            <div class="flex flex-row">
+                <div class="flex rounded flex-col items-center pr-2">
+                    <span class="text-sm text-gray-500 w-full text-end">
+                        next
+                    </span>
+                    <span class="truncate">
+                        Showcase
+                    </span>
+                </div>
+                <label class="flex items-center">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="m8.25 4.5 7.5 7.5-7.5 7.5" />
+                    </svg>
+                </label>
+            </div>
+        </a>
+    </div>
+
+</div>
+{% endblock %}

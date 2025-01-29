@@ -1,0 +1,78 @@
+{% extends 'developer_auth/docs_base.html' %}
+
+{% block title %}
+    Overview
+{% endblock %}
+
+{% block content %}
+<div class="px-8 mt-8">
+
+    <p class="text-2xl">Category Enpoint</p>
+    <p class="text-xl">Details:</p>
+    <p class="text-md text-gray-500">This explains the everythin about the category endpoint.</p>
+    <p class="text-xl mt-8">Response Schema: application/json</p>
+    <div class="flex flex-col border-1 px-1">
+        <div class="flex flex-row">
+            <div class="w-1/3 mx-2">
+                <p class="break-all">id</p>
+            </div>
+            <div class="w-full pl-3 flex flex-col justify-center">  
+                <p class="font-light italic">Integer</p>
+                <p>A unique identifier for the category.</p>
+                <div class="divider"></div>
+            </div>
+        </div>
+
+        <div class="flex flex-row">
+            <div class="w-1/3 mx-2">
+                <p class="break-all">name</p>
+            </div>
+            <div class="w-full pl-3 flex flex-col justify-center">
+                <p class="font-light italic">String</p>
+                <p>Name of the product.</p>
+                <div class="divider"></div>
+            </div>
+        </div>
+
+        <div class="flex flex-row">
+            <div class="w-1/3 mx-2">
+                <p class="break-all">description</p>
+            </div>
+            <div class="w-full pl-3 flex flex-col justify-center">
+                <p class="font-light italic">String</p>
+                <p>Detailed descripition of the category.</p>
+                <div class="divider"></div>
+            </div>
+        </div>
+    </div>
+    
+    <p class="text-xl mt-8">Request Schema:</p>
+    <div class="flex flex-col border-1 px-1">
+        <div class="flex flex-row">
+            <div class="w-1/3 mx-2">
+                <p class="break-all">id</p>
+                <p class="italic">(<span class="text-red-500">Required</span>)</p>
+            </div>
+            <div class="w-full pl-3 flex flex-col justify-center">  
+                <p class="font-light italic">Integer</p>
+                <p>A unique identifier for the category.</p>
+                <div class="divider"></div>
+            </div>
+        </div>
+
+        <div class="flex flex-row">
+            <div class="w-1/3 mx-2">
+                <p class="break-all">name</p>
+            </div>
+            <div class="w-full pl-3 flex flex-col justify-center">
+                <p class="font-light italic">String</p>
+                <p>Name of the product.</p>
+                <div class="divider"></div>
+            </div>
+        </div>
+
+    </div>
+    
+
+</div>
+{% endblock %}

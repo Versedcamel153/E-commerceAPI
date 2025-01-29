@@ -1,0 +1,27 @@
+{% extends 'developer_auth/base.html' %}
+
+{% block title %}
+  Login
+{% endblock %}
+
+{% block content %}
+<h1> Login as a dev.</h1>
+<form method="post">
+    {% csrf_token %}
+    {% if form.errors %}
+        <div class="error-messages">
+            {% for field in form %}
+                {% for error in field.errors %}
+                    <p class="error">{{ error }}</p>
+                {% endfor %}
+            {% endfor %}
+            {% for error in form.non_field_errors %}
+                <p class="error">{{ error }}</p>
+            {% endfor %}
+        </div>
+    {% endif %}
+
+    {{ form.as_p }}
+    <button type="submit">Login</button>
+</form>
+{% endblock %}

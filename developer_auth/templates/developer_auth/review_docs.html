@@ -1,0 +1,268 @@
+
+
+{% extends 'developer_auth/docs_base.html' %}
+
+{% block title %}
+    Review Endpoints
+{% endblock %}
+
+
+{% block content %}
+<div class="px-8">
+<div class="my-20 space-y-2"  id="cr-re">
+    <p class="text-2xl">Create a review</p>
+    <div class="flex items-center">
+        <p class="text-xl">URL: </p>
+        <p class="bg-base-200 rounded-md p-2 mx-2 truncate font-mono font-semibold">
+            <code>https://E-commerceAPI.com/api/products/&lt;slug:slug&gt;/reviews/create/</code>
+        </p>
+    </div>
+    <div class="flex items-center">
+        <p class="text-xl">Methods: </p>
+        <p class="bg-base-200 rounded-md p-2 mx-2  font-mono font-semibold">POST</p>
+    </div>
+    <p class="text-xl">Authentication: </p>
+    
+    <div class="collapse collapse-arrow bg-base-200">
+        <input type="checkbox" />
+        <div class="collapse-title text-md font-medium">Headers</div>
+        <div class="collapse-content overflow-auto">
+            <pre><code>API-Key: {your-APIKEY}</code></pre>
+        </div>
+    </div>
+    <p class="text-xl">Request Body: </p>
+        <div class="bg-base-200 p-4 rounded-2xl overflow-auto">
+            <pre>
+                <code>
+{
+"user_id": 1,
+"username": "...",
+"rating": 1,
+"comment": "...",
+"product": 1
+}
+                </code>
+            </pre>
+    </div>
+    <p class="text-xl">Response: </p>
+    <div class="flex items-center">
+        <p class="p-2 text-md">Status Code:<span class="bg-green-200 rounded-md p-2 mx-2 text-md font-semibold">201 Created</span></p>
+    </div>
+
+    <div class="collapse collapse-arrow bg-base-200">
+        <input type="checkbox" />
+        <div class="collapse-title text-md font-medium">Response Body</div>
+        <div class="collapse-content overflow-auto">
+            <pre>
+                <code>
+{
+"user_id": 1,
+"username": "...",
+"rating": 4,
+"comment": "...",
+"product": 1
+}                      
+                </code>
+            </pre>
+        </div>
+    </div>
+</div>
+
+<div class="my-20 space-y-2" id="get-re">
+    <p class="text-2xl">Get all reviews for a product</p>
+    <div class="flex items-center">
+        <p class="text-xl">URL: </p>
+        <p class="bg-base-200 truncate rounded-md p-2 mx-2 font-semibold">
+            <code>https://E-commerceAPI.com/api/products/&lt;slug:slug&gt;/reviews/</code>
+        </p>
+    </div>
+    <div class="flex items-center">
+        <p class="text-xl">Methods: </p>
+        <p class="bg-base-200 rounded-md p-2 mx-2 font-mono font-semibold">GET</p>
+    </div>
+    <p class="text-xl">Authentication: </p>
+    
+    <div class="collapse collapse-arrow bg-base-200">
+        <input type="checkbox" />
+        <div class="collapse-title text-md font-medium">Headers</div>
+        <div class="collapse-content overflow-auto">
+            <pre><code>API-Key: {your-APIKEY}</code></pre>
+        </div>
+    </div>
+    <p class="text-xl">Response: </p>
+    <div class="flex items-center">
+        <p class="p-2 text-md">Status Code:<span class="bg-green-200 rounded-md p-2 mx-2 text-md font-semibold">200 OK</span></p>
+    </div>
+
+    <div class="collapse collapse-arrow bg-base-200">
+        <input type="checkbox" />
+        <div class="collapse-title text-md font-medium">Response Body</div>
+        <div class="collapse-content overflow-auto">
+            <pre>
+                <code>
+[
+{
+"id": 1,
+"created_at": "17 January 2025",
+"user_id": 1,
+"username": "...",
+"rating": 4,
+"comment": "...",
+"product": 1
+},
+{
+"id": 1,
+"created_at": "17 January 2025",
+"user_id": 1,
+"username": "...",
+"rating": 4,
+"comment": "...",
+"product": 1
+}
+]                      
+                </code>
+            </pre>
+        </div>
+    </div>
+</div>
+
+<div class="my-20 space-y-2" id="get-1-re">
+    <p class="text-2xl">Get a specific review for a product</p>
+    <div class="flex items-center">
+        <p class="text-xl">URL: </p>
+        <p class="bg-base-200 truncate rounded-md p-2 mx-2 font-semibold">
+            <code>https://E-commerceAPI.com/api/products/&lt;slug:slug&gt;/reviews/&lt;int:pk&gt;/</code>
+        </p>
+    </div>
+    <div class="flex items-center">
+        <p class="text-xl">Methods: </p>
+        <p class="bg-base-200 rounded-md p-2 mx-2 font-mono font-semibold">GET</p>
+    </div>
+    <p class="text-xl">Authentication: </p>
+    
+    <div class="collapse collapse-arrow bg-base-200">
+        <input type="checkbox" />
+        <div class="collapse-title text-md font-medium">Headers</div>
+        <div class="collapse-content overflow-auto">
+            <pre><code>API-Key: {your-APIKEY}</code></pre>
+        </div>
+    </div>
+    <p class="text-xl">Response: </p>
+    <div class="flex items-center">
+        <p class="p-2 text-md">Status Code:<span class="bg-green-200 rounded-md p-2 mx-2 text-md font-semibold">200 OK</span></p>
+    </div>
+
+    <div class="collapse collapse-arrow bg-base-200">
+        <input type="checkbox" />
+        <div class="collapse-title text-md font-medium">Response Body</div>
+        <div class="collapse-content overflow-auto">
+            <pre>
+                <code>
+{
+"id": 1,
+"created_at": "17 January 2025",
+"user_id": 1,
+"username": "...",
+"rating": 4,
+"comment": "...",
+"product": 1
+}                
+                </code>
+            </pre>
+        </div>
+    </div>
+</div>
+
+<div class="my-20 space-y-2"  id="up-re">
+    <p class="text-2xl">Update a review</p>
+    <div class="flex items-center">
+        <p class="text-xl">URL: </p>
+        <p class="bg-base-200 rounded-md p-2 mx-2 truncate font-mono font-semibold">
+            <code>https://E-commerceAPI.com/api/products/&lt;slug:slug&gt;/reviews/update/</code>
+        </p>
+    </div>
+    <div class="flex items-center">
+        <p class="text-xl">Methods: </p>
+        <p class="bg-base-200 rounded-md p-2 mx-2  font-mono font-semibold">PATCH</p>
+        <p class="bg-base-200 rounded-md p-2 mx-2  font-mono font-semibold">PUT</p>
+    </div>
+    <p class="text-xl">Authentication: </p>
+    
+    <div class="collapse collapse-arrow bg-base-200">
+        <input type="checkbox" />
+        <div class="collapse-title text-md font-medium">Headers</div>
+        <div class="collapse-content overflow-auto">
+            <pre><code>API-Key: {your-APIKEY}</code></pre>
+        </div>
+    </div>
+    <p class="text-xl">Request Body: </p>
+        <div class="bg-base-200 p-4 rounded-2xl overflow-auto">
+            <pre>
+                <code>
+{
+"user_id": 1,
+"username": "...",
+"rating": 1,
+"comment": "...",
+"product": 1
+}
+                </code>
+            </pre>
+    </div>
+    <p class="text-xl">Response: </p>
+    <div class="flex items-center">
+        <p class="p-2 text-md">Status Code:<span class="bg-green-200 rounded-md p-2 mx-2 text-md font-semibold">200 OK</span></p>
+    </div>
+
+    <div class="collapse collapse-arrow bg-base-200">
+        <input type="checkbox" />
+        <div class="collapse-title text-md font-medium">Response Body</div>
+        <div class="collapse-content overflow-auto">
+            <pre>
+                <code>
+{
+"id": 1,
+"created_at": "17 January 2025",
+"user_id": 1,
+"username": "Farid",
+"rating": 5,
+"comment": "",
+"product": 1
+}                      
+                </code>
+            </pre>
+        </div>
+    </div>
+</div>
+
+<div class="my-20 space-y-2" id="del-re">
+    <p class="text-2xl">Delete a review</p>
+    <div class="flex items-center">
+        <p class="text-xl">URL: </p>
+        <p class="bg-base-200 rounded-md p-2 mx-2 truncate font-mono font-semibold">
+            <code>https://E-commerceAPI.com/api/products/&lt;slug:slug&gt;/reviews/delete/</code>
+        </p>
+    </div>
+    <div class="flex items-center">
+        <p class="text-xl">Methods: </p>
+        <p class="bg-base-200 rounded-md p-2 mx-2  font-mono font-semibold">DELETE</p>
+    </div>
+    <p class="text-xl">URL Parameters:</p>
+    <p><strong>Slug </strong><i>(String, Required)</i>: The unique identifier for the category. This is usually a URL-friendly version of the category's name (e.g., "Electronics"). It is automatically generated upon creation of a category.</p>
+    <p class="text-xl">Authentication: </p>
+    
+    <div class="collapse collapse-arrow bg-base-200">
+        <input type="checkbox" />
+        <div class="collapse-title text-md font-medium">Headers</div>
+        <div class="collapse-content overflow-auto">
+            <pre><code>API-Key: {your-APIKEY}</code></pre>
+        </div>
+    </div>
+    <p class="text-xl">Response: </p>
+    <div class="flex items-center">
+        <p class="p-2 text-md">Status Code":<span class="bg-green-200 rounded-md p-2 mx-2 text-md font-semibold">204 No Content</span></p>
+    </div>
+
+</div>    
+</div>
+{% endblock %}

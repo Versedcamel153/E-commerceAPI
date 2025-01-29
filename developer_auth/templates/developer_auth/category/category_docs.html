@@ -1,0 +1,17 @@
+{% extends 'developer_auth/docs_base.html' %}
+
+{% block title %}
+    Category Enpoints
+{% endblock %}
+
+
+{% block content %}
+
+
+
+<div class="flex w-full justify-between px-8">
+        <button class="btn btn-primary">Previous</button>
+        <button class="btn btn-primary" hx-get="{% url 'category-docs' %}"  hx-target="#doc-content" hx-swap="outerHTML" hx-replace-url="true">Next</button>
+</div>
+</div>
+{% endblock %}

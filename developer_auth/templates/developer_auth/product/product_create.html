@@ -1,0 +1,79 @@
+{% extends 'developer_auth/docs_base.html' %}
+
+{% block title %}
+    Cart Endpoints
+{% endblock %}
+
+
+{% block content %}
+<div class="px-8">
+    <div class="my-20 space-y-2 w-full"  id="cr-p">
+        <p class="text-2xl">Create Product</p>
+        <div class="flex items-center">
+            <p class="text-xl">URL: </p>
+            <p class="bg-base-200 rounded-md p-2 mx-2 truncate font-mono font-semibold">
+                <code>https://E-commerceAPI.com/api/products/create/</code>
+            </p>
+        </div>
+        <div class="flex items-center">
+            <p class="text-xl">Methods: </p>
+            <p class="bg-base-200 rounded-md p-2 mx-2  font-mono font-semibold">POST</p>
+        </div>
+        <p class="text-xl">Authentication: </p>
+        
+        <div class="collapse collapse-arrow bg-base-200">
+            <input type="checkbox" />
+            <div class="collapse-title text-md font-medium">Headers</div>
+            <div class="collapse-content overflow-auto">
+                <pre><code>API-Key: {your-APIKEY}</code></pre>
+            </div>
+        </div>
+        <p class="text-xl">Request Body: </p>
+            <div class="bg-base-200 p-4 rounded-2xl overflow-auto">
+                <pre>
+                    <code>
+{
+"images": [],   
+"name": "pencil",   
+"description": "Writing",   
+"price": "5",   
+"stock_quantity": 100,  
+"category": "stationary"    
+}
+                    </code>
+                </pre>
+        </div>
+        <p class="text-xl">Response: </p>
+        <div class="flex items-center">
+            <p class="p-2 text-md">Status Code:<span class="bg-green-200 rounded-md p-2 mx-2 text-md font-semibold">201 Created</span></p>
+        </div>
+    
+        <div class="collapse collapse-arrow bg-base-200">
+            <input type="checkbox" />
+            <div class="collapse-title text-md font-medium">Response Body</div>
+            <div class="collapse-content overflow-auto">
+                <pre>
+                    <code>
+{
+"id": 1,
+"reviews": [],
+"images": [],
+"category_id": 1,
+"category_name": "stationary",
+"average_rating": "No reviews yet",
+"total_reviews": 0,
+"name": "pencil",
+"slug": "pencil",
+"description": "Wrting",
+"price": "5.00",
+"stock_quantity": 100,
+"created_date": "2025-01-16T16:37:25.979623Z",
+"category": 1
+}                        
+                    </code>
+                </pre>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

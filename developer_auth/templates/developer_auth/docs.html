@@ -1,0 +1,41 @@
+{% extends 'developer_auth/docs_base.html' %}
+
+{% block title %}
+    Documentation(End points)
+{% endblock %}
+
+{% block content %}
+<div class="px-8 w-full">
+
+    <p class="mt-12 text-justify">
+        Welcome to the API documentation! This API is the result of my dedication and effort to create a versatile platform for developers. It’s designed to simplify tasks and enhance application functionality with robust features. As a project I’ve been working on for a while, it combines everything I’ve learned to deliver a seamless integration experience. Dive into the documentation to discover how it works, and feel free to explore how it can add value to your applications!
+    </p>
+    <p class="text-3xl mt-10 font-extrabold">Key Features</p>
+    <p class="font-gray-400 text-gray-400 text-sm"></p>
+    <ul class="mt-4 list-disc list-inside">
+        <li>CRUD operations for products, categories, and reviews</li>
+        <li>Cart management</li>
+        <li>Order creation</li>
+    </ul>    
+</div>
+<div class="absolute bottom-5 px-8 flex justify-end" hx-boost="true">
+      
+    <a href="{% url 'prerequisite' %}" class="btn">
+        <div class="flex flex-row">
+            <div class="flex rounded flex-col items-center pr-2">
+                <span class="text-sm text-gray-500 w-full text-end">
+                    next
+                </span>
+                <span>
+                    Prerequisuite
+                </span>
+            </div>
+            <label class="flex items-center">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="m8.25 4.5 7.5 7.5-7.5 7.5" />
+                </svg>
+            </label>
+        </div>
+    </a>
+</div>
+{% endblock %}

@@ -1,0 +1,56 @@
+{% extends 'developer_auth/docs_base.html' %}
+
+{% block title %}
+    Cart Endpoints
+{% endblock %}
+
+
+{% block content %}
+
+<div class="px-8">
+    <div class="my-20 space-y-2"  id="dec-cart">
+        <p class="text-2xl">Decrease a product's quantity in a cart by 1</p>
+        <div class="flex items-center">
+            <p class="text-xl">URL: </p>
+            <p class="bg-base-200 rounded-md p-2 mx-2 truncate font-mono font-semibold">
+                <code>https://E-commerceAPI.com/api/cart/&lt;int:pk&gt;/decrease/</code>
+            </p>
+        </div>
+        <div class="flex items-center">
+            <p class="text-xl">Methods: </p>
+            <p class="bg-base-200 rounded-md p-2 mx-2  font-mono font-semibold">PATCH</p>
+        </div>
+        <p class="text-xl">URL Parameters:</p>
+        <p><strong>pk (Primary Key/Product ID) </strong><i>(Positive Integer, Required)</i>: The unique identifier for a product in the cart.</p>
+        <p class="text-xl">Authentication: </p>
+        <div class="collapse collapse-arrow bg-base-200">
+            <input type="checkbox" />
+            <div class="collapse-title text-md font-medium">Headers</div>
+            <div class="collapse-content overflow-auto">
+                <pre><code>API-Key: {your-APIKEY}</code></pre>
+            </div>
+        </div>
+        
+        <p class="text-xl">Request Body: Not Required.</p>
+        <p class="text-xl">Response: </p>
+        <div class="flex items-center">
+            <p class="p-2 text-md">Status Code:<span class="bg-green-200 rounded-md p-2 mx-2 text-md font-semibold">200 OK</span></p>
+        </div>
+    
+        <div class="collapse collapse-arrow bg-base-200">
+            <input type="checkbox" />
+            <div class="collapse-title text-md font-medium">Response Body</div>
+            <div class="collapse-content overflow-auto">
+                <pre>
+                    <code>
+    {
+    "quantity": 10
+    }                     
+                    </code>
+                </pre>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

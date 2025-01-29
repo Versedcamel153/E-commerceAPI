@@ -1,0 +1,66 @@
+{% extends 'developer_auth/docs_base.html' %}
+
+{% block title %}
+    Cart Endpoints
+{% endblock %}
+
+
+{% block content %}
+
+<div class="px-8">
+    <div class="my-20 space-y-2"  id="cr-cat">
+        <p class="text-2xl">Create a category</p>
+        <div class="flex items-center">
+            <p class="text-xl">URL: </p>
+            <p class="bg-base-200 rounded-md p-2 mx-2 truncate font-mono font-semibold">
+                <code>https://E-commerceAPI.com/api/products/categories/all/</code>
+            </p>
+        </div>
+        <div class="flex items-center">
+            <p class="text-xl">Methods: </p>
+            <p class="bg-base-200 rounded-md p-2 mx-2  font-mono font-semibold">POST</p>
+        </div>
+        <p class="text-xl">Authentication: </p>
+        
+        <div class="collapse collapse-arrow bg-base-200 border">
+            <input type="checkbox" />
+            <div class="collapse-title text-md font-medium">Headers</div>
+            <div class="collapse-content overflow-auto">
+                <pre><code class="font-light">API-KEY: &lt;your-APIKey&gt;</code></pre>
+            </div>
+        </div>
+        <p class="text-xl">Request Body: </p>
+            <div class="bg-base-200 p-4 rounded-2xl overflow-auto">
+                <pre>
+                    <code>
+    {
+    "name": "pencil",
+    "description": "Writing",
+    }
+                    </code>
+                </pre>
+        </div>
+        <p class="text-xl">Response: </p>
+        <div class="flex items-center">
+            <p class="p-2 text-md">Status Code:<span class="bg-green-200 rounded-md p-2 mx-2 text-md font-semibold">201 Created</span></p>
+        </div>
+    
+        <div class="collapse collapse-arrow bg-base-200">
+            <input type="checkbox" />
+            <div class="collapse-title text-md font-medium">Response Body</div>
+            <div class="collapse-content overflow-auto">
+                <pre>
+                    <code>
+    {
+    "id": 1,
+    "name": "pencil",
+    "description": "Wrting",
+    }                        
+                    </code>
+                </pre>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

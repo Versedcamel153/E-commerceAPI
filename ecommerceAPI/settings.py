@@ -31,7 +31,9 @@ SECRET_KEY = os.getenv("SECRET_KEY")
 DEBUG = os.getenv("DEBUG")
 
 ALLOWED_HOSTS = os.getenv("ALLOWED_HOSTS").split(',')
-
+CSRF_TRUSTED_ORIGINS = [
+    "https://quetzal-keen-infinitely.ngrok-free.app",
+]
 
 # Application definition
 
@@ -42,12 +44,17 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'users',
+    # 'users',
     'products',
     'rest_framework',
+    'rest_framework_api_key',
     'rest_framework_simplejwt.token_blacklist',
     'django_filters',
     'drf_spectacular',
+    # 'webapp',
+    'import_export',
+    'django_extensions',
+    'developer_auth',
 
 ]
 
@@ -69,6 +76,7 @@ REST_FRAMEWORK = {
         'rest_framework.renderers.BrowsableAPIRenderer',
     ),
 
+
 }
 
 SIMPLE_JWT = {
@@ -85,8 +93,8 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'whitenoise.middleware.WhiteNoiseMiddleware',
-]
 
+]
 ROOT_URLCONF = 'ecommerceAPI.urls'
 
 TEMPLATES = [
@@ -110,8 +118,12 @@ WSGI_APPLICATION = 'ecommerceAPI.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
-AUTH_USER_MODEL = 'users.CustomUser'
+AUTH_USER_MODEL = 'developer_auth.Developer'
 
+# AUTHENTICATION_BACKENDS = [
+#     'django.contrib.auth.backends.ModelBackend',
+#     'developer_auth.backends.DeveloperBackend',
+# ]
 
 DATABASES = {
     'default': {
@@ -142,7 +154,7 @@ AUTH_PASSWORD_VALIDATORS = [
 SECURE_BROWSER_XSS_FILTER = True
 X_FRAME_OPTIONS = 'DENY'
 SECURE_CONTENT_TYPE_NOSNIFF = True
-SECURE_SSL_REDIRECT = True
+SECURE_SSL_REDIRECT = False
 
 # Set other security settings
 CSRF_COOKIE_SECURE = True
@@ -167,8 +179,10 @@ STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.1/howto/static-files/
 
-STATIC_URL = 'static/'
-STATIC_ROOT = BASE_DIR / 'static' 
+STATIC_URL = '/static/'
+STATICFILES_DIRS = [
+    BASE_DIR / "static"
+]
 
 
 MEDIA_URL = '/media/'

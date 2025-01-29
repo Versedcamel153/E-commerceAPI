@@ -1,0 +1,66 @@
+{% extends 'developer_auth/docs_base.html' %}
+
+{% block title %}
+    Cart Endpoints
+{% endblock %}
+
+
+{% block content %}
+<div class="px-8">
+    <div class="my-20 space-y-2 w-full" id="get-1-p">
+        <p class="text-2xl">Get a single Product</p>
+        <div class="flex items-center">
+            <p class="text-xl">URL: </p>
+            <p class="bg-base-200 overflow-y-auto rounded-md p-2 mx-2 font-semibold">
+                <code>https://E-commerceAPI.com/api/products/&lt;slug:slug&gt;/</code>
+            </p>
+        </div>
+        <div class="flex items-center">
+            <p class="text-xl">Methods: </p>
+            <p class="bg-base-200 rounded-md p-2 mx-2 font-mono font-semibold">GET</p>
+        </div>
+        <p class="text-xl">URL Parameters:</p>
+        <p><strong>Slug </strong><i>(String, Required)</i>: The unique identifier for the product. This is usually a URL-friendly version of the product's name (e.g., "rexona-roll-on"). It is automatically generated upon creation of a product.</p>
+        <p class="text-xl">Authentication: </p>
+        
+        <div class="collapse collapse-arrow bg-base-200">
+            <input type="checkbox" />
+            <div class="collapse-title text-md font-medium">Headers</div>
+            <div class="collapse-content overflow-auto">
+                <pre><code>API-Key: {your-APIKEY}</code></pre>
+            </div>
+        </div>
+        <p class="text-xl">Response: </p>
+        <div class="flex items-center">
+            <p class="p-2 text-md">Status Code:<span class="bg-green-200 rounded-md p-2 mx-2 text-md font-semibold">200 OK</span></p>
+        </div>
+    
+        <div class="collapse collapse-arrow bg-base-200">
+            <input type="checkbox" />
+            <div class="collapse-title text-md font-medium">Response Body</div>
+            <div class="collapse-content overflow-auto">
+                <pre>
+                    <code>
+{
+"id": 1,
+"reviews": [],
+"images": [],
+"category_id": 1,
+"category_name": "...",
+"average_rating": No reviews yet,
+"total_reviews": 0,
+"name": "...",
+"slug": "...",
+"description": "...",
+"price": "70.00",
+"stock_quantity": 300,
+"created_date": "...",
+"category": 1
+}                        
+                    </code>
+                </pre>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

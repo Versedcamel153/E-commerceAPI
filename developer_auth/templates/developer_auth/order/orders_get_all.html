@@ -1,0 +1,87 @@
+{% extends 'developer_auth/docs_base.html' %}
+
+{% block title %}
+    Cart Endpoints
+{% endblock %}
+
+
+{% block content %}
+
+<div class="px-8">
+    <div class="my-20 space-y-2" id="get-ord">
+        <p class="text-2xl">Get all Orders for a user.</p>
+        <div class="flex items-center">
+            <p class="text-xl">URL: </p>
+            <p class="bg-base-200 truncate rounded-md p-2 mx-2 font-semibold">
+                <code>https://E-commerceAPI.com/api/orders/</code>
+            </p>
+        </div>
+        <div class="flex items-center">
+            <p class="text-xl">Methods: </p>
+            <p class="bg-base-200 rounded-md p-2 mx-2 font-mono font-semibold">GET</p>
+        </div>
+        <p class="text-xl">Authentication: </p>
+        
+        <div class="collapse collapse-arrow bg-base-200">
+            <input type="checkbox" />
+            <div class="collapse-title text-md font-medium">Headers</div>
+            <div class="collapse-content overflow-auto">
+                <pre><code>API-Key: {your-APIKEY}</code></pre>
+            </div>
+        </div>
+        <p class="text-xl">Parameters(Query Params): </p>
+            <div class="bg-base-200 p-4 rounded-2xl overflow-auto">
+                <pre><code>user_id: {request.user.id}</code></pre>
+            </div>
+        <p class="text-xl">Response: </p>
+        <div class="flex items-center">
+            <p class="p-2 text-md">Status Code:<span class="bg-green-200 rounded-md p-2 mx-2 text-md font-semibold">200 OK</span></p>
+        </div>
+    
+        <div class="collapse collapse-arrow bg-base-200">
+            <input type="checkbox" />
+            <div class="collapse-title text-md font-medium">Response Body</div>
+            <div class="collapse-content overflow-auto">
+                <pre>
+                    <code>
+    [
+    {
+    "id": 1,
+    "items": [
+    {
+        "id": 1,
+        "product": {
+            "id": 2,
+            "reviews": [],
+            "images": [],
+            "category_name": "electronics",
+            "average_rating": 0,
+            "total_reviews": 0,
+            "name": "Mocha",
+            "slug": "mocha",
+            "description": "Woven fabric",
+            "price": "200.00",
+            "stock_quantity": 90,
+            "created_date": "2025-01-17T10:58:57.034531Z",
+            "category": 2
+        },
+        "quantity": 10
+    }
+    ],
+    "item_count": 1,
+    "created_at": "17 January 2025",
+    "user_id": 1,
+    "total_price": "2000.00",
+    "status": "PENDING",
+    "cart": 1
+    }
+    ]                
+                    </code>
+                </pre>
+            </div>
+        </div>
+    </div>
+    
+</div>
+
+{% endblock %}
