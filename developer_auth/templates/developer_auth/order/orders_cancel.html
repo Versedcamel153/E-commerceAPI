@@ -1,7 +1,7 @@
 {% extends 'developer_auth/docs_base.html' %}
 
 {% block title %}
-    Cart Endpoints
+    Cancel Order
 {% endblock %}
 
 
@@ -24,13 +24,11 @@
         <p><strong>Slug </strong><i>(String, Required)</i>: The unique identifier for the category. This is usually a URL-friendly version of the category's name (e.g., "Electronics"). It is automatically generated upon creation of a category.</p>
         <p class="text-xl">Authentication: </p>
         
-        <div class="collapse collapse-arrow bg-base-200">
-            <input type="checkbox" />
-            <div class="collapse-title text-md font-medium">Headers</div>
-            <div class="collapse-content overflow-auto">
+    
+            <div class="mockup-code mt-8 w-full">
                 <pre><code>API-Key: {your-APIKEY}</code></pre>
             </div>
-        </div>
+    
         <p class="text-xl">Parameters(Query Params): </p>
             <div class="bg-base-200 p-4 rounded-2xl overflow-auto">
                 <pre><code>user_id: {request.user.id}</code></pre>
@@ -42,5 +40,11 @@
     
     </div>
 </div>
+
+    {% with prev_page='order-get-all' prev_page_name='Get Orders' %}
+            
+        {% include 'developer_auth/bottom_nav.html' %}
+
+    {% endwith %}
 
 {% endblock %}

@@ -5,30 +5,44 @@
 {% endblock %}
 
 {% block content %}
-<form hx-post="{% url 'create-api-key' %}" hx-target="#modal-content" method="post">
+
+<form hx-post="{% url 'create-api-key' %}" 
+      hx-target="#modal-content" 
+      hx-swap="innerHTML"
+      hx-trigger="submit"
+      hx-on::after-request="my_modal_3.showModal()">
     {% csrf_token %}
     <input name="api_key_name" type="text" placeholder="Enter your API key name" class="input input-bordered">
-    <button class="btn btn-primary" type="submit">Generate API key</button>
+    <button class="btn btn-primary" type="submit">Generate API Key</button>
 </form>
 
-<dialog id="my_modal_4" class="modal">
-    <div class="modal-box w-11/12 max-w-5xl">
-        <h3 class="text-lg font-bold">Generated API Key</h3>
-        <div id="modal-content">
-            <!-- API key content will be swapped here -->
-             {{key}}
-        </div>
-        <div class="modal-action">
-            <button class="btn" onclick="document.getElementById('my_modal_4').close()">Close</button>
-        </div>
+<!-- Modal Structure -->
+<dialog id="my_modal_3" class="modal">
+    <div class="modal-box">
+      <form method="dialog">
+        <button class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2" hx-get="{% url 'dashboard' %}" hx-target="body" hx-replace-url="true">✕</button>
+      </form>
+      <h3 class="text-lg font-bold">Generated API Key</h3>
+      <div id="modal-content">
+        <!-- The API key content will be swapped here -->
+      </div>
     </div>
 </dialog>
 
 <script>
-    document.addEventListener('htmx:afterRequest', function (event) {
-        if (event.target.id === 'modal-content') {
-            document.getElementById('my_modal_4').showModal();
+    function openModal() {
+        document.getElementById("modal").classList.remove("hidden");
+    }
+    
+    function closeModal() {
+        document.getElementById("modal").classList.add("hidden");
+    }
+    
+    document.body.addEventListener("htmx:afterSwap", function(event) {
+        if (event.detail.target.id === "modal-content") {
+            openModal();  // Ensures the modal stays open if it was hidden
         }
     });
 </script>
+
 {% endblock %}

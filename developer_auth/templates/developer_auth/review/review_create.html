@@ -1,7 +1,7 @@
 {% extends 'developer_auth/docs_base.html' %}
 
 {% block title %}
-    Cart Endpoints
+    Create Review
 {% endblock %}
 
 
@@ -22,23 +22,20 @@
         </div>
         <p class="text-xl">Authentication: </p>
         
-        <div class="collapse collapse-arrow bg-base-200">
-            <input type="checkbox" />
-            <div class="collapse-title text-md font-medium">Headers</div>
-            <div class="collapse-content overflow-auto">
+            <div class="mockup-code w-full mt-8">
                 <pre><code>API-Key: {your-APIKEY}</code></pre>
             </div>
-        </div>
+        
         <p class="text-xl">Request Body: </p>
-            <div class="bg-base-200 p-4 rounded-2xl overflow-auto">
+            <div class="mockup-code w-full mt-8">
                 <pre>
                     <code>
     {
-    "user_id": 1,
-    "username": "...",
-    "rating": 1,
-    "comment": "...",
-    "product": 1
+        "user_id": 1,
+        "username": "...",
+        "rating": 1,
+        "comment": "...",
+        "product": 1
     }
                     </code>
                 </pre>
@@ -48,24 +45,31 @@
             <p class="p-2 text-md">Status Code:<span class="bg-green-200 rounded-md p-2 mx-2 text-md font-semibold">201 Created</span></p>
         </div>
     
-        <div class="collapse collapse-arrow bg-base-200">
+        <div class="mockup-code w-full mt-8">
+        <div class="collapse collapse-arrow bg-inherit">
             <input type="checkbox" />
             <div class="collapse-title text-md font-medium">Response Body</div>
             <div class="collapse-content overflow-auto">
                 <pre>
                     <code>
     {
-    "user_id": 1,
-    "username": "...",
-    "rating": 4,
-    "comment": "...",
-    "product": 1
+        "user_id": 1,
+        "username": "...",
+        "rating": 4,
+        "comment": "...",
+        "product": 1
     }                      
                     </code>
                 </pre>
             </div>
         </div>
+        </div>
     </div>
 </div>
+    {% with prev_page='review-overview' prev_page_name='Review Overview' next_page='review-get-one' next_page_name='Get Review' %}
+            
+        {% include 'developer_auth/bottom_nav.html' %}
+
+    {% endwith %}
 
 {% endblock %}

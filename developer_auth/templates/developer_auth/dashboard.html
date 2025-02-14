@@ -7,44 +7,98 @@
 {% block content %}
 <div class="px-8 relative w-full h-screen">
 
-   
-        <div class="border shadow-2xl">
-            
-            <form action="{% url 'create-api-key' %}" method="post">
-                {% csrf_token %}
-                <input name="api_key_name" type="text" placeholder="Enter your API key name" class="input input-bordered">
-                <button class="btn btn-primary" type="submit">Generate API key</button>
-            </form>
+
+    <div class="overflow-x-auto mt-10">
+        <div class="flex flex-row mt-4 font-semibold text-blue-700 items-center">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="size-5" role="button">
+                <path d="M10.75 4.75a.75.75 0 0 0-1.5 0v4.5h-4.5a.75.75 0 0 0 0 1.5h4.5v4.5a.75.75 0 0 0 1.5 0v-4.5h4.5a.75.75 0 0 0 0-1.5h-4.5v-4.5Z" />
+            </svg>                
+            <span role="button" onclick="my_modal_3.showModal()">
+      
+                &nbsp;Generate API KEY
+            </span>
+            <!-- Modal Structure -->
+            <dialog id="my_modal_3" class="modal">
+                <div class="modal-box" id="modal-content">
+                <form method="dialog">
+                    <button class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">✕</button>
+                </form>
+                <h3 class="text-lg font-bold">Create new API Key</h3>
+                <div>
+                    <!-- The API key content will be swapped here -->
+                    <form class="space-y-6 flex justify-center" hx-post="{% url 'create-api-key' %}" 
+                            hx-target="#modal-content" 
+                            hx-swap="innerHTML"
+                            hx-trigger="submit">
+                        {% csrf_token %}
+                        <input name="api_key_name" type="text" placeholder="eg. Company API" class="input input-bordered" required>
+                        <button class="btn btn-primary" type="submit" hx-indicator="#indicator">Generate API Key
+                            <span class="loading loading-dots loading-md htmx-indicator"></span>
+                        </button>
+                    </form>
+                </div>
+                </div>
+            </dialog>
+
         </div>
-        
-    <div>
-                {{key}}
-            </div>
-    
-    
-
-<!-- 
-
-                        <input 
-                            type="text" 
-                            id="key-{{ forloop.counter }}" 
-                            value="{{ key.hashed_key }}" 
-                            readonly 
-                            style="width: 300px; border: none; background-color: transparent; font-size: inherit;"
-                        />
-                        <button class="copy-btn" onclick="copyToClipboard('key-{{ forloop.counter }}')">Copy</button>
-        <script>
-            // Function to copy the key to the clipboard
-            function copyToClipboard(inputId) {
-                const inputElement = document.getElementById(inputId);
-                inputElement.select();
-                inputElement.setSelectionRange(0, 99999); // For mobile devices
-                document.execCommand("copy");
-    
-                alert("Copied the key: " + inputElement.value);
-            }
-        </script> -->
-    
+        <table class="table table-zebra">
+          <!-- head -->
+          <thead>
+            <tr class="border-b-4 border-b-blue-600">
+              <th>Name</th>
+              <th>API Key(Prefix)</th>
+              <th>Status</th>
+              <th>Expiry date</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            <!-- row 1 -->
+            {% for api_key in api_keys %}
+             <tr>
+                <th>{{ api_key.name }}</th>
+                <td>{{ api_key.prefix }}</td>
+                <td>
+                    {% if api_key.revoked %}
+                        Revoked
+                    {% else %}
+                        Active
+                    {% endif %}
+                </td>
+                <td>
+                    {% if api_key.expiry_date %}
+                        {{ api_key.expiry_date }}
+                    {% else %}
+                        N/A
+                    {% endif %}
+                </td>
+                <td>
+                    {% csrf_token %}
+                    {% if api_key.revoked %}
+                    <button class="btn btn-soft btn-error btn-disabled">Revoke</button>
+                    {% else %}
+                    <button class="btn btn-soft btn-error" hx-patch="{% url 'revoke-key' api_key.prefix %}" hx-target="body" hx-confirm="Are you sure you want to revoke this API Key? This cannot be undone.">Revoke</button>
+                    {% endif %}
+                </td>
+              </tr>
+            {% empty %}
+                <tr>
+                    <td colspan="5">
+                        <p class="text-center p-4">No API Keys</p>
+                    </td>
+                </tr>
+                 
+            {% endfor %}
+            
+          </tbody>
+        </table>
+    </div>
 
 </div>
+<script>
+    document.addEventListener("htmx:configRequest", (event) => {
+        const csrfToken = document.querySelector('[name=csrfmiddlewaretoken]').value;
+        event.detail.headers['X-CSRFToken'] = csrfToken;
+    });
+</script>
 {% endblock %}

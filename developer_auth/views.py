@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.http import JsonResponse
 from django.contrib.auth import login as auth_login, authenticate, logout as auth_logout, get_user_model
 from django.contrib.auth.decorators import login_required
@@ -30,10 +30,15 @@ def support(request):
 @login_required(login_url='login')
 def dashboard(request):
     developer = request.user
-    api_key = DeveloperAPIKey.objects.filter(developer=developer)
+    api_keys = DeveloperAPIKey.objects.filter(developer=developer)
 
-    return render(request, 'developer_auth/dashboard.html', {'api_key': api_key})
+    return render(request, 'developer_auth/dashboard.html', {'api_keys': api_keys})
 
+def revoke_key(request, prefix):
+    key = DeveloperAPIKey.objects.get(prefix=prefix)
+    key.revoked = True
+    key.save()
+    return redirect('dashboard')
 
 def products_overview(request):
     return render(request, 'developer_auth/product/product_overview.html')
@@ -163,19 +168,26 @@ def logout(request):
 
 @login_required(login_url='login')
 def create_api_key(request):
-    key = None
     if request.method == 'POST':
         user_email = request.user.email
         name = request.POST.get('api_key_name')
-        developer = Developer.objects.get(email=user_email)
+
+        # Get the developer instance safely
+        developer = get_object_or_404(Developer, email=user_email)
+
+        # Optional: Prevent duplicate API keys for a developer
         # if DeveloperAPIKey.objects.filter(developer=developer).exists():
-        #     return JsonResponse({'error': 'Developer already has an api key.'}, status=400)
-        print(developer)
-        print(name)
+        #     return JsonResponse({'error': 'Developer already has an API key.'}, status=400)
+
         # Create an API key for the developer
         api_key, key = DeveloperAPIKey.objects.create_key(developer=developer, name=name)
-    return render(request, 'developer_auth/api_key.html', {'key': key})
 
+        # Return partial template for HTMX updates
+        return render(request, 'developer_auth/key.html', {'key': key})
+    return redirect('dashboard')
+
+def api_key(request):
+    return render(request, 'developer_auth/api_key.html')
 
 @login_required(login_url='login')
 def regenerate_api_key(request):

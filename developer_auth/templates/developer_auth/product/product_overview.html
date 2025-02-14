@@ -1,7 +1,7 @@
 {% extends 'developer_auth/docs_base.html' %}
 
 {% block title %}
-    Overview
+    Product Overview
 {% endblock %}
 
 {% block content %}
@@ -258,4 +258,9 @@
     
 
 </div>
+{% with prev_page='category-delete' prev_page_name='Delete Category' next_page='product-create' next_page_name='Create Product' %}
+        
+        {% include 'developer_auth/bottom_nav.html' %}
+
+{% endwith %}
 {% endblock %}

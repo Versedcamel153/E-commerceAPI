@@ -1,7 +1,7 @@
 {% extends 'developer_auth/docs_base.html' %}
 
 {% block title %}
-    Cart Endpoints
+    Get Category
 {% endblock %}
 
 
@@ -22,41 +22,44 @@
         </div>
         <p class="text-xl">Authentication: </p>
         
-        <div class="collapse collapse-arrow bg-base-200">
-            <input type="checkbox" />
-            <div class="collapse-title text-md font-medium">Headers</div>
-            <div class="collapse-content overflow-auto">
+            <div class="mockup-code w-full mt-8">
                 <pre><code>API-Key: {your-APIKEY}</code></pre>
             </div>
-        </div>
         <p class="text-xl">Response: </p>
         <div class="flex items-center">
             <p class="p-2 text-md">Status Code:<span class="bg-green-200 rounded-md p-2 mx-2 text-md font-semibold">200 OK</span></p>
         </div>
     
-        <div class="collapse collapse-arrow bg-base-200">
+        <div class="mockup-code w-full mt-8">
+        <div class="collapse collapse-arrow bg-inherit">
             <input type="checkbox" />
             <div class="collapse-title text-md font-medium">Response Body</div>
             <div class="collapse-content overflow-auto">
                 <pre>
                     <code>
     [
-    {
-    "id": 1,
-    "name": "Fashion",
-    "description": "Men and women apparel"
-    },
-    {
-    "id": 2,
-    "name": "Electronics",
-    "description": "Tools and equipments"
-    }
+        {
+            "id": 1,
+            "name": "Fashion",
+            "description": "Men and women apparel"
+            },
+            {
+            "id": 2,
+            "name": "Electronics",
+            "description": "Tools and equipments"
+        }
     ]                       
                     </code>
                 </pre>
             </div>
         </div>
+        </div>
     </div>
 </div>
+    {% with prev_page='category-create' prev_page_name='Create category' next_page='category-update' next_page_name='Update category' %}
+        
+        {% include 'developer_auth/bottom_nav.html' %}
+
+    {% endwith %}
 
 {% endblock %}

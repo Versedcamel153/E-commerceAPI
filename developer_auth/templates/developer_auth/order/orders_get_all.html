@@ -1,7 +1,7 @@
 {% extends 'developer_auth/docs_base.html' %}
 
 {% block title %}
-    Cart Endpoints
+    Get all Orders
 {% endblock %}
 
 
@@ -22,13 +22,10 @@
         </div>
         <p class="text-xl">Authentication: </p>
         
-        <div class="collapse collapse-arrow bg-base-200">
-            <input type="checkbox" />
-            <div class="collapse-title text-md font-medium">Headers</div>
-            <div class="collapse-content overflow-auto">
+            <div class="mockup-code mt-8 w-full">
                 <pre><code>API-Key: {your-APIKEY}</code></pre>
             </div>
-        </div>
+        
         <p class="text-xl">Parameters(Query Params): </p>
             <div class="bg-base-200 p-4 rounded-2xl overflow-auto">
                 <pre><code>user_id: {request.user.id}</code></pre>
@@ -38,50 +35,57 @@
             <p class="p-2 text-md">Status Code:<span class="bg-green-200 rounded-md p-2 mx-2 text-md font-semibold">200 OK</span></p>
         </div>
     
-        <div class="collapse collapse-arrow bg-base-200">
+        <div class="mockup-code mt-8 w-full">
+        <div class="collapse collapse-arrow bg-inherit">
             <input type="checkbox" />
             <div class="collapse-title text-md font-medium">Response Body</div>
             <div class="collapse-content overflow-auto">
                 <pre>
                     <code>
     [
-    {
-    "id": 1,
-    "items": [
-    {
+        {
         "id": 1,
-        "product": {
-            "id": 2,
-            "reviews": [],
-            "images": [],
-            "category_name": "electronics",
-            "average_rating": 0,
-            "total_reviews": 0,
-            "name": "Mocha",
-            "slug": "mocha",
-            "description": "Woven fabric",
-            "price": "200.00",
-            "stock_quantity": 90,
-            "created_date": "2025-01-17T10:58:57.034531Z",
-            "category": 2
-        },
-        "quantity": 10
-    }
-    ],
-    "item_count": 1,
-    "created_at": "17 January 2025",
-    "user_id": 1,
-    "total_price": "2000.00",
-    "status": "PENDING",
-    "cart": 1
-    }
+        "items": [
+        {
+            "id": 1,
+            "product": {
+                "id": 2,
+                "reviews": [],
+                "images": [],
+                "category_name": "electronics",
+                "average_rating": 0,
+                "total_reviews": 0,
+                "name": "Mocha",
+                "slug": "mocha",
+                "description": "Woven fabric",
+                "price": "200.00",
+                "stock_quantity": 90,
+                "created_date": "2025-01-17T10:58:57.034531Z",
+                "category": 2
+            },
+            "quantity": 10
+        }
+        ],
+        "item_count": 1,
+        "created_at": "17 January 2025",
+        "user_id": 1,
+        "total_price": "2000.00",
+        "status": "PENDING",
+        "cart": 1
+        }
     ]                
                     </code>
                 </pre>
             </div>
         </div>
+        </div>
     </div>
-    
 </div>
+
+    {% with prev_page='order-get-one' prev_page_name='Get Order Details' next_page='order-cancel' next_page_name='Cancel Order' %}
+            
+        {% include 'developer_auth/bottom_nav.html' %}
+
+    {% endwith %}
 
 {% endblock %}

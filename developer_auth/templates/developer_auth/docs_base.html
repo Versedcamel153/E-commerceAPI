@@ -1,7 +1,7 @@
 {% load static %}
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="abyss">
 <head>
     <meta charset="UTF-8">
     <link href="{% static 'css/styles.css' %}" rel="stylesheet">
@@ -24,7 +24,7 @@
                         <div class="lg:hidden flex lg:flex-1 mx-2">
                             <a href="#" class="-m-1.5 p-1.5">
                             <span class="sr-only">Your Company</span>
-                            <img class="h-8 w-auto" src="https://tailwindui.com/plus/img/logos/mark.svg?color=indigo&shade=600" alt="">
+                            <img class="h-8 w-auto" src="{% static 'img/tailwindcss.svg' %}" alt="">
                             </a>
                         </div>
                         <div class="mx-2 flex-1 px-2">Navbar Title</div>
@@ -39,7 +39,6 @@
                              {% endif %}
                             </ul>
                         </div>
-                        
                 
                         <div class="flex-none lg:hidden">
                             <label for="my-drawer-2" aria-label="open sidebar" class="btn btn-square btn-ghost">
@@ -89,19 +88,19 @@
                         </ul>
                     </div>
             </div>
-            <ul class="menu w-full px-4 py-0">
+            <ul class="menu w-full px-4 py-0 font-medium">
                 <!-- Sidebar content here -->
                 <li>
                 <details open>
                     <summary>Introduction</summary>
                     <ul hx-boost="true">
-                      <li><a href="{% url 'docs' %}">Overview</a></li>
-                      <li><a href="{% url 'prerequisite' %}">Prerequisite</a></li>
-                      <li><a>Features</a>
-                      <li><a href="{% url 'authentication' %}">Authentication</a></li>
-                      <li><a href="{% url 'implementation' %}">Live Implementation</a></li>
-                      <li><a href="{% url 'support' %}">Support and Feedback</a></li>
-                      <li>
+                        <li><a href="{% url 'docs' %}" class="{% if request.resolver_match.url_name == 'docs' %}menu-active{% endif %}">Overview</a></li>
+                        <li><a href="{% url 'prerequisite' %}" class="{% if request.resolver_match.url_name == 'prerequisite' %}menu-active{% endif %}">Prerequisite</a></li>
+                        <li><a href="#" class="{% if request.resolver_match.url_name == 'features' %}menu-active{% endif %}">Features</a></li>
+                        <li><a href="{% url 'authentication' %}" class="{% if request.resolver_match.url_name == 'authentication' %}menu-active{% endif %}">Authentication</a></li>
+                        <li><a href="{% url 'implementation' %}" class="{% if request.resolver_match.url_name == 'implementation' %}menu-active{% endif %}">Live Implementation</a></li>
+                        <li><a href="{% url 'support' %}" class="{% if request.resolver_match.url_name == 'support' %}menu-active{% endif %}">Support and Feedback</a></li>
+                      <!-- <li>
                         <details open>
                           <summary>Parent</summary>
                           <ul>
@@ -109,7 +108,7 @@
                             <li><a>Submenu 2</a></li>
                           </ul>
                         </details>
-                      </li>
+                      </li> -->
                     </ul>
                 </details>
                 </li>
@@ -125,80 +124,101 @@
                         </summary>
                         <ul>                   
                             <li>
-                                <details>
-                                    <summary>Category Endpoints</summary>
-                                    <ul hx-boost="true">
-                                        <li><a href="{% url 'category-overview' %}">Overview</a></li>
-                                        <li><a href="{% url 'category-create' %}">Create Category</a></li>
-                                        <li><a href="{% url 'category-update' %}">Update Category</a></li>
-                                        <li><a href="{% url 'category-delete' %}">Delete Product</a></li>
-                                        <li><a href="{% url 'category-get' %}">Get all Categories</a></li>
-                                        <li><a href="">Get one Category</a></li>
-                                    </ul>
-                                </details>
-                            </li>
-                            <li>
-                                <details>
-                                    <summary>Products Endpoints</summary>
-                                    <ul hx-boost="true">
-                                        <li><a href="{% url 'product-overview' %}">Overview</a>
-                                        <li><a href="{% url 'product-create' %}">Create Product</a></li>
-                                        <li><a href="{% url 'product-update' %}">Update Product</a></li>
-                                        <li><a href="{% url 'product-delete' %}">Delete Product</a></li>
-                                        <li><a href="{% url 'product-get-all' %}">Get all products</a></li>
-                                        <li><a href="{% url 'product-get-one' %}">Get one product</a></li>
-                                    </ul>
-                                </details>
-                            </li>
-                            <li>
-                                <details>
-                                    <summary>Review Endpoints</summary>
-                                    <ul hx-boost="true">
-                                        <li><a href="{% url 'review-overview' %}">Overview</a></li>
-                                        <li><a href="{% url 'review-create' %}">Create Review</a></li>
-                                        <li><a href="{% url 'review-update' %}">Update Review</a></li>
-                                        <li><a href="{% url 'review-delete' %}">Delete Review</a></li>
-                                        <li><a href="{% url 'review-get-all' %}">Get all Reviews of a product</a></li>
-                                        <li><a href="{% url 'review-get-one' %}">Get one Review</a></li>
-                                    </ul>
-                                </details>
-                            </li>
-                            <li>
-                                <details>
+                                <details {% if request.resolver_match.url_name in 'category-overview,category-create,category-update,category-delete,category-get' %}open{% endif %}>
                                     <summary>
-                                        <label>
+                                        <label class="pr-2">
+                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-5">
+                                                <path stroke-linecap="round" stroke-linejoin="round" d="M9.568 3H5.25A2.25 2.25 0 0 0 3 5.25v4.318c0 .597.237 1.17.659 1.591l9.581 9.581c.699.699 1.78.872 2.607.33a18.095 18.095 0 0 0 5.223-5.223c.542-.827.369-1.908-.33-2.607L11.16 3.66A2.25 2.25 0 0 0 9.568 3Z" />
+                                                <path stroke-linecap="round" stroke-linejoin="round" d="M6 6h.008v.008H6V6Z" />
+                                              </svg>                                              
+                                        </label>
+                                        Category Endpoints
+                                    </summary>
+                                    <ul hx-boost="true">
+                                        <li><a href="{% url 'category-overview' %}" class="{% if request.resolver_match.url_name == 'category-overview' %}menu-active{% endif %}">Overview</a></li>
+                                        <li><a href="{% url 'category-create' %}" class="{% if request.resolver_match.url_name == 'category-create' %}menu-active{% endif %}">Create Category</a></li>
+                                        <li><a href="{% url 'category-get' %}" class="{% if request.resolver_match.url_name == 'category-get' %}menu-active{% endif %}">Get Categories</a></li>
+                                        <li><a href="{% url 'category-update' %}" class="{% if request.resolver_match.url_name == 'category-update' %}menu-active{% endif %}">Update Category</a></li>
+                                        <li><a href="{% url 'category-delete' %}" class="{% if request.resolver_match.url_name == 'category-delete' %}menu-active{% endif %}">Delete Product</a></li>
+                                    </ul>
+                                </details>
+                            </li>
+                            <li>
+                                <details {% if request.resolver_match.url_name in 'product-overview,product-create,product-update,product-delete,product-get-all,product-get-one' %}open{% endif %}>
+                                    <summary>
+                                        <label class="pr-2">
                                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
-                                            <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M7.5 14.25a3 3 0 0 0-3 3h15.75m-12.75-3h11.218c1.121-2.3 2.1-4.684 2.924-7.138a60.114 60.114 0 0 0-16.536-1.84M7.5 14.25 5.106 5.272M6 20.25a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0Zm12.75 0a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0Z" />
+                                                <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 10.5V6a3.75 3.75 0 1 0-7.5 0v4.5m11.356-1.993 1.263 12c.07.665-.45 1.243-1.119 1.243H4.25a1.125 1.125 0 0 1-1.12-1.243l1.264-12A1.125 1.125 0 0 1 5.513 7.5h12.974c.576 0 1.059.435 1.119 1.007ZM8.625 10.5a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Zm7.5 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Z" />
+                                              </svg>                                              
+                                        </label>
+                                        Products Endpoints
+                                    </summary>
+                                    <ul hx-boost="true">
+                                        <li><a href="{% url 'product-overview' %}" class="{% if request.resolver_match.url_name == 'product-overview' %}menu-active{% endif %}">Overview</a></li>
+                                        <li><a href="{% url 'product-create' %}" class="{% if request.resolver_match.url_name == 'product-create' %}menu-active{% endif %}">Create Product</a></li>
+                                        <li><a href="{% url 'product-get-all' %}" class="{% if request.resolver_match.url_name == 'product-get-all' %}menu-active{% endif %}">Get products</a></li>
+                                        <li><a href="{% url 'product-update' %}" class="{% if request.resolver_match.url_name == 'product-update' %}menu-active{% endif %}">Update Product</a></li>
+                                        <li><a href="{% url 'product-delete' %}" class="{% if request.resolver_match.url_name == 'product-delete' %}menu-active{% endif %}">Delete Product</a></li>
+                                                                            </ul>
+                                </details>
+                            </li>
+                            <li>
+                                <details {% if request.resolver_match.url_name in 'review-overview,review-create,review-update,review-delete,review-get-all,review-get-one' %}open{% endif %}>
+                                    <summary>
+                                        <label class="pr-2">
+                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+                                                <path stroke-linecap="round" stroke-linejoin="round" d="M7.5 8.25h9m-9 3H12m-9.75 1.51c0 1.6 1.123 2.994 2.707 3.227 1.129.166 2.27.293 3.423.379.35.026.67.21.865.501L12 21l2.755-4.133a1.14 1.14 0 0 1 .865-.501 48.172 48.172 0 0 0 3.423-.379c1.584-.233 2.707-1.626 2.707-3.228V6.741c0-1.602-1.123-2.995-2.707-3.228A48.394 48.394 0 0 0 12 3c-2.392 0-4.744.175-7.043.513C3.373 3.746 2.25 5.14 2.25 6.741v6.018Z" />
+                                              </svg>                                                                                           
+                                        </label>
+                                        Review Endpoints
+                                    </summary>
+                                    <ul hx-boost="true">
+                                        <li><a href="{% url 'review-overview' %}" class="{% if request.resolver_match.url_name == 'review-overview' %}menu-active{% endif %}">Overview</a></li>
+                                        <li><a href="{% url 'review-create' %}" class="{% if request.resolver_match.url_name == 'review-create' %}menu-active{% endif %}">Create Review</a></li>
+                                        <li><a href="{% url 'review-get-one' %}" class="{% if request.resolver_match.url_name == 'review-get-one' %}menu-active{% endif %}">Get a Review</a></li>
+                                        <li><a href="{% url 'review-get-all' %}" class="{% if request.resolver_match.url_name == 'review-get-all' %}menu-active{% endif %}">Get all Reviews</a></li>
+                                        <li><a href="{% url 'review-update' %}" class="{% if request.resolver_match.url_name == 'review-update' %}menu-active{% endif %}">Update Review</a></li>
+                                        <li><a href="{% url 'review-delete' %}" class="{% if request.resolver_match.url_name == 'review-delete' %}menu-active{% endif %}">Delete Review</a></li>
+                                                                            </ul>
+                                </details>
+                            </li>
+                            <li>
+                                <details {% if request.resolver_match.url_name in 'cart-overview,cart-get,cart-add,cart-increase,cart-decrease,cart-remove' %}open{% endif %}>
+                                    <summary>
+                                        <label class="pr-2">
+                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-5">
+                                                <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M7.5 14.25a3 3 0 0 0-3 3h15.75m-12.75-3h11.218c1.121-2.3 2.1-4.684 2.924-7.138a60.114 60.114 0 0 0-16.536-1.84M7.5 14.25 5.106 5.272M6 20.25a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0Zm12.75 0a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0Z" />
                                             </svg>                                              
                                         </label>
                                         Cart Endpoints
                                     </summary>
                                     <ul hx-boost="true">
-                                        <li><a href="{% url 'cart-overview' %}">Overview</a></li>
-                                        <li><a href="{% url 'cart-get' %}">View Cart</a></li>
-                                        <li><a href="{% url 'cart-add' %}">Add to cart</a></li>
-                                        <li><a href="{% url 'cart-increase' %}">Increase product quantity in cart</a></li>
-                                        <li><a href="{% url 'cart-decrease' %}">Decrease product quantity in cart</a></li>
-                                        <li><a href="{% url 'cart-remove' %}">Remove product from cart</a></li>
+                                        <li><a href="{% url 'cart-overview' %}" class="{% if request.resolver_match.url_name == 'cart-overview' %}menu-active{% endif %}">Overview</a></li>
+                                        <li><a href="{% url 'cart-get' %}" class="{% if request.resolver_match.url_name == 'cart-get' %}menu-active{% endif %}">View Cart</a></li>
+                                        <li><a href="{% url 'cart-add' %}" class="{% if request.resolver_match.url_name == 'cart-add' %}menu-active{% endif %}">Add to cart</a></li>
+                                        <li><a href="{% url 'cart-increase' %}" class="{% if request.resolver_match.url_name == 'cart-increase' %}menu-active{% endif %}">Increase product quantity</a></li>
+                                        <li><a href="{% url 'cart-decrease' %}" class="{% if request.resolver_match.url_name == 'cart-decrease' %}menu-active{% endif %}">Decrease product quantity</a></li>
+                                        <li><a href="{% url 'cart-remove' %}" class="{% if request.resolver_match.url_name == 'cart-remove' %}menu-active{% endif %}">Remove product</a></li>
                                     </ul>
                                 </details>
                             </li>
                             <li>
-                                <details>
+                                <details {% if request.resolver_match.url_name in 'order-overview,order-create,order-get-one,order-get-all,order-cancel' %}open{% endif %}>
                                     <summary>
-                                        <label>
-                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
-                                            <path stroke-linecap="round" stroke-linejoin="round" d="m21 7.5-9-5.25L3 7.5m18 0-9 5.25m9-5.25v9l-9 5.25M3 7.5l9 5.25M3 7.5v9l9 5.25m0-9v9" />
+                                        <label class="pr-2">
+                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-5">
+                                                <path stroke-linecap="round" stroke-linejoin="round" d="m21 7.5-9-5.25L3 7.5m18 0-9 5.25m9-5.25v9l-9 5.25M3 7.5l9 5.25M3 7.5v9l9 5.25m0-9v9" />
                                             </svg>                                              
                                         </label>
                                         Orders Endpoints
+                                        
                                     </summary>
                                     <ul hx-boost="true">
-                                        <li><a href="{% url 'order-overview' %}">Overview</a></li>
-                                        <li><a href="{% url 'order-create' %}">Create Order</a></li>
-                                        <li><a href="{% url 'order-get-one' %}">Get Order details</a></li>
-                                        <li><a href="{% url 'order-get-all' %}">Get all Orders from a User</a></li>
-                                        <li><a href="{% url 'order-cancel' %}">Cancel Order</a></li>
+                                        <li><a href="{% url 'order-overview' %}" class="{% if request.resolver_match.url_name == 'order-overview' %}menu-active{% endif %}">Overview</a></li>
+                                        <li><a href="{% url 'order-create' %}" class="{% if request.resolver_match.url_name == 'order-create' %}menu-active{% endif %}">Create Order</a></li>
+                                        <li><a href="{% url 'order-get-one' %}" class="{% if request.resolver_match.url_name == 'order-get-one' %}menu-active{% endif %}">Get Order details</a></li>
+                                        <li><a href="{% url 'order-get-all' %}" class="{% if request.resolver_match.url_name == 'order-get-all' %}menu-active{% endif %}">Get all Orders</a></li>
+                                        <li><a href="{% url 'order-cancel' %}" class="{% if request.resolver_match.url_name == 'order-cancel' %}menu-active{% endif %}">Cancel Order</a></li>
                                     </ul>
                                 </details>
                             </li>

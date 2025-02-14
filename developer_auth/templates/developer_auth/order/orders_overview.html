@@ -1,7 +1,7 @@
 {% extends 'developer_auth/docs_base.html' %}
 
 {% block title %}
-    Overview
+    Order Overview
 {% endblock %}
 
 {% block content %}
@@ -122,4 +122,9 @@
     
 
 </div>
+    {% with prev_page='cart-remove' prev_page_name='Remove Cart Item' next_page='order-create' next_page_name='Create Order' %}
+                
+        {% include 'developer_auth/bottom_nav.html' %}
+
+    {% endwith %}
 {% endblock %}

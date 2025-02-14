@@ -1,6 +1,6 @@
 from django.urls import path
 from .views import (
-    login, register, logout, create_api_key, regenerate_api_key,index, docs, live_implementation, dashboard, support, prerequisite, authentication,
+    login, register, revoke_key, api_key,logout, create_api_key, regenerate_api_key,index, docs, live_implementation, dashboard, support, prerequisite, authentication,
     product_create, product_delete, product_get_all, product_get_one, product_update, products_overview,
     orders_cancel, orders_create, orders_get_all, orders_get_one, orders_overview,
     cart_overview, cart_add, cart_decrease, cart_get, cart_increase, cart_remove,
@@ -15,7 +15,9 @@ urlpatterns = [
     path('auth/login/', login, name='login'),
     path('auth/register/', register, name='register'),
     path('logout/', logout, name='logout'),
+    path('key/', api_key, name='api-key'),
     path('api-key/', create_api_key, name='create-api-key'),
+    path('api-key/revoke/<str:prefix>/', revoke_key, name='revoke-key'),
     path('api-key/regenerate/', regenerate_api_key, name='regenerate-key'),
     path('docs/', docs, name='docs'),
     path('docs/authentication/', authentication, name='authentication'),
@@ -34,7 +36,7 @@ urlpatterns = [
     path('docs/orders/create/', orders_create, name='order-create'),
     path('docs/orders/get-all/', orders_get_all, name='order-get-all'),
     path('docs/orders/get-one/', orders_get_one, name='order-get-one'),
-    path('docs/orders/', orders_cancel, name='order-cancel'),
+    path('docs/orders/cancel/', orders_cancel, name='order-cancel'),
 
     path('docs/category/', category_overview, name='category-overview'),
     path('docs/category/create/', category_create, name='category-create'),

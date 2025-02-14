@@ -1,11 +1,11 @@
 {% extends 'developer_auth/docs_base.html' %}
 
 {% block title %}
-    Overview
+    Category Overview
 {% endblock %}
 
 {% block content %}
-<div class="px-8 mt-8">
+<div class="px-8 mt-8 border">
 
     <p class="text-2xl">Category Enpoint</p>
     <p class="text-xl">Details:</p>
@@ -75,4 +75,9 @@
     
 
 </div>
+    {% with next_page='category-create' next_page_name='Create Category' %}
+        
+        {% include 'developer_auth/bottom_nav.html' %}
+
+    {% endwith %}
 {% endblock %}

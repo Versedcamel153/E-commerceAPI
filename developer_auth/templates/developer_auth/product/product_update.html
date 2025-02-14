@@ -1,7 +1,7 @@
 {% extends 'developer_auth/docs_base.html' %}
 
 {% block title %}
-    Cart Endpoints
+    Update Product
 {% endblock %}
 
 
@@ -32,17 +32,17 @@
             </div>
         </div>
         <p class="text-xl">Request Body: </p>
-            <div class="bg-base-200 p-4 rounded-2xl overflow-auto">
+            <div class="mockup-code w-full mt-8">
                 <pre>
                     <code>
-{
-"images": [],
-"name": "....",
-"description": "...",
-"price": "5",
-"stock_quantity": 100,
-"category": 1
-}
+    {
+        "images": [],
+        "name": "....",
+        "description": "...",
+        "price": "5",
+        "stock_quantity": 100,
+        "category": 1
+    }
                     </code>
                 </pre>
         </div>
@@ -51,32 +51,40 @@
             <p class="p-2 text-md">Status Code:<span class="bg-green-200 rounded-md p-2 mx-2 text-md font-semibold">200 OK</span></p>
         </div>
     
-        <div class="collapse collapse-arrow bg-base-200">
+        <div class="mockup-code w-full mt-8">
+        <div class="collapse collapse-arrow bg-inherit">
             <input type="checkbox" />
             <div class="collapse-title text-md font-medium">Response Body</div>
             <div class="collapse-content overflow-auto">
                 <pre>
                     <code>
-{
-"id": 1,
-"reviews": [],
-"images": [],
-"category_id": 1,
-"category_name": "...",
-"average_rating": "No reviews yet",
-"total_reviews": 0,
-"name": "pencil",
-"slug": "pencil",
-"description": "...",
-"price": "5.00",
-"stock_quantity": 100,
-"created_date": "...",
-"category": 1
-}                        
+    {
+        "id": 1,
+        "reviews": [],
+        "images": [],
+        "category_id": 1,
+        "category_name": "...",
+        "average_rating": "No reviews yet",
+        "total_reviews": 0,
+        "name": "pencil",
+        "slug": "pencil",
+        "description": "...",
+        "price": "5.00",
+        "stock_quantity": 100,
+        "created_date": "...",
+        "category": 1
+    }                        
                     </code>
                 </pre>
             </div>
         </div>
+        </div>
     </div>
 </div>
+
+    {% with prev_page='product-get-all' prev_page_name='Get Products' next_page='product-delete' next_page_name='Delete product' %}
+        
+        {% include 'developer_auth/bottom_nav.html' %}
+
+    {% endwith %}
 {% endblock %}
