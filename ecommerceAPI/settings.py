@@ -72,13 +72,13 @@ SOMEAUTH = {
     "ENABLED_PROVIDERS": ["google"],  # Must match provider apps in INSTALLED_APPS
     "PROVIDERS": {
         "google": {
-            "client_id": "902886621611-1l0ers9q2cgir8smr32g6e30lqo3fviq.apps.googleusercontent.com",
-            "secret": "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",
+            "client_id": "",
+            "secret": "",
         }
     }
 }
 
-API_KEY_ENCRYPTION_SECRET = "V6V8g8Rx1Dh5lYlHTICdPst48pm2-RgqqYqdWyd4o8Q="
+API_KEY_ENCRYPTION_SECRET = ""
 
 SOCIALACCOUNT_AUTO_SIGNUP = True
 SOCIALACCOUNT_LOGIN_ON_GET = True

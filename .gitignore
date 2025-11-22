@@ -15,4 +15,5 @@ developer_auth/*.pyc
 developer_auth/*.pyo    
 developer_auth/*.py
 node_modules/
+encryption_key.txt
 
