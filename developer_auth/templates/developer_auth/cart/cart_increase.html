@@ -1,60 +1,148 @@
-{% extends 'developer_auth/docs_base.html' %}
+{% extends 'developer_auth/docs_layout.html' %}
 
-{% block title %}
-    Increase Cart Item
-{% endblock %}
+{% block title %}Increase Cart Item - E-commerceAPI{% endblock %}
 
+{% block header_title %}Increase Cart Item{% endblock %}
+{% block header_description %}Increase the quantity of an item in the shopping cart.{% endblock %}
 
-{% block content %}
-<div class="px-8">
-    <div class="my-20 space-y-2"  id="inc-cart">
-        <p class="text-2xl">Increase a product's quantity in a cart by 1</p>
-        <div class="flex items-center">
-            <p class="text-xl">URL: </p>
-            <p class="bg-base-200 rounded-md p-2 mx-2 truncate font-mono font-semibold">
-                <code>https://E-commerceAPI.com/api/cart/&lt;int:pk&gt;/increase/</code>
-            </p>
-        </div>
-        <div class="flex items-center">
-            <p class="text-xl">Methods: </p>
-            <p class="bg-base-200 rounded-md p-2 mx-2  font-mono font-semibold">PATCH</p>
-        </div>
-        <p class="text-xl">URL Parameters:</p>
-        <p><strong>pk (Primary Key/ Product ID) </strong><i>(Positive Integer, Required)</i>: The unique identifier for a product in the cart.</p>
-        <p class="text-xl">Authentication: </p>
+{% block doc_content %}
+<div class="space-y-6">
+    <!-- Header -->
+    <div class="border-b border-slate-200 pb-6">
+        <h1 class="text-3xl font-bold text-slate-900">Increase Cart Item</h1>
+        <p class="mt-2 text-lg text-slate-600">Increase the quantity of an item in the shopping cart.</p>
+    </div>
 
-            <div class="mockup-code w-full mt-8">
-                <pre><code>API-Key: {your-APIKEY}</code></pre>
+    <!-- Endpoint Card -->
+    <div class="bg-white rounded-lg border border-slate-200 shadow-sm overflow-hidden">
+        <div class="bg-slate-50 px-4 py-3 border-b border-slate-200 flex items-center justify-between">
+            <div class="flex items-center gap-3">
+                <span class="px-2.5 py-1 rounded-md text-xs font-bold bg-blue-100 text-blue-700 border border-blue-200 font-mono">PATCH</span>
+                <code class="text-sm text-slate-700 font-mono">/api/cart/&lt;int:pk&gt;/increase/</code>
             </div>
+            <div class="flex items-center gap-2">
+                <span class="flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-medium bg-amber-50 text-amber-700 border border-amber-200">
+                    <i class="fas fa-lock text-[10px]"></i>
+                    Auth Required
+                </span>
+            </div>
+        </div>
         
-        <p class="text-xl">Request Body: Not Required.</p>
-        <p class="text-xl">Response: </p>
-        <div class="flex items-center">
-            <p class="p-2 text-md">Status Code:<span class="bg-green-200 rounded-md p-2 mx-2 text-md font-semibold">200 OK</span></p>
-        </div>
-    
-        <div class="mockup-code w-full mt-8">
-        <div class="collapse collapse-arrow bg-inherit">
-            <input type="checkbox" />
-            <div class="collapse-title text-md font-medium">Response Body</div>
-            <div class="collapse-content overflow-auto">
-                <pre>
-                    <code>
-    {
-        "quantity": 10
-    }                     
-                    </code>
-                </pre>
+        <div class="p-6 space-y-6">
+            <!-- Authentication -->
+            <div>
+                <h3 class="text-sm font-semibold text-slate-900 uppercase tracking-wider mb-3">Authentication</h3>
+                <div class="bg-slate-50 rounded-md border border-slate-200 p-3">
+                    <div class="flex items-center gap-3 text-sm">
+                        <span class="font-mono text-slate-500">Header:</span>
+                        <code class="font-mono text-indigo-600">API-KEY: &lt;your_api_key&gt;</code>
+                    </div>
+                </div>
             </div>
-        </div>
+
+            <!-- Path Parameters -->
+            <div>
+                <h3 class="text-sm font-semibold text-slate-900 uppercase tracking-wider mb-3">Path Parameters</h3>
+                <div class="overflow-x-auto">
+                    <table class="w-full text-sm text-left border border-slate-200 rounded-lg">
+                        <thead class="text-xs text-slate-500 uppercase bg-slate-50 border-b border-slate-200">
+                            <tr>
+                                <th class="px-4 py-3 font-medium">Parameter</th>
+                                <th class="px-4 py-3 font-medium">Type</th>
+                                <th class="px-4 py-3 font-medium">Description</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-slate-200">
+                            <tr class="bg-white">
+                                <td class="px-4 py-3 font-mono text-slate-700">pk</td>
+                                <td class="px-4 py-3 text-slate-500">integer</td>
+                                <td class="px-4 py-3 text-slate-600">The unique identifier of the cart item.</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Responses -->
+            <div>
+                <h3 class="text-sm font-semibold text-slate-900 uppercase tracking-wider mb-3">Responses</h3>
+                <div class="space-y-4">
+                    <!-- 200 OK -->
+                    <div class="border border-slate-200 rounded-lg overflow-hidden">
+                        <div class="bg-emerald-50 px-4 py-2 border-b border-emerald-100 flex items-center gap-2">
+                            <span class="w-2 h-2 rounded-full bg-emerald-500"></span>
+                            <span class="font-mono text-sm font-medium text-emerald-700">200 OK</span>
+                        </div>
+                        <div class="p-4 bg-slate-50">
+                            <pre class="font-mono text-xs text-slate-700 overflow-x-auto">
+{
+    "quantity": 11
+}</pre>
+                        </div>
+                    </div>
+
+                    <!-- 404 Not Found -->
+                    <div class="border border-slate-200 rounded-lg overflow-hidden">
+                        <div class="bg-red-50 px-4 py-2 border-b border-red-100 flex items-center gap-2">
+                            <span class="w-2 h-2 rounded-full bg-red-500"></span>
+                            <span class="font-mono text-sm font-medium text-red-700">404 Not Found</span>
+                        </div>
+                        <div class="p-4 bg-slate-50">
+                            <pre class="font-mono text-xs text-slate-700 overflow-x-auto">
+{
+    "error": "ItemNotFound",
+    "message": "The requested cart item does not exist."
+}</pre>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
+
+    <!-- Code Examples -->
+    <div class="space-y-6">
+        <!-- cURL -->
+        <div class="bg-slate-900 rounded-lg overflow-hidden shadow-sm">
+            <div class="px-4 py-2 bg-slate-800 border-b border-slate-700 flex items-center justify-between">
+                <span class="text-xs font-medium text-slate-300">cURL</span>
+                <button class="text-slate-400 hover:text-white transition-colors">
+                    <i class="far fa-copy"></i>
+                </button>
+            </div>
+            <div class="p-4 overflow-x-auto">
+                <pre class="font-mono text-xs text-emerald-400">
+curl -X PATCH "https://api.ecommerceapi.com/api/cart/1/increase/" \
+  -H "API-KEY: your_api_key"</pre>
+            </div>
+        </div>
+
+        <!-- Python -->
+        <div class="bg-slate-900 rounded-lg overflow-hidden shadow-sm">
+            <div class="px-4 py-2 bg-slate-800 border-b border-slate-700 flex items-center justify-between">
+                <span class="text-xs font-medium text-slate-300">Python (requests)</span>
+                <button class="text-slate-400 hover:text-white transition-colors">
+                    <i class="far fa-copy"></i>
+                </button>
+            </div>
+            <div class="p-4 overflow-x-auto">
+                <pre class="font-mono text-xs text-blue-300">
+import requests
+
+url = "https://api.ecommerceapi.com/api/cart/1/increase/"
+headers = {
+    "API-KEY": "your_api_key"
+}
+
+response = requests.patch(url, headers=headers)
+print(response.json())</pre>
+            </div>
+        </div>
+    </div>
+
+{% with prev_page='cart-add' prev_page_name='Add to Cart' next_page='cart-decrease' next_page_name='Decrease Cart Item' %}
+    {% include 'developer_auth/bottom_nav.html' %}
+{% endwith %}
+
 </div>
-
-    {% with prev_page='cart-add' prev_page_name='Add to Cart' next_page='cart-decrease' next_page_name='Decrease Cart Item' %}
-                
-        {% include 'developer_auth/bottom_nav.html' %}
-
-    {% endwith %}
-
 {% endblock %}

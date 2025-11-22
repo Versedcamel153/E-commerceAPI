@@ -68,3 +68,25 @@ class DeveloperAPIKey(AbstractAPIKey):
     developer = models.ForeignKey(Developer, on_delete=models.CASCADE, related_name='api_key')
 
     objects = DeveloperAPIKeyManager()
+
+class APIKey(models.Model):
+    MODE_CHOICES = [
+        ('live', 'Live'),
+        ('test', 'Test'),
+    ]
+    mode = models.CharField(max_length=10, choices=MODE_CHOICES, default='test')
+    developer = models.ForeignKey(Developer, on_delete=models.CASCADE)
+    name = models.CharField(max_length=100)
+    public_key = models.CharField(max_length=50, unique=True)
+    encrypted_secret_key = models.BinaryField()
+    is_active = models.BooleanField(default=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+    revoked_at = models.DateTimeField(null=True, blank=True)
+
+    @staticmethod
+    def generate_public_key(mode):
+        return f"pk_{mode}_" + secrets.token_urlsafe(24)
+    
+    @staticmethod
+    def generate_secret_key(mode):
+        return f"sk_{mode}_" + secrets.token_urlsafe(48)

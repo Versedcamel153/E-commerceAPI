@@ -1,18 +1,45 @@
-{% extends 'developer_auth/docs_base.html' %}
+{% extends 'developer_auth/docs_layout.html' %}
 
-{% block title %}
-    Prerequisite
+{% block doc_content %}
+<div class="mb-12">
+    <h1 class="text-3xl font-bold text-slate-900 mb-4">Prerequisites</h1>
+    <p class="text-slate-600 leading-relaxed mb-6">
+        To use this API effectively, developers must implement a user model in their application. This is necessary for endpoints requiring a <code class="bg-slate-100 px-1 py-0.5 rounded text-sm font-mono text-slate-700">user_id</code> parameter, which allows actions or data to be associated with specific users.
+    </p>
+    
+    <div class="bg-blue-50 border-l-4 border-blue-500 p-4 mb-6">
+        <div class="flex">
+            <div class="flex-shrink-0">
+                <i class="fa-solid fa-circle-info text-blue-500"></i>
+            </div>
+            <div class="ml-3">
+                <p class="text-sm text-blue-700">
+                    Each user in the developer’s application should have a unique identifier, enabling seamless integration and proper functionality with the API.
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <p class="text-slate-600 leading-relaxed mb-6">
+        This prerequisite ensures user-related operations are executed accurately within the API, such as creating carts, placing orders, and managing reviews.
+    </p>
+</div>
+
+<div class="flex justify-between mt-12 pt-8 border-t border-slate-200">
+    <a href="{% url 'docs' %}" class="flex items-center gap-2 text-indigo-600 font-medium hover:text-indigo-800">
+        <i class="fa-solid fa-arrow-left"></i> Previous: Introduction
+    </a>
+    <a href="{% url 'authentication' %}" class="flex items-center gap-2 text-indigo-600 font-medium hover:text-indigo-800">
+        Next: Authentication <i class="fa-solid fa-arrow-right"></i>
+    </a>
+</div>
 {% endblock %}
 
-{% block content %}
-<div class="px-8 flex flex-col">
-    <p class="text-3xl mt-10 font-extrabold">Prerequisite</p>
-    <p class="mt-4 text-justify font-semibold lg:text-lg text-gray-800">To use this API, developers must implement a user model in their application. This is necessary for endpoints requiring a <strong>user_id</strong> parameter, which allows actions or data to be associated with specific users. Each user in the developer’s application should have a unique identifier, enabling seamless integration and proper functionality with the API. This prerequisite ensures user-related operations are executed accurately within the API.</p>
+{% block on_page_nav %}
+<div class="w-64 hidden xl:block p-8">
+    <h4 class="text-xs font-semibold text-slate-500 uppercase tracking-wider mb-3">On this page</h4>
+    <ul class="space-y-2 border-l border-slate-200">
+        <li><a href="#" class="block pl-4 text-sm text-indigo-600 border-l-2 border-indigo-600 -ml-[1px]">Prerequisites</a></li>
+    </ul>
 </div>
-    {% with prev_page='docs' prev_page_name='Overview' next_page='authentication' next_page_name='Authentication' %}
-        
-        {% include 'developer_auth/bottom_nav.html' %}
-
-    {% endwith %}
-
 {% endblock %}

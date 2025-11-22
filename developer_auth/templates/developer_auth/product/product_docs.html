@@ -1,27 +1,16 @@
-{% extends 'developer_auth/docs_base.html' %}
+{% extends 'developer_auth/docs_layout.html' %}
 
-{% block title %}
-    Product Endpoints
-{% endblock %}
-
-{% block content %}
-
-<div class="px-8">
+{% block doc_content %}
+<div class="mb-12">
+    <h1 class="text-3xl font-bold text-slate-900 mb-4">Product Endpoints</h1>
     
-
-
-
-
-
-
-
-
-
-<div class="flex w-full justify-between px-8" hx-boost="true">
-    <button class="btn btn-primary">Previous</button>
-    <button class="btn btn-primary"><a href="{% url 'categories-docs' %}">Next</a></button>
-</div> 
-  
+    <div class="flex justify-between mt-12 pt-8 border-t border-slate-200">
+        <button class="flex items-center gap-2 text-slate-400 font-medium cursor-not-allowed">
+            Previous
+        </button>
+        <a href="{% url 'category-overview' %}" class="flex items-center gap-2 text-indigo-600 font-medium hover:text-indigo-800">
+            Next <i class="fa-solid fa-arrow-right"></i>
+        </a>
+    </div>
 </div>
-
 {% endblock %}

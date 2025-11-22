@@ -1,46 +1,145 @@
-{% extends 'developer_auth/docs_base.html' %}
+{% extends 'developer_auth/docs_layout.html' %}
 
-{% block title %}
-    Remove Cart Item
-{% endblock %}
+{% block title %}Remove Cart Item - E-commerceAPI{% endblock %}
 
+{% block header_title %}Remove Cart Item{% endblock %}
+{% block header_description %}Remove an item from the shopping cart.{% endblock %}
 
-{% block content %}
+{% block doc_content %}
+<div class="space-y-6">
+    <!-- Header -->
+    <div class="border-b border-slate-200 pb-6">
+        <h1 class="text-3xl font-bold text-slate-900">Remove Cart Item</h1>
+        <p class="mt-2 text-lg text-slate-600">Remove an item from the shopping cart.</p>
+    </div>
 
-<div class="px-8"> 
-    <div class="my-20 space-y-2" id="rmv-cart">
-        <p class="text-2xl">Delete a product from the cart</p>
-        <div class="flex items-center">
-            <p class="text-xl">URL: </p>
-            <p class="bg-base-200 rounded-md p-2 mx-2 truncate font-mono font-semibold">
-                <code>https://E-commerceAPI.com/api/cart/&lt;int:pk&gt;/remove/</code>
-            </p>
-        </div>
-        <div class="flex items-center">
-            <p class="text-xl">Methods: </p>
-            <p class="bg-base-200 rounded-md p-2 mx-2  font-mono font-semibold">DELETE</p>
-        </div>
-        <p class="text-xl">URL Parameters:</p>
-        <p><strong>Slug </strong><i>(String, Required)</i>: The unique identifier for the category. This is usually a URL-friendly version of the category's name (e.g., "Electronics"). It is automatically generated upon creation of a category.</p>
-        <p class="text-xl">Authentication: </p>
-        
-        
-            <div class="mockup-code w-full mt-8">
-                <pre><code>API-Key: {your-APIKEY}</code></pre>
+    <!-- Endpoint Card -->
+    <div class="bg-white rounded-lg border border-slate-200 shadow-sm overflow-hidden">
+        <div class="bg-slate-50 px-4 py-3 border-b border-slate-200 flex items-center justify-between">
+            <div class="flex items-center gap-3">
+                <span class="px-2.5 py-1 rounded-md text-xs font-bold bg-red-100 text-red-700 border border-red-200 font-mono">DELETE</span>
+                <code class="text-sm text-slate-700 font-mono">/api/cart/&lt;int:pk&gt;/remove/</code>
             </div>
-        
-        <p class="text-xl">Response: </p>
-        <div class="flex items-center">
-            <p class="p-2 text-md">Status Code":<span class="bg-green-200 rounded-md p-2 mx-2 text-md font-semibold">204 No Content</span></p>
+            <div class="flex items-center gap-2">
+                <span class="flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-medium bg-amber-50 text-amber-700 border border-amber-200">
+                    <i class="fas fa-lock text-[10px]"></i>
+                    Auth Required
+                </span>
+            </div>
         </div>
-    
-    </div> 
+        
+        <div class="p-6 space-y-6">
+            <!-- Authentication -->
+            <div>
+                <h3 class="text-sm font-semibold text-slate-900 uppercase tracking-wider mb-3">Authentication</h3>
+                <div class="bg-slate-50 rounded-md border border-slate-200 p-3">
+                    <div class="flex items-center gap-3 text-sm">
+                        <span class="font-mono text-slate-500">Header:</span>
+                        <code class="font-mono text-indigo-600">API-KEY: &lt;your_api_key&gt;</code>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Path Parameters -->
+            <div>
+                <h3 class="text-sm font-semibold text-slate-900 uppercase tracking-wider mb-3">Path Parameters</h3>
+                <div class="overflow-x-auto">
+                    <table class="w-full text-sm text-left border border-slate-200 rounded-lg">
+                        <thead class="text-xs text-slate-500 uppercase bg-slate-50 border-b border-slate-200">
+                            <tr>
+                                <th class="px-4 py-3 font-medium">Parameter</th>
+                                <th class="px-4 py-3 font-medium">Type</th>
+                                <th class="px-4 py-3 font-medium">Description</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-slate-200">
+                            <tr class="bg-white">
+                                <td class="px-4 py-3 font-mono text-slate-700">pk</td>
+                                <td class="px-4 py-3 text-slate-500">integer</td>
+                                <td class="px-4 py-3 text-slate-600">The unique identifier of the cart item to remove.</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Responses -->
+            <div>
+                <h3 class="text-sm font-semibold text-slate-900 uppercase tracking-wider mb-3">Responses</h3>
+                <div class="space-y-4">
+                    <!-- 204 No Content -->
+                    <div class="border border-slate-200 rounded-lg overflow-hidden">
+                        <div class="bg-emerald-50 px-4 py-2 border-b border-emerald-100 flex items-center gap-2">
+                            <span class="w-2 h-2 rounded-full bg-emerald-500"></span>
+                            <span class="font-mono text-sm font-medium text-emerald-700">204 No Content</span>
+                        </div>
+                        <div class="p-4 bg-slate-50">
+                            <p class="text-sm text-slate-600">The item was successfully removed from the cart. No content is returned.</p>
+                        </div>
+                    </div>
+
+                    <!-- 404 Not Found -->
+                    <div class="border border-slate-200 rounded-lg overflow-hidden">
+                        <div class="bg-red-50 px-4 py-2 border-b border-red-100 flex items-center gap-2">
+                            <span class="w-2 h-2 rounded-full bg-red-500"></span>
+                            <span class="font-mono text-sm font-medium text-red-700">404 Not Found</span>
+                        </div>
+                        <div class="p-4 bg-slate-50">
+                            <pre class="font-mono text-xs text-slate-700 overflow-x-auto">
+{
+    "error": "ItemNotFound",
+    "message": "The requested cart item does not exist."
+}</pre>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Code Examples -->
+    <div class="space-y-6">
+        <!-- cURL -->
+        <div class="bg-slate-900 rounded-lg overflow-hidden shadow-sm">
+            <div class="px-4 py-2 bg-slate-800 border-b border-slate-700 flex items-center justify-between">
+                <span class="text-xs font-medium text-slate-300">cURL</span>
+                <button class="text-slate-400 hover:text-white transition-colors">
+                    <i class="far fa-copy"></i>
+                </button>
+            </div>
+            <div class="p-4 overflow-x-auto">
+                <pre class="font-mono text-xs text-emerald-400">
+curl -X DELETE "https://api.ecommerceapi.com/api/cart/1/remove/" \
+  -H "API-KEY: your_api_key"</pre>
+            </div>
+        </div>
+
+        <!-- Python -->
+        <div class="bg-slate-900 rounded-lg overflow-hidden shadow-sm">
+            <div class="px-4 py-2 bg-slate-800 border-b border-slate-700 flex items-center justify-between">
+                <span class="text-xs font-medium text-slate-300">Python (requests)</span>
+                <button class="text-slate-400 hover:text-white transition-colors">
+                    <i class="far fa-copy"></i>
+                </button>
+            </div>
+            <div class="p-4 overflow-x-auto">
+                <pre class="font-mono text-xs text-blue-300">
+import requests
+
+url = "https://api.ecommerceapi.com/api/cart/1/remove/"
+headers = {
+    "API-KEY": "your_api_key"
+}
+
+response = requests.delete(url, headers=headers)
+print(response.status_code)</pre>
+            </div>
+        </div>
+    </div>
+
+{% with prev_page='cart-add' prev_page_name='Add to Cart' next_page='cart-increase' next_page_name='Increase Quantity' %}
+    {% include 'developer_auth/bottom_nav.html' %}
+{% endwith %}
+
 </div>
-
-    {% with prev_page='cart-decrease' prev_page_name='Decrease Cart' next_page='order-overview' next_page_name='Orders' %}
-            
-        {% include 'developer_auth/bottom_nav.html' %}
-
-    {% endwith %}
-
 {% endblock %}

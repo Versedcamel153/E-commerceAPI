@@ -1,104 +1,297 @@
-{% extends 'developer_auth/docs_base.html' %}
-
-{% block title %}
-    Support And Feedback
-{% endblock %}
+{% extends 'developer_auth/dash_base.html' %}
 
 {% block content %}
-<div class="px-8 relative w-full h-screen">
-
-
-    <div class="overflow-x-auto mt-10">
-        <div class="flex flex-row mt-4 font-semibold text-blue-700 items-center">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="size-5" role="button">
-                <path d="M10.75 4.75a.75.75 0 0 0-1.5 0v4.5h-4.5a.75.75 0 0 0 0 1.5h4.5v4.5a.75.75 0 0 0 1.5 0v-4.5h4.5a.75.75 0 0 0 0-1.5h-4.5v-4.5Z" />
-            </svg>                
-            <span role="button" onclick="my_modal_3.showModal()">
-      
-                &nbsp;Generate API KEY
-            </span>
-            <!-- Modal Structure -->
-            <dialog id="my_modal_3" class="modal">
-                <div class="modal-box" id="modal-content">
-                <form method="dialog">
-                    <button class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">✕</button>
-                </form>
-                <h3 class="text-lg font-bold">Create new API Key</h3>
-                <div>
-                    <!-- The API key content will be swapped here -->
-                    <form class="space-y-6 flex justify-center" hx-post="{% url 'create-api-key' %}" 
-                            hx-target="#modal-content" 
-                            hx-swap="innerHTML"
-                            hx-trigger="submit">
-                        {% csrf_token %}
-                        <input name="api_key_name" type="text" placeholder="eg. Company API" class="input input-bordered" required>
-                        <button class="btn btn-primary" type="submit" hx-indicator="#indicator">Generate API Key
-                            <span class="loading loading-dots loading-md htmx-indicator"></span>
-                        </button>
-                    </form>
+            <!-- Scrollable Content -->
+            <main class="flex-1 overflow-y-auto p-6 bg-slate-50">
+                
+                <!-- API Credentials Section -->
+                <div class="bg-white rounded-xl border border-slate-200 shadow-sm p-6 mb-6">
+                    <div class="flex justify-between items-center mb-4">
+                        <h2 class="text-lg font-semibold">API Credentials</h2>
+                        <button class="text-sm text-indigo-600 hover:text-indigo-800 font-medium">Roll Keys</button>
+                    </div>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <!-- Public Key -->
+                        <div>
+                            <label class="block text-xs font-medium text-slate-500 uppercase mb-1">Public Key</label>
+                            <div class="flex">
+                                <input type="text" value="{{ api_key.public_key }}" readonly class="flex-1 bg-slate-50 border border-slate-200 rounded-l-lg px-3 py-2 text-sm font-mono text-slate-600 focus:outline-none">
+                                <button onclick="copyToClipboard('{{ api_key.public_key }}', this)" class="bg-slate-100 border border-l-0 border-slate-200 rounded-r-lg px-3 hover:bg-slate-200 text-slate-500">
+                                    <i class="fa-regular fa-copy"></i>
+                                </button>
+                            </div>
+                        </div>
+                        
+                        <!-- Secret Key -->
+                        <div>
+                            <label class="block text-xs font-medium text-slate-500 uppercase mb-1">Secret Key</label>
+                            <div class="flex">
+                                <input type="password" id="secretKey" value="{{ api_key.secret_key }}" readonly class="flex-1 bg-slate-50 border border-slate-200 rounded-l-lg px-3 py-2 text-sm font-mono text-slate-600 focus:outline-none">
+                                <button onclick="toggleSecret('secretKey', 'eyeIcon')" class="bg-slate-100 border border-l-0 border-slate-200 px-3 hover:bg-slate-200 text-slate-500">
+                                    <i class="fa-regular fa-eye" id="eyeIcon"></i>
+                                </button>
+                                <button onclick="copyToClipboard('{{ api_key.secret_key }}', this)" class="bg-slate-100 border border-l-0 border-slate-200 rounded-r-lg px-3 hover:bg-slate-200 text-slate-500">
+                                    <i class="fa-regular fa-copy"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
                 </div>
+
+                <!-- Stats Grid -->
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-6">
+                    <!-- Card 1 -->
+                    <div class="bg-white p-5 rounded-xl border border-slate-200 shadow-sm">
+                        <div class="flex justify-between items-start">
+                            <div>
+                                <p class="text-xs font-medium text-slate-500 uppercase">Total Requests</p>
+                                <h3 class="text-2xl font-bold text-slate-800 mt-1">142,384</h3>
+                            </div>
+                            <span class="bg-green-100 text-green-700 text-xs font-medium px-2 py-1 rounded-full">+12.5%</span>
+                        </div>
+                        <div class="mt-4 h-1 bg-slate-100 rounded-full overflow-hidden">
+                            <div class="h-full bg-indigo-500 w-3/4"></div>
+                        </div>
+                        <p class="text-xs text-slate-400 mt-2">75% of monthly quota</p>
+                    </div>
+
+                    <!-- Card 2 -->
+                    <div class="bg-white p-5 rounded-xl border border-slate-200 shadow-sm">
+                        <div class="flex justify-between items-start">
+                            <div>
+                                <p class="text-xs font-medium text-slate-500 uppercase">Success Rate</p>
+                                <h3 class="text-2xl font-bold text-slate-800 mt-1">99.8%</h3>
+                            </div>
+                            <span class="bg-green-100 text-green-700 text-xs font-medium px-2 py-1 rounded-full">+0.2%</span>
+                        </div>
+                        <div class="mt-4 h-1 bg-slate-100 rounded-full overflow-hidden">
+                            <div class="h-full bg-green-500 w-[99%]"></div>
+                        </div>
+                        <p class="text-xs text-slate-400 mt-2">Last 30 days</p>
+                    </div>
+
+                    <!-- Card 3 -->
+                    <div class="bg-white p-5 rounded-xl border border-slate-200 shadow-sm">
+                        <div class="flex justify-between items-start">
+                            <div>
+                                <p class="text-xs font-medium text-slate-500 uppercase">Avg Latency</p>
+                                <h3 class="text-2xl font-bold text-slate-800 mt-1">145ms</h3>
+                            </div>
+                            <span class="bg-red-100 text-red-700 text-xs font-medium px-2 py-1 rounded-full">+12ms</span>
+                        </div>
+                        <div class="mt-4 h-1 bg-slate-100 rounded-full overflow-hidden">
+                            <div class="h-full bg-yellow-500 w-1/2"></div>
+                        </div>
+                        <p class="text-xs text-slate-400 mt-2">Global average</p>
+                    </div>
+
+                    <!-- Card 4 -->
+                    <div class="bg-white p-5 rounded-xl border border-slate-200 shadow-sm">
+                        <div class="flex justify-between items-start">
+                            <div>
+                                <p class="text-xs font-medium text-slate-500 uppercase">Active Webhooks</p>
+                                <h3 class="text-2xl font-bold text-slate-800 mt-1">3</h3>
+                            </div>
+                            <div class="w-8 h-8 bg-indigo-50 rounded-full flex items-center justify-center text-indigo-600">
+                                <i class="fa-solid fa-bolt"></i>
+                            </div>
+                        </div>
+                        <p class="text-xs text-slate-400 mt-6">98.2% delivery rate</p>
+                    </div>
                 </div>
-            </dialog>
 
-        </div>
-        <table class="table table-zebra">
-          <!-- head -->
-          <thead>
-            <tr class="border-b-4 border-b-blue-600">
-              <th>Name</th>
-              <th>API Key(Prefix)</th>
-              <th>Status</th>
-              <th>Expiry date</th>
-              <th>Actions</th>
-            </tr>
-          </thead>
-          <tbody>
-            <!-- row 1 -->
-            {% for api_key in api_keys %}
-             <tr>
-                <th>{{ api_key.name }}</th>
-                <td>{{ api_key.prefix }}</td>
-                <td>
-                    {% if api_key.revoked %}
-                        Revoked
-                    {% else %}
-                        Active
-                    {% endif %}
-                </td>
-                <td>
-                    {% if api_key.expiry_date %}
-                        {{ api_key.expiry_date }}
-                    {% else %}
-                        N/A
-                    {% endif %}
-                </td>
-                <td>
-                    {% csrf_token %}
-                    {% if api_key.revoked %}
-                    <button class="btn btn-soft btn-error btn-disabled">Revoke</button>
-                    {% else %}
-                    <button class="btn btn-soft btn-error" hx-patch="{% url 'revoke-key' api_key.prefix %}" hx-target="body" hx-confirm="Are you sure you want to revoke this API Key? This cannot be undone.">Revoke</button>
-                    {% endif %}
-                </td>
-              </tr>
-            {% empty %}
-                <tr>
-                    <td colspan="5">
-                        <p class="text-center p-4">No API Keys</p>
-                    </td>
-                </tr>
-                 
-            {% endfor %}
-            
-          </tbody>
-        </table>
-    </div>
+                <!-- Charts Section -->
+                <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-6">
+                    <!-- Main Chart -->
+                    <div class="bg-white p-6 rounded-xl border border-slate-200 shadow-sm lg:col-span-2">
+                        <h3 class="text-sm font-semibold text-slate-800 mb-4">API Traffic (Last 7 Days)</h3>
+                        <div class="relative h-72 w-full">
+                        <canvas id="trafficChart" height="200"></canvas>
+                        </div>
+                    </div>
 
-</div>
-<script>
-    document.addEventListener("htmx:configRequest", (event) => {
-        const csrfToken = document.querySelector('[name=csrfmiddlewaretoken]').value;
-        event.detail.headers['X-CSRFToken'] = csrfToken;
-    });
-</script>
-{% endblock %}
+                    <!-- Secondary Chart -->
+                    <div class="bg-white p-6 rounded-xl border border-slate-200 shadow-sm">
+                        <h3 class="text-sm font-semibold text-slate-800 mb-4">Response Codes</h3>
+                        <div class="relative h-48">
+                            <canvas id="statusChart"></canvas>
+                        </div>
+                        <div class="mt-4 space-y-2">
+                            <div class="flex justify-between text-xs">
+                                <span class="flex items-center gap-2"><span class="w-2 h-2 rounded-full bg-green-500"></span> 2xx Success</span>
+                                <span class="font-medium">92%</span>
+                            </div>
+                            <div class="flex justify-between text-xs">
+                                <span class="flex items-center gap-2"><span class="w-2 h-2 rounded-full bg-yellow-500"></span> 4xx Client Error</span>
+                                <span class="font-medium">5%</span>
+                            </div>
+                            <div class="flex justify-between text-xs">
+                                <span class="flex items-center gap-2"><span class="w-2 h-2 rounded-full bg-red-500"></span> 5xx Server Error</span>
+                                <span class="font-medium">3%</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Recent Logs Table -->
+                <div class="bg-white rounded-xl border border-slate-200 shadow-sm overflow-hidden">
+                    <div class="px-6 py-4 border-b border-slate-200 flex justify-between items-center">
+                        <h3 class="text-sm font-semibold text-slate-800">Recent API Calls</h3>
+                        <a href="#" class="text-xs text-indigo-600 hover:text-indigo-800 font-medium">View All Logs</a>
+                    </div>
+                    <div class="overflow-x-auto">
+                        <table class="w-full text-sm text-left">
+                            <thead class="text-xs text-slate-500 uppercase bg-slate-50 border-b border-slate-200">
+                                <tr>
+                                    <th class="px-6 py-3">Status</th>
+                                    <th class="px-6 py-3">Method</th>
+                                    <th class="px-6 py-3">Endpoint</th>
+                                    <th class="px-6 py-3">Latency</th>
+                                    <th class="px-6 py-3">Time</th>
+                                </tr>
+                            </thead>
+                            <tbody class="divide-y divide-slate-200">
+                                <tr class="hover:bg-slate-50">
+                                    <td class="px-6 py-4">
+                                        <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800">
+                                            200 OK
+                                        </span>
+                                    </td>
+                                    <td class="px-6 py-4 font-mono text-xs font-bold text-slate-600">GET</td>
+                                    <td class="px-6 py-4 font-mono text-xs text-slate-600">/api/v1/products</td>
+                                    <td class="px-6 py-4 text-slate-500">124ms</td>
+                                    <td class="px-6 py-4 text-slate-500">Just now</td>
+                                </tr>
+                                <tr class="hover:bg-slate-50">
+                                    <td class="px-6 py-4">
+                                        <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800">
+                                            201 Created
+                                        </span>
+                                    </td>
+                                    <td class="px-6 py-4 font-mono text-xs font-bold text-slate-600">POST</td>
+                                    <td class="px-6 py-4 font-mono text-xs text-slate-600">/api/v1/orders</td>
+                                    <td class="px-6 py-4 text-slate-500">342ms</td>
+                                    <td class="px-6 py-4 text-slate-500">2 mins ago</td>
+                                </tr>
+                                <tr class="hover:bg-slate-50">
+                                    <td class="px-6 py-4">
+                                        <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-red-100 text-red-800">
+                                            401 Unauth
+                                        </span>
+                                    </td>
+                                    <td class="px-6 py-4 font-mono text-xs font-bold text-slate-600">GET</td>
+                                    <td class="px-6 py-4 font-mono text-xs text-slate-600">/api/v1/profile</td>
+                                    <td class="px-6 py-4 text-slate-500">45ms</td>
+                                    <td class="px-6 py-4 text-slate-500">5 mins ago</td>
+                                </tr>
+                                <tr class="hover:bg-slate-50">
+                                    <td class="px-6 py-4">
+                                        <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800">
+                                            200 OK
+                                        </span>
+                                    </td>
+                                    <td class="px-6 py-4 font-mono text-xs font-bold text-slate-600">GET</td>
+                                    <td class="px-6 py-4 font-mono text-xs text-slate-600">/api/v1/products/123</td>
+                                    <td class="px-6 py-4 text-slate-500">98ms</td>
+                                    <td class="px-6 py-4 text-slate-500">12 mins ago</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+            </main>
+
+{% endblock content %}
+
+{% block extra_js %}
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <!-- Scripts for Interactivity -->
+    <script>
+        // --- Chart.js Configuration ---
+        
+        // Traffic Line Chart
+        const ctxTraffic = document.getElementById('trafficChart').getContext('2d');
+        new Chart(ctxTraffic, {
+            type: 'line',
+            data: {
+                labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
+                datasets: [{
+                    label: 'Requests',
+                    data: [1200, 1900, 3000, 5000, 2300, 3400, 4500],
+                    borderColor: '#4f46e5', // Indigo 600
+                    backgroundColor: 'rgba(79, 70, 229, 0.1)',
+                    tension: 0.4,
+                    fill: true
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: { legend: { display: false } },
+                scales: {
+                    y: { beginAtZero: true, grid: { borderDash: [2, 4] } },
+                    x: { grid: { display: false } }
+                }
+            }
+        });
+
+        // Status Doughnut Chart
+        const ctxStatus = document.getElementById('statusChart').getContext('2d');
+        new Chart(ctxStatus, {
+            type: 'doughnut',
+            data: {
+                labels: ['2xx', '4xx', '5xx'],
+                datasets: [{
+                    data: [92, 5, 3],
+                    backgroundColor: ['#22c55e', '#eab308', '#ef4444'],
+                    borderWidth: 0
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                cutout: '75%',
+                plugins: { legend: { display: false } }
+            }
+        });
+    
+    function toggleSecret(inputId, iconId = 'eyeIcon') {
+        const input = document.getElementById(inputId);
+        const icon = document.getElementById(iconId);
+        
+        if (input.type === 'password') {
+            input.type = 'text';
+            if(icon) {
+                icon.classList.remove('fa-eye');
+                icon.classList.add('fa-eye-slash');
+            }
+        } else {
+            input.type = 'password';
+            if(icon) {
+                icon.classList.remove('fa-eye-slash');
+                icon.classList.add('fa-eye');
+            }
+        }
+    }
+
+    function copyToClipboard(text, btnElement) {
+        navigator.clipboard.writeText(text).then(() => {
+            // Visual feedback
+            if (btnElement) {
+                const originalIcon = btnElement.innerHTML;
+                btnElement.innerHTML = '<i class="fa-solid fa-check text-green-600"></i>';
+                setTimeout(() => {
+                    btnElement.innerHTML = originalIcon;
+                }, 2000);
+            } else {
+                alert('Copied to clipboard!');
+            }
+        }).catch(err => {
+            console.error('Failed to copy: ', err);
+        });
+    }
+
+    </script>
+{% endblock extra_js %}

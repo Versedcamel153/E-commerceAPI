@@ -1,23 +1,30 @@
 from django.urls import path
 from .views import (
-    login, register, revoke_key, api_key,logout, create_api_key, regenerate_api_key,index, docs, live_implementation, dashboard, support, prerequisite, authentication,
+    login, register, revoke_key, api_key,logout, generate_api_key, regenerate_api_key,index, docs, live_implementation, dashboard, support, prerequisite, authentication,
     product_create, product_delete, product_get_all, product_get_one, product_update, products_overview,
     orders_cancel, orders_create, orders_get_all, orders_get_one, orders_overview,
     cart_overview, cart_add, cart_decrease, cart_get, cart_increase, cart_remove,
     category_create, category_delete, category_get, category_overview, category_update,
     review_create, review_delete, review_get_all, review_get_one, review_overview, review_update,
+    api_keys, products, order, webhooks, documetation, cheat_sheet
     )
 
 urlpatterns = [
     # Add your URL patterns here
     # Example:
+    path('cheat-sheet/', cheat_sheet, name='cheat-sheet'),
+    path('products/', products, name='products'),
+    path('orders/', order, name='orders'),
+    path('api-keys/', api_keys, name='api-keys'),
+    path('webhooks/', webhooks, name='webhooks'),
+    path('documentation/', documetation, name='documentation'),
     path('', index, name='index'),
     path('auth/login/', login, name='login'),
     path('auth/register/', register, name='register'),
     path('logout/', logout, name='logout'),
     path('key/', api_key, name='api-key'),
-    path('api-key/', create_api_key, name='create-api-key'),
-    path('api-key/revoke/<str:prefix>/', revoke_key, name='revoke-key'),
+    path('api-key/', generate_api_key, name='generate-api-key'),
+    path('api-key/revoke/<str:public_key>/', revoke_key, name='revoke-key'),
     path('api-key/regenerate/', regenerate_api_key, name='regenerate-key'),
     path('docs/', docs, name='docs'),
     path('docs/authentication/', authentication, name='authentication'),

@@ -1,130 +1,79 @@
-{% extends 'developer_auth/docs_base.html' %}
+{% extends 'developer_auth/docs_layout.html' %}
 
-{% block title %}
-    Order Overview
-{% endblock %}
+{% block title %}Orders Overview - E-commerceAPI{% endblock %}
 
-{% block content %}
-<div class="px-8 mt-8">
+{% block doc_content %}
+<div class="space-y-6">
+    <!-- Header -->
+    <div class="border-b border-slate-200 pb-6">
+        <h1 class="text-3xl font-bold text-slate-900">Orders Overview</h1>
+        <p class="mt-2 text-lg text-slate-600">Manage customer orders, including creation, retrieval, and cancellation.</p>
+    </div>
 
-    <p class="text-2xl">Order Enpoint</p>
-    <p class="text-xl">Details:</p>
-    <p class="text-md text-gray-500">This explains the everythin about the order endpoint.</p>
-    <p class="text-xl mt-8">Response Schema: application/json</p>
-    <div class="flex flex-col border-1 px-1">
-        <div class="flex flex-row">
-            <div class="w-1/3 mx-2">
-                <p class="break-all">id</p>
-            </div>
-            <div class="w-full pl-3 flex flex-col justify-center">  
-                <p class="font-light italic">Integer</p>
-                <p>A unique identifier for the order.</p>
-                <div class="divider"></div>
-            </div>
+    <!-- Schema Section -->
+    <div class="bg-white rounded-lg border border-slate-200 shadow-sm overflow-hidden">
+        <div class="bg-slate-50 px-6 py-4 border-b border-slate-200">
+            <h2 class="text-lg font-semibold text-slate-900">Order Object</h2>
+            <p class="text-sm text-slate-600 mt-1">Represents a customer's order in the system.</p>
         </div>
-
-        <div class="flex flex-row">
-            <div class="w-1/3 mx-2">
-                <p class="break-all">items</p>
-            </div>
-            <div class="w-full pl-3 flex flex-col justify-center">
-                <p class="font-light italic">Array</p>
-                <p>An object of the items in the order.</p>
-                <div class="divider"></div>
-            </div>
-        </div>
-
-        <div class="flex flex-row">
-            <div class="w-1/3 mx-2">
-                <p class="break-all">item_count</p>
-            </div>
-            <div class="w-full pl-3 flex flex-col justify-center">
-                <p class="font-light italic">String</p>
-                <p>Number of items/products in the order.</p>
-                <div class="divider"></div>
-            </div>
-        </div>
-
-        <div class="flex flex-row">
-            <div class="w-1/3 mx-2">
-                <p class="break-all">created_at</p>
-            </div>
-            <div class="w-full pl-3 flex flex-col justify-center">
-                <p class="font-light italic">String(date-time)</p>
-                <p>Timestamp when the order was created.</p>
-                <div class="divider"></div>
-            </div>
-        </div>
-
-        <div class="flex flex-row">
-            <div class="w-1/3 mx-2">
-                <p class="break-all">user_id</p>
-            </div>
-            <div class="w-full pl-3 flex flex-col justify-center">
-                <p class="font-light italic">Integer(int64)</p>
-                <p>The unique User to whom the order is for.</p>
-                <div class="divider"></div>
-            </div>
-        </div>
-
-        <div class="flex flex-row">
-            <div class="w-1/3 mx-2">
-                <p class="break-all">total_price</p>
-            </div>
-            <div class="w-full pl-3 flex flex-col justify-center">
-                <p class="font-light italic">decimal(^-?\d{0,8}(?:\.\d{0,2})?$)</p>
-                <p>Total price of the items in the order.</p>
-                <div class="divider"></div>
-            </div>
-        </div>
-
-        <div class="flex flex-row">
-            <div class="w-1/3 mx-2">
-                <p class="break-all">status</p>
-            </div>
-            <div class="w-full pl-3 flex flex-col justify-center">
-                <p class="font-light italic">String(Options: 'PENDING', 'CANCELLED', 'COMPLETED')</p>
-                <p>Status of the order.</p>
-                <div class="divider"></div>
-            </div>
-        </div>
-
-        <div class="flex flex-row">
-            <div class="w-1/3 mx-2">
-                <p class="break-all">cart</p>
-            </div>
-            <div class="w-full pl-3 flex flex-col justify-center">
-                <p class="font-light italic">Integer</p>
-                <p>ID of the cart which contains the items for the order.</p>
-                <div class="divider"></div>
-            </div>
-        </div>
-
         
-    </div>
-    
-    <p class="text-xl mt-8">Request Schema:</p>
-    <div class="flex flex-col border-1 px-1">
-
-        <div class="flex flex-row">
-            <div class="w-1/3 mx-2">
-                <p class="break-all">cart</p>
-                <p class="italic">(<span class="text-red-500">Required</span>)</p>
-            </div>
-            <div class="w-full pl-3 flex flex-col justify-center">
-                <p class="font-light italic">Integer</p>
-                <p>ID of the cart which contains the items for the order.</p>
-                <div class="divider"></div>
-            </div>
+        <div class="overflow-x-auto">
+            <table class="w-full text-sm text-left">
+                <thead class="text-xs text-slate-500 uppercase bg-slate-50 border-b border-slate-200">
+                    <tr>
+                        <th class="px-6 py-3 font-medium">Field</th>
+                        <th class="px-6 py-3 font-medium">Type</th>
+                        <th class="px-6 py-3 font-medium">Description</th>
+                    </tr>
+                </thead>
+                <tbody class="divide-y divide-slate-200">
+                    <tr class="bg-white hover:bg-slate-50 transition-colors">
+                        <td class="px-6 py-4 font-mono text-slate-700">id</td>
+                        <td class="px-6 py-4 text-slate-500">integer</td>
+                        <td class="px-6 py-4 text-slate-600">Unique identifier for the order.</td>
+                    </tr>
+                    <tr class="bg-white hover:bg-slate-50 transition-colors">
+                        <td class="px-6 py-4 font-mono text-slate-700">items</td>
+                        <td class="px-6 py-4 text-slate-500">array</td>
+                        <td class="px-6 py-4 text-slate-600">List of items included in the order.</td>
+                    </tr>
+                    <tr class="bg-white hover:bg-slate-50 transition-colors">
+                        <td class="px-6 py-4 font-mono text-slate-700">item_count</td>
+                        <td class="px-6 py-4 text-slate-500">integer</td>
+                        <td class="px-6 py-4 text-slate-600">Total number of items in the order.</td>
+                    </tr>
+                    <tr class="bg-white hover:bg-slate-50 transition-colors">
+                        <td class="px-6 py-4 font-mono text-slate-700">created_at</td>
+                        <td class="px-6 py-4 text-slate-500">string (date-time)</td>
+                        <td class="px-6 py-4 text-slate-600">Timestamp when the order was created.</td>
+                    </tr>
+                    <tr class="bg-white hover:bg-slate-50 transition-colors">
+                        <td class="px-6 py-4 font-mono text-slate-700">user_id</td>
+                        <td class="px-6 py-4 text-slate-500">integer</td>
+                        <td class="px-6 py-4 text-slate-600">ID of the user who placed the order.</td>
+                    </tr>
+                    <tr class="bg-white hover:bg-slate-50 transition-colors">
+                        <td class="px-6 py-4 font-mono text-slate-700">total_price</td>
+                        <td class="px-6 py-4 text-slate-500">decimal</td>
+                        <td class="px-6 py-4 text-slate-600">Total cost of all items in the order.</td>
+                    </tr>
+                    <tr class="bg-white hover:bg-slate-50 transition-colors">
+                        <td class="px-6 py-4 font-mono text-slate-700">status</td>
+                        <td class="px-6 py-4 text-slate-500">string</td>
+                        <td class="px-6 py-4 text-slate-600">Current status: <code class="text-xs bg-slate-100 px-1 py-0.5 rounded">PENDING</code>, <code class="text-xs bg-slate-100 px-1 py-0.5 rounded">CANCELLED</code>, or <code class="text-xs bg-slate-100 px-1 py-0.5 rounded">COMPLETED</code>.</td>
+                    </tr>
+                    <tr class="bg-white hover:bg-slate-50 transition-colors">
+                        <td class="px-6 py-4 font-mono text-slate-700">cart</td>
+                        <td class="px-6 py-4 text-slate-500">integer</td>
+                        <td class="px-6 py-4 text-slate-600">ID of the source cart for this order.</td>
+                    </tr>
+                </tbody>
+            </table>
         </div>
-
     </div>
-    
 
+{% with prev_page='cart-decrease' prev_page_name='Decrease Cart Item' next_page='order-get-all' next_page_name='Get All Orders' %}
+    {% include 'developer_auth/bottom_nav.html' %}
+{% endwith %}
 </div>
-    {% with prev_page='cart-remove' prev_page_name='Remove Cart Item' next_page='order-create' next_page_name='Create Order' %}
-                
-        {% include 'developer_auth/bottom_nav.html' %}
-
-    {% endwith %}
 {% endblock %}

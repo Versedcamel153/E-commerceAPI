@@ -2,3 +2,17 @@
 .env
 schema.yaml
 schema(1).yaml
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+webapp/__pycache__/
+webapp/*.pyc
+webapp/*.pyo
+webapp/*.pyd
+developer_auth/__pycache__/
+developer_auth/*.pyc    
+developer_auth/*.pyo    
+developer_auth/*.py
+node_modules/
+

@@ -1,70 +1,100 @@
-{% extends 'developer_auth/docs_base.html' %}
+{% extends 'developer_auth/docs_layout.html' %}
 
-{% block title %}
-    Get all Orders
-{% endblock %}
+{% block title %}Get All Orders - E-commerceAPI{% endblock %}
 
+{% block doc_content %}
+<div class="space-y-6">
+    <!-- Header -->
+    <div class="border-b border-slate-200 pb-6">
+        <h1 class="text-3xl font-bold text-slate-900">Get All Orders</h1>
+        <p class="mt-2 text-lg text-slate-600">Retrieve a list of all orders for a specific user.</p>
+    </div>
 
-{% block content %}
-
-<div class="px-8">
-    <div class="my-20 space-y-2" id="get-ord">
-        <p class="text-2xl">Get all Orders for a user.</p>
-        <div class="flex items-center">
-            <p class="text-xl">URL: </p>
-            <p class="bg-base-200 truncate rounded-md p-2 mx-2 font-semibold">
-                <code>https://E-commerceAPI.com/api/orders/</code>
-            </p>
-        </div>
-        <div class="flex items-center">
-            <p class="text-xl">Methods: </p>
-            <p class="bg-base-200 rounded-md p-2 mx-2 font-mono font-semibold">GET</p>
-        </div>
-        <p class="text-xl">Authentication: </p>
-        
-            <div class="mockup-code mt-8 w-full">
-                <pre><code>API-Key: {your-APIKEY}</code></pre>
+    <!-- Endpoint Card -->
+    <div class="bg-white rounded-lg border border-slate-200 shadow-sm overflow-hidden">
+        <div class="bg-slate-50 px-4 py-3 border-b border-slate-200 flex items-center justify-between">
+            <div class="flex items-center gap-3">
+                <span class="px-2.5 py-1 rounded-md text-xs font-bold bg-blue-100 text-blue-700 border border-blue-200 font-mono">GET</span>
+                <code class="text-sm text-slate-700 font-mono">/api/orders/</code>
             </div>
-        
-        <p class="text-xl">Parameters(Query Params): </p>
-            <div class="bg-base-200 p-4 rounded-2xl overflow-auto">
-                <pre><code>user_id: {request.user.id}</code></pre>
+            <div class="flex items-center gap-2">
+                <span class="flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-medium bg-amber-50 text-amber-700 border border-amber-200">
+                    <i class="fas fa-lock text-[10px]"></i>
+                    Auth Required
+                </span>
             </div>
-        <p class="text-xl">Response: </p>
-        <div class="flex items-center">
-            <p class="p-2 text-md">Status Code:<span class="bg-green-200 rounded-md p-2 mx-2 text-md font-semibold">200 OK</span></p>
         </div>
-    
-        <div class="mockup-code mt-8 w-full">
-        <div class="collapse collapse-arrow bg-inherit">
-            <input type="checkbox" />
-            <div class="collapse-title text-md font-medium">Response Body</div>
-            <div class="collapse-content overflow-auto">
-                <pre>
-                    <code>
-    [
-        {
+        
+        <div class="p-6 space-y-6">
+            <!-- Authentication -->
+            <div>
+                <h3 class="text-sm font-semibold text-slate-900 uppercase tracking-wider mb-3">Authentication</h3>
+                <div class="bg-slate-50 rounded-md border border-slate-200 p-3">
+                    <div class="flex items-center gap-3 text-sm">
+                        <span class="font-mono text-slate-500">Header:</span>
+                        <code class="font-mono text-indigo-600">API-KEY: &lt;your_api_key&gt;</code>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Query Parameters -->
+            <div>
+                <h3 class="text-sm font-semibold text-slate-900 uppercase tracking-wider mb-3">Query Parameters</h3>
+                <div class="overflow-x-auto">
+                    <table class="w-full text-sm text-left border border-slate-200 rounded-lg">
+                        <thead class="text-xs text-slate-500 uppercase bg-slate-50 border-b border-slate-200">
+                            <tr>
+                                <th class="px-4 py-3 font-medium">Parameter</th>
+                                <th class="px-4 py-3 font-medium">Type</th>
+                                <th class="px-4 py-3 font-medium">Description</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-slate-200">
+                            <tr class="bg-white">
+                                <td class="px-4 py-3 font-mono text-slate-700">user_id</td>
+                                <td class="px-4 py-3 text-slate-500">integer</td>
+                                <td class="px-4 py-3 text-slate-600">The ID of the user to retrieve orders for.</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Responses -->
+            <div>
+                <h3 class="text-sm font-semibold text-slate-900 uppercase tracking-wider mb-3">Responses</h3>
+                <div class="space-y-4">
+                    <!-- 200 OK -->
+                    <div class="border border-slate-200 rounded-lg overflow-hidden">
+                        <div class="bg-emerald-50 px-4 py-2 border-b border-emerald-100 flex items-center gap-2">
+                            <span class="w-2 h-2 rounded-full bg-emerald-500"></span>
+                            <span class="font-mono text-sm font-medium text-emerald-700">200 OK</span>
+                        </div>
+                        <div class="p-4 bg-slate-50">
+                            <pre class="font-mono text-xs text-slate-700 overflow-x-auto">
+[
+    {
         "id": 1,
         "items": [
-        {
-            "id": 1,
-            "product": {
-                "id": 2,
-                "reviews": [],
-                "images": [],
-                "category_name": "electronics",
-                "average_rating": 0,
-                "total_reviews": 0,
-                "name": "Mocha",
-                "slug": "mocha",
-                "description": "Woven fabric",
-                "price": "200.00",
-                "stock_quantity": 90,
-                "created_date": "2025-01-17T10:58:57.034531Z",
-                "category": 2
-            },
-            "quantity": 10
-        }
+            {
+                "id": 1,
+                "product": {
+                    "id": 2,
+                    "reviews": [],
+                    "images": [],
+                    "category_name": "electronics",
+                    "average_rating": 0,
+                    "total_reviews": 0,
+                    "name": "Mocha",
+                    "slug": "mocha",
+                    "description": "Woven fabric",
+                    "price": "200.00",
+                    "stock_quantity": 90,
+                    "created_date": "2025-01-17T10:58:57.034531Z",
+                    "category": 2
+                },
+                "quantity": 10
+            }
         ],
         "item_count": 1,
         "created_at": "17 January 2025",
@@ -72,20 +102,72 @@
         "total_price": "2000.00",
         "status": "PENDING",
         "cart": 1
-        }
-    ]                
-                    </code>
-                </pre>
+    }
+]</pre>
+                        </div>
+                    </div>
+
+                    <!-- 404 Not Found -->
+                    <div class="border border-slate-200 rounded-lg overflow-hidden">
+                        <div class="bg-red-50 px-4 py-2 border-b border-red-100 flex items-center gap-2">
+                            <span class="w-2 h-2 rounded-full bg-red-500"></span>
+                            <span class="font-mono text-sm font-medium text-red-700">404 Not Found</span>
+                        </div>
+                        <div class="p-4 bg-slate-50">
+                            <pre class="font-mono text-xs text-slate-700 overflow-x-auto">
+{
+    "detail": "Not found."
+}</pre>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
+    </div>
+
+    <!-- Code Examples -->
+    <div class="space-y-6">
+        <!-- cURL -->
+        <div class="bg-slate-900 rounded-lg overflow-hidden shadow-sm">
+            <div class="px-4 py-2 bg-slate-800 border-b border-slate-700 flex items-center justify-between">
+                <span class="text-xs font-medium text-slate-300">cURL</span>
+                <button class="text-slate-400 hover:text-white transition-colors">
+                    <i class="far fa-copy"></i>
+                </button>
+            </div>
+            <div class="p-4 overflow-x-auto">
+                <pre class="font-mono text-xs text-emerald-400">
+curl -X GET "https://api.ecommerceapi.com/api/orders/?user_id=1" \
+  -H "API-KEY: your_api_key"</pre>
+            </div>
+        </div>
+
+        <!-- Python -->
+        <div class="bg-slate-900 rounded-lg overflow-hidden shadow-sm">
+            <div class="px-4 py-2 bg-slate-800 border-b border-slate-700 flex items-center justify-between">
+                <span class="text-xs font-medium text-slate-300">Python (requests)</span>
+                <button class="text-slate-400 hover:text-white transition-colors">
+                    <i class="far fa-copy"></i>
+                </button>
+            </div>
+            <div class="p-4 overflow-x-auto">
+                <pre class="font-mono text-xs text-blue-300">
+import requests
+
+url = "https://api.ecommerceapi.com/api/orders/"
+params = {"user_id": 1}
+headers = {
+    "API-KEY": "your_api_key"
+}
+
+response = requests.get(url, headers=headers, params=params)
+print(response.json())</pre>
+            </div>
         </div>
     </div>
+
+{% with prev_page='order-overview' prev_page_name='Orders Overview' next_page='order-get-one' next_page_name='Get Single Order' %}
+    {% include 'developer_auth/bottom_nav.html' %}
+{% endwith %}
 </div>
-
-    {% with prev_page='order-get-one' prev_page_name='Get Order Details' next_page='order-cancel' next_page_name='Cancel Order' %}
-            
-        {% include 'developer_auth/bottom_nav.html' %}
-
-    {% endwith %}
-
 {% endblock %}

@@ -1,0 +1,93 @@
+<div class="px-8">
+    <div class="my-20 space-y-2" id="cr-cat">
+       
+        <!-- Endpoint Card -->
+        <div class="bg-white rounded-lg p-4 sm:p-6 mb-6">
+            <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 mb-4">
+                <div class="flex items-center gap-2">
+                    <span class="font-mono bg-blue-100 text-blue-800 px-2 py-1 rounded text-xs sm:text-sm">POST</span>
+                    <span class="font-mono text-gray-800 text-sm sm:text-base break-all">/api/products/categories/all/</span>
+                </div>
+                <span class="badge badge-primary badge-sm sm:badge-md mt-1 sm:mt-0">Requires Auth</span>
+            </div>
+
+            <p class="text-gray-700 text-sm sm:text-base mb-4 sm:mb-6">Creates a new product category with the provided details.</p>
+
+            <!-- Authentication -->
+            <div class="mb-4 sm:mb-6">
+                <h3 class="font-semibold text-base sm:text-lg mb-2">Authentication</h3>
+                <div class="bg-gray-50 p-3 sm:p-4 rounded overflow-x-auto">
+                    <pre class="text-xs sm:text-sm">API-KEY: &lt;YOUR_API_KEY&gt;</pre>
+                </div>
+            </div>
+
+            <!-- Request Body -->
+            <div class="mb-4 sm:mb-6">
+                <h3 class="font-semibold text-base sm:text-lg mb-2">Request Body</h3>
+                <div class="bg-gray-50 p-3 sm:p-4 rounded overflow-x-auto">
+                    <pre class="text-xs sm:text-sm">{
+    "name": "string (required)",
+    "description": "string (required)"
+}</pre>
+                </div>
+            </div>
+
+            <!-- Responses -->
+            <div class="mb-4 sm:mb-6">
+                <h3 class="font-semibold text-base sm:text-lg mb-2">Responses</h3>
+                
+                <!-- Success Response -->
+                <div class="mb-3 sm:mb-4">
+                    <div class="flex items-center mb-1 sm:mb-2">
+                        <span class="font-mono bg-green-100 text-green-800 px-2 py-1 rounded text-xs sm:text-sm">201 Created</span>
+                    </div>
+                    <div class="bg-gray-50 p-3 sm:p-4 rounded overflow-x-auto">
+                        <pre class="text-xs sm:text-sm">{
+    "id": 1,
+    "name": "pencil",
+    "description": "Writing"
+}</pre>
+                    </div>
+                </div>
+
+                <!-- Error Response -->
+                <div>
+                    <div class="flex items-center mb-1 sm:mb-2">
+                        <span class="font-mono bg-red-100 text-red-800 px-2 py-1 rounded text-xs sm:text-sm">400 Bad Request</span>
+                    </div>
+                    <div class="bg-gray-50 p-3 sm:p-4 rounded overflow-x-auto">
+                        <pre class="text-xs sm:text-sm">{
+    "error": "InvalidData",
+    "message": "Name and description are required fields."
+}</pre>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Example Request -->
+            <div class="mb-4 sm:mb-6">
+                <h3 class="font-semibold text-base sm:text-lg mb-2">Example Request</h3>
+                <div class="bg-gray-800 text-gray-100 p-3 sm:p-4 rounded overflow-x-auto">
+                    <pre class="text-xs sm:text-sm">curl -X POST https://E-commerceAPI.com/api/products/categories/all/ \
+    -H "API-KEY: YOUR_API_KEY" \
+    -H "Content-Type: application/json" \
+    -d '{"name": "pencil", "description": "Writing"}'</pre>
+                </div>
+            </div>
+
+            <!-- Python Example -->
+            <div class="mb-4 sm:mb-6">
+                <h3 class="font-semibold text-base sm:text-lg mb-2">Python Example</h3>
+                <div class="bg-gray-800 text-gray-100 p-3 sm:p-4 rounded overflow-x-auto">
+                    <pre class="text-xs sm:text-sm">import requests
+
+response = requests.post(
+    "https://E-commerceAPI.com/api/products/categories/all/",
+    headers={"API-KEY": "YOUR_API_KEY"},
+    json={"name": "pencil", "description": "Writing"}
+)</pre>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

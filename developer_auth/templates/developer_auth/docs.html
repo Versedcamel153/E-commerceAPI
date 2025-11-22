@@ -1,26 +1,56 @@
-{% extends 'developer_auth/docs_base.html' %}
+{% extends 'developer_auth/docs_layout.html' %}
 
-{% block title %}
-    Documentation(End points)
-{% endblock %}
-
-{% block content %}
-<div class="px-8 flex flex-col">
-
-    <p class="mt-12 text-justify font-semibold lg:text-lg text-gray-800">
-        Welcome to the API documentation! This API is the result of my dedication and continuous learning, combining everything I've explored in development to create a robust and versatile platform. It is designed to simplify e-commerce operations, providing an efficient way to manage products, carts, and orders. Built with performance and ease of integration in mind, this API enables developers to seamlessly incorporate essential functionalities into their applications. Explore the documentation to see how it works and how it can enhance your projects.    </p>
-    <p class="text-3xl mt-10 font-extrabold">Key Features</p>
-    <p class="font-gray-400 text-gray-400 text-sm"></p>
-    <ul class="mt-4 list-disc list-inside font-semibold lg:text-lg text-gray-800">
-        <li>Comprehensive CRUD operations for products, categories, and reviews</li>
-        <li>Efficient Cart management system</li>
-        <li>Seamless Order creation and processing</li>
-    </ul>    
+{% block doc_content %}
+<div class="mb-12">
+    <h1 class="text-3xl font-bold text-slate-900 mb-4">Overview</h1>
+    <p class="text-slate-600 leading-relaxed mb-6">
+        Welcome to the API documentation! This API is the result of dedication and continuous learning, combining everything explored in development to create a robust and versatile platform.
+    </p>
+    <p class="text-slate-600 leading-relaxed mb-6">
+        It is designed to simplify e-commerce operations, providing an efficient way to manage products, carts, and orders. Built with performance and ease of integration in mind, this API enables developers to seamlessly incorporate essential functionalities into their applications.
+    </p>
 </div>
 
-    {% with next_page='prerequisite' next_page_name='Prerequisite' %}
-        
-        {% include 'developer_auth/bottom_nav.html' %}
+<div class="mb-12">
+    <h2 class="text-2xl font-bold text-slate-900 mb-4">Key Features</h2>
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div class="p-6 border border-slate-200 rounded-lg bg-slate-50">
+            <div class="w-10 h-10 bg-indigo-100 rounded-lg flex items-center justify-center text-indigo-600 mb-3">
+                <i class="fa-solid fa-box-open"></i>
+            </div>
+            <h3 class="font-semibold text-slate-800 mb-2">Product Management</h3>
+            <p class="text-sm text-slate-600">Comprehensive CRUD operations for products, categories, and reviews.</p>
+        </div>
+        <div class="p-6 border border-slate-200 rounded-lg bg-slate-50">
+            <div class="w-10 h-10 bg-green-100 rounded-lg flex items-center justify-center text-green-600 mb-3">
+                <i class="fa-solid fa-cart-shopping"></i>
+            </div>
+            <h3 class="font-semibold text-slate-800 mb-2">Cart System</h3>
+            <p class="text-sm text-slate-600">Efficient cart management system for handling user shopping sessions.</p>
+        </div>
+        <div class="p-6 border border-slate-200 rounded-lg bg-slate-50">
+            <div class="w-10 h-10 bg-orange-100 rounded-lg flex items-center justify-center text-orange-600 mb-3">
+                <i class="fa-solid fa-truck-fast"></i>
+            </div>
+            <h3 class="font-semibold text-slate-800 mb-2">Order Processing</h3>
+            <p class="text-sm text-slate-600">Seamless order creation, tracking, and processing workflows.</p>
+        </div>
+    </div>
+</div>
 
-    {% endwith %}
+<div class="flex justify-end mt-12 pt-8 border-t border-slate-200">
+    <a href="{% url 'prerequisite' %}" class="flex items-center gap-2 text-indigo-600 font-medium hover:text-indigo-800">
+        Next: Prerequisites <i class="fa-solid fa-arrow-right"></i>
+    </a>
+</div>
+{% endblock %}
+
+{% block on_page_nav %}
+<div class="w-64 hidden xl:block p-8">
+    <h4 class="text-xs font-semibold text-slate-500 uppercase tracking-wider mb-3">On this page</h4>
+    <ul class="space-y-2 border-l border-slate-200">
+        <li><a href="#" class="block pl-4 text-sm text-indigo-600 border-l-2 border-indigo-600 -ml-[1px]">Overview</a></li>
+        <li><a href="#" class="block pl-4 text-sm text-slate-500 hover:text-slate-800">Key Features</a></li>
+    </ul>
+</div>
 {% endblock %}

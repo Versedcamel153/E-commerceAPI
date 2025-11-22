@@ -1,0 +1,122 @@
+{% extends 'developer_auth/dash_base.html' %}
+
+{% block content %}
+            <!-- Scrollable Content -->
+            <main class="flex-1 overflow-y-auto p-6 bg-slate-50">
+                
+                <!-- Actions -->
+                <div class="flex justify-between items-center mb-6">
+                    <div class="flex gap-2">
+                        <div class="relative">
+                            <i class="fa-solid fa-search absolute left-3 top-1/2 transform -translate-y-1/2 text-slate-400 text-sm"></i>
+                            <input type="text" placeholder="Search products..." class="pl-9 pr-4 py-2 border border-slate-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 w-64">
+                        </div>
+                        <select class="border border-slate-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 bg-white">
+                            <option>All Categories</option>
+                            <option>Electronics</option>
+                            <option>Clothing</option>
+                            <option>Home</option>
+                        </select>
+                    </div>
+                    <button class="bg-indigo-600 hover:bg-indigo-700 text-white px-4 py-2 rounded-lg text-sm font-medium flex items-center gap-2">
+                        <i class="fa-solid fa-plus"></i> Add Product
+                    </button>
+                </div>
+
+                <!-- Products Grid -->
+                <div class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-6">
+                    <!-- Product Card 1 -->
+                    <div class="bg-white rounded-xl border border-slate-200 shadow-sm overflow-hidden group hover:shadow-md transition-shadow">
+                        <div class="h-48 bg-slate-100 relative">
+                            <img src="https://images.unsplash.com/photo-1523275335684-37898b6baf30?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=60" alt="Product" class="w-full h-full object-cover">
+                            <div class="absolute top-2 right-2 opacity-0 group-hover:opacity-100 transition-opacity">
+                                <button class="bg-white p-2 rounded-full shadow-sm text-slate-600 hover:text-indigo-600"><i class="fa-solid fa-pen"></i></button>
+                            </div>
+                        </div>
+                        <div class="p-4">
+                            <div class="flex justify-between items-start mb-2">
+                                <h3 class="font-medium text-slate-800 truncate">Minimalist Watch</h3>
+                                <span class="text-sm font-bold text-slate-900">$129.00</span>
+                            </div>
+                            <p class="text-xs text-slate-500 mb-3">SKU: WTC-001</p>
+                            <div class="flex justify-between items-center">
+                                <span class="inline-flex items-center px-2 py-1 rounded-md text-xs font-medium bg-green-50 text-green-700 border border-green-100">
+                                    In Stock (45)
+                                </span>
+                                <span class="text-xs text-slate-400">Electronics</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Product Card 2 -->
+                    <div class="bg-white rounded-xl border border-slate-200 shadow-sm overflow-hidden group hover:shadow-md transition-shadow">
+                        <div class="h-48 bg-slate-100 relative">
+                            <img src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=60" alt="Product" class="w-full h-full object-cover">
+                            <div class="absolute top-2 right-2 opacity-0 group-hover:opacity-100 transition-opacity">
+                                <button class="bg-white p-2 rounded-full shadow-sm text-slate-600 hover:text-indigo-600"><i class="fa-solid fa-pen"></i></button>
+                            </div>
+                        </div>
+                        <div class="p-4">
+                            <div class="flex justify-between items-start mb-2">
+                                <h3 class="font-medium text-slate-800 truncate">Wireless Headphones</h3>
+                                <span class="text-sm font-bold text-slate-900">$249.00</span>
+                            </div>
+                            <p class="text-xs text-slate-500 mb-3">SKU: AUD-002</p>
+                            <div class="flex justify-between items-center">
+                                <span class="inline-flex items-center px-2 py-1 rounded-md text-xs font-medium bg-yellow-50 text-yellow-700 border border-yellow-100">
+                                    Low Stock (3)
+                                </span>
+                                <span class="text-xs text-slate-400">Audio</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Product Card 3 -->
+                    <div class="bg-white rounded-xl border border-slate-200 shadow-sm overflow-hidden group hover:shadow-md transition-shadow">
+                        <div class="h-48 bg-slate-100 relative">
+                            <img src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=60" alt="Product" class="w-full h-full object-cover">
+                            <div class="absolute top-2 right-2 opacity-0 group-hover:opacity-100 transition-opacity">
+                                <button class="bg-white p-2 rounded-full shadow-sm text-slate-600 hover:text-indigo-600"><i class="fa-solid fa-pen"></i></button>
+                            </div>
+                        </div>
+                        <div class="p-4">
+                            <div class="flex justify-between items-start mb-2">
+                                <h3 class="font-medium text-slate-800 truncate">Running Sneakers</h3>
+                                <span class="text-sm font-bold text-slate-900">$89.95</span>
+                            </div>
+                            <p class="text-xs text-slate-500 mb-3">SKU: SHO-003</p>
+                            <div class="flex justify-between items-center">
+                                <span class="inline-flex items-center px-2 py-1 rounded-md text-xs font-medium bg-green-50 text-green-700 border border-green-100">
+                                    In Stock (120)
+                                </span>
+                                <span class="text-xs text-slate-400">Footwear</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Product Card 4 -->
+                    <div class="bg-white rounded-xl border border-slate-200 shadow-sm overflow-hidden group hover:shadow-md transition-shadow">
+                        <div class="h-48 bg-slate-100 relative">
+                            <img src="https://images.unsplash.com/photo-1586495777744-4413f21062fa?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=60" alt="Product" class="w-full h-full object-cover">
+                            <div class="absolute top-2 right-2 opacity-0 group-hover:opacity-100 transition-opacity">
+                                <button class="bg-white p-2 rounded-full shadow-sm text-slate-600 hover:text-indigo-600"><i class="fa-solid fa-pen"></i></button>
+                            </div>
+                        </div>
+                        <div class="p-4">
+                            <div class="flex justify-between items-start mb-2">
+                                <h3 class="font-medium text-slate-800 truncate">Leather Backpack</h3>
+                                <span class="text-sm font-bold text-slate-900">$159.00</span>
+                            </div>
+                            <p class="text-xs text-slate-500 mb-3">SKU: BAG-004</p>
+                            <div class="flex justify-between items-center">
+                                <span class="inline-flex items-center px-2 py-1 rounded-md text-xs font-medium bg-red-50 text-red-700 border border-red-100">
+                                    Out of Stock
+                                </span>
+                                <span class="text-xs text-slate-400">Accessories</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </main>
+{% endblock content %}

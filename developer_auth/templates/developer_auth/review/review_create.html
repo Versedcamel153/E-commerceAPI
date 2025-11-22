@@ -1,75 +1,181 @@
-{% extends 'developer_auth/docs_base.html' %}
+{% extends 'developer_auth/docs_layout.html' %}
 
-{% block title %}
-    Create Review
-{% endblock %}
+{% block doc_content %}
+<div class="space-y-6">
+    <!-- Header -->
+    <div class="border-b border-slate-200 pb-6">
+        <h1 class="text-3xl font-bold text-slate-900">Create Review</h1>
+        <p class="mt-2 text-lg text-slate-600">Creates a new review for a product.</p>
+    </div>
 
-
-{% block content %}
-
-<div class="px-8">
-    <div class="my-20 space-y-2"  id="cr-re">
-        <p class="text-2xl">Create a review</p>
-        <div class="flex items-center">
-            <p class="text-xl">URL: </p>
-            <p class="bg-base-200 rounded-md p-2 mx-2 truncate font-mono font-semibold">
-                <code>https://E-commerceAPI.com/api/products/&lt;slug:slug&gt;/reviews/create/</code>
-            </p>
-        </div>
-        <div class="flex items-center">
-            <p class="text-xl">Methods: </p>
-            <p class="bg-base-200 rounded-md p-2 mx-2  font-mono font-semibold">POST</p>
-        </div>
-        <p class="text-xl">Authentication: </p>
-        
-            <div class="mockup-code w-full mt-8">
-                <pre><code>API-Key: {your-APIKEY}</code></pre>
+    <!-- Endpoint Card -->
+    <div class="bg-white rounded-lg border border-slate-200 shadow-sm overflow-hidden">
+        <div class="bg-slate-50 px-4 py-3 border-b border-slate-200 flex items-center justify-between">
+            <div class="flex items-center gap-3">
+                <span class="px-2.5 py-1 rounded-md text-xs font-bold bg-green-100 text-green-700 border border-green-200 font-mono">POST</span>
+                <code class="text-sm text-slate-700 font-mono">/api/products/&lt;slug:slug&gt;/reviews/create/</code>
             </div>
-        
-        <p class="text-xl">Request Body: </p>
-            <div class="mockup-code w-full mt-8">
-                <pre>
-                    <code>
-    {
-        "user_id": 1,
-        "username": "...",
-        "rating": 1,
-        "comment": "...",
-        "product": 1
-    }
-                    </code>
-                </pre>
-        </div>
-        <p class="text-xl">Response: </p>
-        <div class="flex items-center">
-            <p class="p-2 text-md">Status Code:<span class="bg-green-200 rounded-md p-2 mx-2 text-md font-semibold">201 Created</span></p>
-        </div>
-    
-        <div class="mockup-code w-full mt-8">
-        <div class="collapse collapse-arrow bg-inherit">
-            <input type="checkbox" />
-            <div class="collapse-title text-md font-medium">Response Body</div>
-            <div class="collapse-content overflow-auto">
-                <pre>
-                    <code>
-    {
-        "user_id": 1,
-        "username": "...",
-        "rating": 4,
-        "comment": "...",
-        "product": 1
-    }                      
-                    </code>
-                </pre>
+            <div class="flex items-center gap-2">
+                <span class="flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-medium bg-amber-50 text-amber-700 border border-amber-200">
+                    <i class="fas fa-lock text-[10px]"></i>
+                    Auth Required
+                </span>
             </div>
         </div>
+        
+        <div class="p-6 space-y-6">
+            <!-- Authentication -->
+            <div>
+                <h3 class="text-sm font-semibold text-slate-900 uppercase tracking-wider mb-3">Authentication</h3>
+                <div class="bg-slate-50 rounded-md border border-slate-200 p-3">
+                    <div class="flex items-center gap-3 text-sm">
+                        <span class="font-mono text-slate-500">Header:</span>
+                        <code class="font-mono text-indigo-600">API-KEY: &lt;your_api_key&gt;</code>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Path Parameters -->
+            <div>
+                <h3 class="text-sm font-semibold text-slate-900 uppercase tracking-wider mb-3">Path Parameters</h3>
+                <div class="overflow-x-auto">
+                    <table class="w-full text-sm text-left border border-slate-200 rounded-lg">
+                        <thead class="text-xs text-slate-500 uppercase bg-slate-50 border-b border-slate-200">
+                            <tr>
+                                <th class="px-4 py-3 font-medium">Parameter</th>
+                                <th class="px-4 py-3 font-medium">Type</th>
+                                <th class="px-4 py-3 font-medium">Description</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-slate-200">
+                            <tr class="bg-white">
+                                <td class="px-4 py-3 font-mono text-slate-700">slug</td>
+                                <td class="px-4 py-3 text-slate-500">string</td>
+                                <td class="px-4 py-3 text-slate-600">The unique identifier for the product.</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Request Body -->
+            <div>
+                <h3 class="text-sm font-semibold text-slate-900 uppercase tracking-wider mb-3">Request Body</h3>
+                <div class="bg-slate-900 rounded-lg overflow-hidden shadow-sm">
+                    <div class="px-4 py-2 bg-slate-800 border-b border-slate-700 flex items-center justify-between">
+                        <span class="text-xs font-medium text-slate-300">JSON</span>
+                    </div>
+                    <div class="p-4 overflow-x-auto">
+                        <pre class="font-mono text-xs text-slate-300">
+{
+    "user_id": 1,
+    "username": "johndoe",
+    "rating": 5,
+    "comment": "Great product!",
+    "product": 1
+}</pre>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Responses -->
+            <div>
+                <h3 class="text-sm font-semibold text-slate-900 uppercase tracking-wider mb-3">Responses</h3>
+                <div class="space-y-4">
+                    <!-- 201 Created -->
+                    <div class="border border-slate-200 rounded-lg overflow-hidden">
+                        <div class="bg-emerald-50 px-4 py-2 border-b border-emerald-100 flex items-center gap-2">
+                            <span class="w-2 h-2 rounded-full bg-emerald-500"></span>
+                            <span class="font-mono text-sm font-medium text-emerald-700">201 Created</span>
+                        </div>
+                        <div class="p-4 bg-slate-50">
+                            <pre class="font-mono text-xs text-slate-700 overflow-x-auto">
+{
+    "id": 1,
+    "user_id": 1,
+    "username": "johndoe",
+    "rating": 5,
+    "comment": "Great product!",
+    "product": 1,
+    "created_at": "2023-10-27T10:00:00Z"
+}</pre>
+                        </div>
+                    </div>
+
+                    <!-- 400 Bad Request -->
+                    <div class="border border-slate-200 rounded-lg overflow-hidden">
+                        <div class="bg-red-50 px-4 py-2 border-b border-red-100 flex items-center gap-2">
+                            <span class="w-2 h-2 rounded-full bg-red-500"></span>
+                            <span class="font-mono text-sm font-medium text-red-700">400 Bad Request</span>
+                        </div>
+                        <div class="p-4 bg-slate-50">
+                            <pre class="font-mono text-xs text-slate-700 overflow-x-auto">
+{
+    "error": "InvalidData",
+    "message": "Rating and comment are required fields."
+}</pre>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
+
+    <!-- Code Examples -->
+    <div class="space-y-6">
+        <!-- cURL -->
+        <div class="bg-slate-900 rounded-lg overflow-hidden shadow-sm">
+            <div class="px-4 py-2 bg-slate-800 border-b border-slate-700 flex items-center justify-between">
+                <span class="text-xs font-medium text-slate-300">cURL</span>
+                <button class="text-slate-400 hover:text-white transition-colors">
+                    <i class="far fa-copy"></i>
+                </button>
+            </div>
+            <div class="p-4 overflow-x-auto">
+                <pre class="font-mono text-xs text-emerald-400">
+curl -X POST "https://api.ecommerceapi.com/api/products/pencil/reviews/create/" \
+  -H "API-KEY: your_api_key" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "user_id": 1,
+    "rating": 5,
+    "comment": "Great product!"
+  }'</pre>
+            </div>
+        </div>
+
+        <!-- Python -->
+        <div class="bg-slate-900 rounded-lg overflow-hidden shadow-sm">
+            <div class="px-4 py-2 bg-slate-800 border-b border-slate-700 flex items-center justify-between">
+                <span class="text-xs font-medium text-slate-300">Python (requests)</span>
+                <button class="text-slate-400 hover:text-white transition-colors">
+                    <i class="far fa-copy"></i>
+                </button>
+            </div>
+            <div class="p-4 overflow-x-auto">
+                <pre class="font-mono text-xs text-blue-300">
+import requests
+
+url = "https://api.ecommerceapi.com/api/products/pencil/reviews/create/"
+headers = {
+    "API-KEY": "your_api_key",
+    "Content-Type": "application/json"
+}
+data = {
+    "user_id": 1,
+    "rating": 5,
+    "comment": "Great product!"
+}
+
+response = requests.post(url, headers=headers, json=data)
+print(response.json())</pre>
+            </div>
+        </div>
+    </div>
+
+{% with prev_page='review-overview' prev_page_name='Review Overview' next_page='review-get-one' next_page_name='Get Review' %}
+    {% include 'developer_auth/bottom_nav.html' %}
+{% endwith %}
+
 </div>
-    {% with prev_page='review-overview' prev_page_name='Review Overview' next_page='review-get-one' next_page_name='Get Review' %}
-            
-        {% include 'developer_auth/bottom_nav.html' %}
-
-    {% endwith %}
-
 {% endblock %}

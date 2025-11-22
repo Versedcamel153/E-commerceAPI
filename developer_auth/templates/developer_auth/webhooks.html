@@ -1,0 +1,116 @@
+{% extends 'developer_auth/dash_base.html' %}
+
+{% block content %}
+       <!-- Scrollable Content -->
+            <main class="flex-1 overflow-y-auto p-6 bg-slate-50">
+                
+                <div class="flex justify-between items-center mb-6">
+                    <p class="text-sm text-slate-500">Configure webhooks to receive real-time updates.</p>
+                    <button class="bg-indigo-600 hover:bg-indigo-700 text-white px-4 py-2 rounded-lg text-sm font-medium flex items-center gap-2">
+                        <i class="fa-solid fa-plus"></i> Add Endpoint
+                    </button>
+                </div>
+
+                <!-- Webhooks List -->
+                <div class="space-y-4">
+                    <!-- Webhook 1 -->
+                    <div class="bg-white rounded-xl border border-slate-200 shadow-sm p-6">
+                        <div class="flex justify-between items-start mb-4">
+                            <div class="flex items-start gap-4">
+                                <div class="w-10 h-10 rounded-lg bg-indigo-50 flex items-center justify-center text-indigo-600">
+                                    <i class="fa-solid fa-globe"></i>
+                                </div>
+                                <div>
+                                    <div class="flex items-center gap-3 mb-1">
+                                        <h3 class="font-semibold text-slate-800">Order Updates</h3>
+                                        <span class="inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-green-100 text-green-800">Active</span>
+                                    </div>
+                                    <p class="text-sm font-mono text-slate-600 mb-2">https://api.myapp.com/webhooks/orders</p>
+                                    <div class="flex gap-2">
+                                        <span class="inline-flex items-center px-2 py-1 rounded-md text-xs font-medium bg-slate-100 text-slate-600">order.created</span>
+                                        <span class="inline-flex items-center px-2 py-1 rounded-md text-xs font-medium bg-slate-100 text-slate-600">order.paid</span>
+                                        <span class="inline-flex items-center px-2 py-1 rounded-md text-xs font-medium bg-slate-100 text-slate-600">order.shipped</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="flex gap-2">
+                                <button class="text-slate-400 hover:text-slate-600 p-2"><i class="fa-solid fa-pen"></i></button>
+                                <button class="text-slate-400 hover:text-slate-600 p-2"><i class="fa-solid fa-rotate-right"></i></button>
+                                <button class="text-slate-400 hover:text-red-600 p-2"><i class="fa-solid fa-trash"></i></button>
+                            </div>
+                        </div>
+                        
+                        <div class="mt-4 pt-4 border-t border-slate-100 flex justify-between items-center text-xs text-slate-500">
+                            <span>Last delivery: 2 mins ago</span>
+                            <span class="flex items-center gap-1"><i class="fa-solid fa-check-circle text-green-500"></i> 99.9% Success Rate</span>
+                        </div>
+                    </div>
+
+                    <!-- Webhook 2 -->
+                    <div class="bg-white rounded-xl border border-slate-200 shadow-sm p-6">
+                        <div class="flex justify-between items-start mb-4">
+                            <div class="flex items-start gap-4">
+                                <div class="w-10 h-10 rounded-lg bg-orange-50 flex items-center justify-center text-orange-600">
+                                    <i class="fa-solid fa-box-open"></i>
+                                </div>
+                                <div>
+                                    <div class="flex items-center gap-3 mb-1">
+                                        <h3 class="font-semibold text-slate-800">Inventory Alerts</h3>
+                                        <span class="inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-slate-100 text-slate-600">Disabled</span>
+                                    </div>
+                                    <p class="text-sm font-mono text-slate-600 mb-2">https://api.myapp.com/webhooks/inventory</p>
+                                    <div class="flex gap-2">
+                                        <span class="inline-flex items-center px-2 py-1 rounded-md text-xs font-medium bg-slate-100 text-slate-600">product.low_stock</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="flex gap-2">
+                                <button class="text-slate-400 hover:text-slate-600 p-2"><i class="fa-solid fa-pen"></i></button>
+                                <button class="text-slate-400 hover:text-red-600 p-2"><i class="fa-solid fa-trash"></i></button>
+                            </div>
+                        </div>
+                        
+                        <div class="mt-4 pt-4 border-t border-slate-100 flex justify-between items-center text-xs text-slate-500">
+                            <span>Last delivery: 5 days ago</span>
+                            <span>No recent deliveries</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Recent Deliveries -->
+                <div class="mt-8">
+                    <h3 class="text-sm font-semibold text-slate-800 mb-4">Recent Deliveries</h3>
+                    <div class="bg-white rounded-xl border border-slate-200 shadow-sm overflow-hidden">
+                        <table class="w-full text-sm text-left">
+                            <thead class="text-xs text-slate-500 uppercase bg-slate-50 border-b border-slate-200">
+                                <tr>
+                                    <th class="px-6 py-3">Status</th>
+                                    <th class="px-6 py-3">Event</th>
+                                    <th class="px-6 py-3">ID</th>
+                                    <th class="px-6 py-3">Time</th>
+                                </tr>
+                            </thead>
+                            <tbody class="divide-y divide-slate-200">
+                                <tr class="hover:bg-slate-50">
+                                    <td class="px-6 py-4">
+                                        <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800">200 OK</span>
+                                    </td>
+                                    <td class="px-6 py-4 font-mono text-xs text-slate-600">order.created</td>
+                                    <td class="px-6 py-4 font-mono text-xs text-slate-500">evt_123456789</td>
+                                    <td class="px-6 py-4 text-slate-500">2 mins ago</td>
+                                </tr>
+                                <tr class="hover:bg-slate-50">
+                                    <td class="px-6 py-4">
+                                        <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-red-100 text-red-800">500 Error</span>
+                                    </td>
+                                    <td class="px-6 py-4 font-mono text-xs text-slate-600">order.paid</td>
+                                    <td class="px-6 py-4 font-mono text-xs text-slate-500">evt_987654321</td>
+                                    <td class="px-6 py-4 text-slate-500">15 mins ago</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+            </main>
+{% endblock content %}

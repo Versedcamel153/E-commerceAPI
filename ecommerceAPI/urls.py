@@ -26,6 +26,7 @@ urlpatterns = [
     path('api/schema/', SpectacularAPIView.as_view(), name='schema'),
     path('webapp/', include('webapp.urls')),
     path('', include('developer_auth.urls')),
+    path('', include('someauth.urls')),
 
 ]
 

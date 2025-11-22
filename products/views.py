@@ -14,7 +14,7 @@ from rest_framework.generics import (
 )
 from rest_framework_api_key.permissions import BaseHasAPIKey
 from rest_framework import serializers
-from developer_auth.models import DeveloperAPIKey as APIKey
+from developer_auth.models import APIKey
 from .models import Product, Review, Category, Order, Cart, CartItem, OrderItem, ProductImage as Image
 from .filters import ProductFilter
 from .serializers import (
@@ -22,6 +22,7 @@ from .serializers import (
     CategorySerializer, OrderSerializer, 
     ProductImageSerializer, CartSerializer,
 )
+from developer_auth.utils import decrypt_key
 
 # Create your views here.
 
@@ -44,17 +45,45 @@ from .serializers import (
 #         api_key, key = APIKey.objects.create_key(name='')
 #         return Response({"api_key": key}, status=status.HTTP_201_CREATED)
         
-class HasAPIKeyView(BaseHasAPIKey):
+class HasAPIKeyView(BasePermission):
     """
     Custom permission to check if the request contains a valid API key.
     """
-    model = APIKey
 
-    def get_key(self, request):
-        api_key = request.headers.get('API-KEY')
-        if not api_key:
-            raise AuthenticationFailed("Missing API key in 'API-KEY' header.")
-        return api_key
+    def get_public_key(self, request):
+        return request.headers.get('X-Public-Key')
+    
+    def get_secret_key(self, request):
+        return request.headers.get('X-Secret-Key')
+    
+    def authenticate_public_key(self, key):
+        try:
+            return APIKey.objects.get(public_key=key, is_active=True)
+        except APIKey.DoesNotExist:
+            raise AuthenticationFailed('Invalid public key.')
+        
+    def authenticate_secret_key(self, key):
+        for api_key in APIKey.objects.filter(is_active=True):
+            if decrypt_key(api_key.encrypted_secret_key) == key:
+                return api_key
+        raise AuthenticationFailed('Invalid secret key.')
+    
+    def has_permission(self, request, view):
+        public = self.get_public_key(request)
+        secret = self.get_secret_key(request)
+
+        # if public:
+        #     api_key = self.authenticate_public_key(public)
+        if secret:
+            api_key = self.authenticate_secret_key(secret)
+        else:
+            raise PermissionDenied('Missing API key header.')
+        
+        request.api_key = api_key
+        request.developer = api_key.developer
+        request.environment = api_key.mode
+        
+        return True
         
 class ProductCreateView(CreateAPIView):
     """View for creating a new product."""
@@ -71,18 +100,9 @@ class ProductListView(ListAPIView):
     search_fields = ['name', 'description']
 
     def get_queryset(self):
-        api_key = self.request.headers.get('API-KEY')
+        
+        developer = self.request.developer
 
-        if not api_key:
-            raise PermissionDenied("Invalid API Key.")
-        
-        try:
-            api_key_obj = APIKey.objects.get_from_key(api_key)
-            print("API Key is valid!")
-        except APIKey.DoesNotExist:
-            print("Invalid API Key!")
-        
-        developer = api_key_obj.developer
         return Product.objects.filter(developer=developer)
 
 
@@ -120,18 +140,7 @@ class ProductImageList(ListAPIView):
     permission_classes = [HasAPIKeyView]
 
     def get_queryset(self):
-        api_key = self.request.headers.get('API-KEY')
-
-        if not api_key:
-            raise PermissionDenied("Invalid API Key.")
-        
-        try:
-            api_key_obj = APIKey.objects.get_from_key(api_key)
-            print("API Key is valid!")
-        except APIKey.DoesNotExist:
-            print("Invalid API Key!")
-        
-        developer = api_key_obj.developer
+        developer = self.request.developer
         return Image.objects.filter(product__developer=developer)
 
 class ProductImageUpdate(UpdateAPIView):
@@ -139,18 +148,7 @@ class ProductImageUpdate(UpdateAPIView):
     permission_classes = [HasAPIKeyView]
 
     def get_queryset(self):
-        api_key = self.request.headers.get('API-KEY')
-
-        if not api_key:
-            raise PermissionDenied("Invalid API Key.")
-        
-        try:
-            api_key_obj = APIKey.objects.get_from_key(api_key)
-            print("API Key is valid!")
-        except APIKey.DoesNotExist:
-            print("Invalid API Key!")
-        
-        developer = api_key_obj.developer
+        developer = self.request.developer
         return Image.objects.filter(product__developer=developer)
     
 class ProductImageDetails(RetrieveAPIView):
@@ -158,36 +156,16 @@ class ProductImageDetails(RetrieveAPIView):
     permission_classes = [HasAPIKeyView]
 
     def get_queryset(self):
-        api_key = self.request.headers.get('API-KEY')
-
-        if not api_key:
-            raise PermissionDenied("Invalid API Key.")
         
-        try:
-            api_key_obj = APIKey.objects.get_from_key(api_key)
-            print("API Key is valid!")
-        except APIKey.DoesNotExist:
-            print("Invalid API Key!")
-        
-        developer = api_key_obj.developer
+        developer = self.request.developer
         return Image.objects.filter(product__developer=developer)
 
 class ProductImageDelete(DestroyAPIView):
     serializer_class = ProductImageSerializer
+    permission_classes = [HasAPIKeyView]
 
     def get_queryset(self):
-        #api_key = self.request.headers.get('API-KEY')
-
-        # if not api_key:
-        #     raise PermissionDenied("Invalid API Key.")
-        api_key = 'KyHmZQhB.78g0PuYQ1IJ9YicQ8v6lAfZMeE8UdBy2'
-        try:
-            api_key_obj = APIKey.objects.get_from_key(api_key)
-            print("API Key is valid!")
-        except APIKey.DoesNotExist:
-            print("Invalid API Key!")
-        
-        developer = api_key_obj.developer
+        developer = self.request.developer
         return Image.objects.filter(product__developer=developer)
 
 
@@ -271,16 +249,8 @@ class CategoryListCreateView(ListCreateAPIView):
     permission_classes = [HasAPIKeyView]  # Require authentication
 
     def get_queryset(self):
-        api_key = self.request.headers.get('API-KEY')
-        if not api_key:
-            raise PermissionDenied("API Key is required.")
-        
-        try:
-            api_key_obj = APIKey.objects.get_from_key(api_key)
-        except APIKey.DoesNotExist:
-            raise ValidationError("Invalid API Key.")
-        
-        developer = api_key_obj.developer
+       
+        developer = self.request.developer
         return Category.objects.filter(developer=developer)
 
 class CategoryRetrieveUpdateDestroyView(RetrieveUpdateDestroyAPIView):
@@ -297,16 +267,7 @@ class OrderListView(ListAPIView):
 
     def get_queryset(self):
         """Override to filter orders by API Key and user ID."""
-        api_key = self.request.headers.get("API-KEY")
-        if not api_key:
-            raise PermissionDenied("API Key is required.")
-        
-        try:
-            api_key_obj = APIKey.objects.get_from_key(api_key)
-        except APIKey.DoesNotExist:
-            raise ValidationError("Invalid API Key.")
-        
-        developer = api_key_obj.developer
+        developer = self.request.developer
 
         user_id = self.request.query_params.get('user_id')
         if not user_id:
@@ -333,17 +294,8 @@ class OrderCreateView(CreateAPIView):
         # Ensure the cart isn't empty
         if not cart.items.exists():
             raise ValidationError("Your cart is empty.")
-
-        api_key = self.request.headers.get("API-KEY")
-        if not api_key:
-            raise PermissionDenied("API Key is required.")
         
-        try:
-            api_key_obj = APIKey.objects.get_from_key(api_key)
-        except APIKey.DoesNotExist:
-            raise ValidationError("Invalid API Key.")
-        
-        developer = api_key_obj.developer
+        developer = self.request.developer
         print(f"Developer: {developer}")
 
         # Create the order and associate it with the cart

@@ -1,45 +1,89 @@
-{% extends 'developer_auth/docs_base.html' %}
+{% extends 'developer_auth/docs_layout.html' %}
 
-{% block title %}
-    Documentation(End points)
+{% block doc_content %}
+<div class="mb-12">
+    <h1 class="text-3xl font-bold text-slate-900 mb-4">Authentication</h1>
+    <p class="text-slate-600 leading-relaxed mb-6">
+        Our API uses API Key authentication to secure access. Each developer must generate an API key after signing up and use it to authenticate requests. The API key should be passed as a header <code class="bg-slate-100 px-1 py-0.5 rounded text-sm font-mono text-slate-700">API-Key</code> in every request.
+    </p>
+    
+    <div class="bg-yellow-50 border-l-4 border-yellow-500 p-4 mb-6">
+        <div class="flex">
+            <div class="flex-shrink-0">
+                <i class="fa-solid fa-triangle-exclamation text-yellow-500"></i>
+            </div>
+            <div class="ml-3">
+                <p class="text-sm text-yellow-700">
+                    Ensure your API key is kept confidential and not exposed in public code repositories.
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <p class="text-slate-600 leading-relaxed mb-6">
+        An API Key is needed to access all the endpoints. You can obtain one from the <a href="{% url 'api-keys' %}" class="text-indigo-600 hover:underline">API Keys</a> section of your dashboard.
+    </p>
+</div>
+
+<div class="mb-12">
+    <h2 class="text-2xl font-bold text-slate-900 mb-4">Example Usage</h2>
+    
+    <div class="mb-6">
+        <h3 class="text-lg font-semibold text-slate-800 mb-2">Python</h3>
+        <div class="bg-slate-900 rounded-lg overflow-hidden shadow-lg">
+            <div class="flex items-center justify-between px-4 py-2 bg-slate-800 border-b border-slate-700">
+                <span class="text-xs text-slate-400 font-mono">python</span>
+                <button class="text-slate-400 hover:text-white"><i class="fa-regular fa-copy"></i></button>
+            </div>
+            <div class="p-4 overflow-x-auto">
+<pre class="text-sm font-mono text-slate-300">
+import requests        
+
+url = "https://api.ecom-api.com/v1/products"
+headers = {
+    "API-KEY": "YOUR_API_KEY",
+}
+
+response = requests.get(url, headers=headers)
+</pre>
+            </div>
+        </div>
+    </div>
+
+    <div class="mb-6">
+        <h3 class="text-lg font-semibold text-slate-800 mb-2">cURL</h3>
+        <div class="bg-slate-900 rounded-lg overflow-hidden shadow-lg">
+            <div class="flex items-center justify-between px-4 py-2 bg-slate-800 border-b border-slate-700">
+                <span class="text-xs text-slate-400 font-mono">bash</span>
+                <button class="text-slate-400 hover:text-white"><i class="fa-regular fa-copy"></i></button>
+            </div>
+            <div class="p-4 overflow-x-auto">
+<pre class="text-sm font-mono text-slate-300">
+curl -X GET "https://api.ecom-api.com/v1/products" \
+  -H "API-KEY: YOUR_API_KEY" \
+  -H "Content-Type: application/json"
+</pre>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="flex justify-between mt-12 pt-8 border-t border-slate-200">
+    <a href="{% url 'prerequisite' %}" class="flex items-center gap-2 text-indigo-600 font-medium hover:text-indigo-800">
+        <i class="fa-solid fa-arrow-left"></i> Previous: Prerequisites
+    </a>
+    <a href="{% url 'implementation' %}" class="flex items-center gap-2 text-indigo-600 font-medium hover:text-indigo-800">
+        Next: Implementation <i class="fa-solid fa-arrow-right"></i>
+    </a>
+</div>
 {% endblock %}
 
-{% block content %}
-<!-- <div class=" h-screen relative w-full"> -->
-    <div class="px-8 flex flex-col">
-
-    <p class="text-3xl mt-10 font-extrabold">Authentication</p>
-    <p class="mt-4 text-justify font-semibold lg:text-lg text-gray-800">Our API uses API Key authentication to secure access. Each developer must generate an API key after signing up and use it to authenticate requests. The API key should be passed as a header <strong>(API-Key)</strong> in every request. Ensure your API key is kept confidential and not exposed in public code repositories. 
-        An API Key is needed to access the all the endpoints. Obtain one from <a class="link link-primary" href="{% url 'create-api-key' %}">here</a>
-    </p>
-
-    <div class="mockup-code w-full mt-8">
-        <pre>Python</pre>
-        <pre><code class="language-python">
-        import requests        
-        
-        url = "https://api.example.com/products"
-        headers = {
-            "API-KEY": "YOUR_API_KEY",
-        }
-        </code></pre>
-    </div>
-    <div class="mockup-code w-full mt-8">
-        <pre>Sh</pre>
-        <pre><code class="language-python">
-        curl -X GET "https://api.example.com/products" \
-        -H "API-KEY: YOUR_API_KEY" \
-        -H "Content-Type: application/json"
-        </code></pre>
-    </div>
-
-    
-    </div>
-    {% with prev_page='prerequisite' prev_page_name='Prerequisite' next_page='implementation' next_page_name='Implementation' %}
-    
-    {% include 'developer_auth/bottom_nav.html' %}
-
-    {% endwith %}
-<!-- 
-</div> -->
+{% block on_page_nav %}
+<div class="w-64 hidden xl:block p-8">
+    <h4 class="text-xs font-semibold text-slate-500 uppercase tracking-wider mb-3">On this page</h4>
+    <ul class="space-y-2 border-l border-slate-200">
+        <li><a href="#" class="block pl-4 text-sm text-indigo-600 border-l-2 border-indigo-600 -ml-[1px]">Authentication</a></li>
+        <li><a href="#" class="block pl-4 text-sm text-slate-500 hover:text-slate-800">Example Usage</a></li>
+    </ul>
+</div>
 {% endblock %}

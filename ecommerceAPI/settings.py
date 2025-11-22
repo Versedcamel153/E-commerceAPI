@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django.contrib.sites',
     # 'users',
     'products',
     'rest_framework',
@@ -51,12 +52,38 @@ INSTALLED_APPS = [
     'rest_framework_simplejwt.token_blacklist',
     'django_filters',
     'drf_spectacular',
+    'corsheaders',
     # 'webapp',
     'import_export',
     'django_extensions',
     'developer_auth',
-
+    'tailwind',
+    'someauth',
+    'allauth',
+    'allauth.account',
+    'allauth.socialaccount',
+    'allauth.socialaccount.providers.google',
 ]
+
+SITE_ID = 1
+
+SOMEAUTH = {
+    "USE_SOCIAL": True,  # Set False to disable social login
+    "ENABLED_PROVIDERS": ["google"],  # Must match provider apps in INSTALLED_APPS
+    "PROVIDERS": {
+        "google": {
+            "client_id": "902886621611-1l0ers9q2cgir8smr32g6e30lqo3fviq.apps.googleusercontent.com",
+            "secret": "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",
+        }
+    }
+}
+
+API_KEY_ENCRYPTION_SECRET = "V6V8g8Rx1Dh5lYlHTICdPst48pm2-RgqqYqdWyd4o8Q="
+
+SOCIALACCOUNT_AUTO_SIGNUP = True
+SOCIALACCOUNT_LOGIN_ON_GET = True
+
+LOGIN_REDIRECT_URL = '/dashboard/'
 
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': [
@@ -85,6 +112,7 @@ SIMPLE_JWT = {
 }
 
 MIDDLEWARE = [
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -93,8 +121,18 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'whitenoise.middleware.WhiteNoiseMiddleware',
+        'allauth.account.middleware.AccountMiddleware',
+
 
 ]
+CORS_ALLOWED_ORIGINS = [
+    "http://localhost:5173",
+    "https://quetzal-keen-infinitely.ngrok-free.app",
+    "https://kd1664fj-5173.euw.devtunnels.ms"
+]
+CORS_ALLOW_METHODS = ["GET", "POST", "OPTIONS"]
+CORS_ALLOW_HEADERS = ["*"]
+
 ROOT_URLCONF = 'ecommerceAPI.urls'
 
 TEMPLATES = [

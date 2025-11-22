@@ -1,0 +1,254 @@
+{% extends 'developer_auth/dash_base.html' %}
+
+{% block content %}
+<div class="flex flex-1 overflow-hidden">
+    <!-- Main Content -->
+    <main class="flex-1 overflow-y-auto p-8 bg-white">
+        <div class="max-w-4xl mx-auto space-y-12">
+            
+            <!-- Header -->
+            <div>
+                <h1 class="text-3xl font-bold text-slate-900 mb-4">Documentation Components</h1>
+                <p class="text-slate-600 leading-relaxed">
+                    A collection of reusable components for building consistent documentation pages.
+                </p>
+            </div>
+
+            <!-- 1. Typography -->
+            <section>
+                <h2 class="text-2xl font-bold text-slate-900 mb-6 border-b pb-2">Typography</h2>
+                
+                <div class="space-y-6 p-6 border rounded-lg">
+                    <!-- H1 -->
+                    <div>
+                        <span class="text-xs text-slate-400 uppercase font-mono mb-2 block">Page Title (H1)</span>
+                        <h1 class="text-3xl font-bold text-slate-900">Resource Name</h1>
+                    </div>
+
+                    <!-- H2 -->
+                    <div>
+                        <span class="text-xs text-slate-400 uppercase font-mono mb-2 block">Section Title (H2)</span>
+                        <h2 class="text-2xl font-bold text-slate-900">Authentication</h2>
+                    </div>
+
+                    <!-- H3 -->
+                    <div>
+                        <span class="text-xs text-slate-400 uppercase font-mono mb-2 block">Subsection Title (H3)</span>
+                        <h3 class="text-xl font-semibold text-slate-800">Error Codes</h3>
+                    </div>
+
+                    <!-- Paragraph -->
+                    <div>
+                        <span class="text-xs text-slate-400 uppercase font-mono mb-2 block">Body Text</span>
+                        <p class="text-slate-600 leading-relaxed">
+                            The E-Commerce API uses API keys to authenticate requests. You can view and manage your API keys in the dashboard. Your API keys carry many privileges, so be sure to keep them secure!
+                        </p>
+                    </div>
+
+                    <!-- Inline Code -->
+                    <div>
+                        <span class="text-xs text-slate-400 uppercase font-mono mb-2 block">Inline Code</span>
+                        <p class="text-slate-600">
+                            Set the <code class="bg-slate-100 px-1.5 py-0.5 rounded text-sm font-mono text-slate-700 border border-slate-200">Content-Type</code> header to <code class="bg-slate-100 px-1.5 py-0.5 rounded text-sm font-mono text-indigo-600 border border-slate-200">application/json</code>.
+                        </p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 2. Code Blocks -->
+            <section>
+                <h2 class="text-2xl font-bold text-slate-900 mb-6 border-b pb-2">Code Blocks</h2>
+
+                <!-- Terminal/Bash -->
+                <div class="mb-8">
+                    <h3 class="text-lg font-semibold text-slate-800 mb-3">Terminal / cURL</h3>
+                    <div class="bg-slate-900 rounded-lg overflow-hidden shadow-lg">
+                        <div class="flex items-center justify-between px-4 py-2 bg-slate-800 border-b border-slate-700">
+                            <div class="flex gap-2">
+                                <div class="w-3 h-3 rounded-full bg-red-500"></div>
+                                <div class="w-3 h-3 rounded-full bg-yellow-500"></div>
+                                <div class="w-3 h-3 rounded-full bg-green-500"></div>
+                            </div>
+                            <span class="text-xs text-slate-400 font-mono">bash</span>
+                        </div>
+                        <div class="p-4 overflow-x-auto">
+<pre class="text-sm font-mono text-slate-300">
+curl https://api.ecom-api.com/v1/products \
+  -u sk_test_4eC39HqLyjWDarjtT1zdp7dc: \
+  -d limit=3
+</pre>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- JSON Response -->
+                <div class="mb-8">
+                    <h3 class="text-lg font-semibold text-slate-800 mb-3">JSON Response</h3>
+                    <div class="bg-slate-50 rounded-lg border border-slate-200 overflow-hidden">
+                        <div class="flex items-center justify-between px-4 py-2 bg-slate-100 border-b border-slate-200">
+                            <span class="text-xs font-medium text-slate-500 uppercase">Response</span>
+                            <span class="text-xs font-mono text-green-600">200 OK</span>
+                        </div>
+                        <div class="p-4 overflow-x-auto">
+<pre class="text-sm font-mono text-slate-700">
+{
+  <span class="text-indigo-600">"id"</span>: <span class="text-green-600">"prod_MW72Jh3"</span>,
+  <span class="text-indigo-600">"object"</span>: <span class="text-green-600">"product"</span>,
+  <span class="text-indigo-600">"active"</span>: <span class="text-blue-600">true</span>,
+  <span class="text-indigo-600">"created"</span>: <span class="text-blue-600">167889231</span>,
+  <span class="text-indigo-600">"name"</span>: <span class="text-green-600">"Gold Special Edition"</span>
+}
+</pre>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 3. Alerts & Callouts -->
+            <section>
+                <h2 class="text-2xl font-bold text-slate-900 mb-6 border-b pb-2">Alerts & Callouts</h2>
+
+                <div class="space-y-4">
+                    <!-- Info Alert -->
+                    <div class="bg-blue-50 border-l-4 border-blue-500 p-4">
+                        <div class="flex">
+                            <div class="flex-shrink-0">
+                                <i class="fa-solid fa-circle-info text-blue-500"></i>
+                            </div>
+                            <div class="ml-3">
+                                <h3 class="text-sm font-medium text-blue-800">Note</h3>
+                                <p class="text-sm text-blue-700 mt-1">
+                                    The base URL for all API requests is <code class="font-bold">https://api.ecom-api.com/v1</code>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Warning Alert -->
+                    <div class="bg-amber-50 border-l-4 border-amber-500 p-4">
+                        <div class="flex">
+                            <div class="flex-shrink-0">
+                                <i class="fa-solid fa-triangle-exclamation text-amber-500"></i>
+                            </div>
+                            <div class="ml-3">
+                                <h3 class="text-sm font-medium text-amber-800">Warning</h3>
+                                <p class="text-sm text-amber-700 mt-1">
+                                    API keys are secret. Do not commit them to version control.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Success Alert -->
+                    <div class="bg-green-50 border-l-4 border-green-500 p-4">
+                        <div class="flex">
+                            <div class="flex-shrink-0">
+                                <i class="fa-solid fa-check-circle text-green-500"></i>
+                            </div>
+                            <div class="ml-3">
+                                <h3 class="text-sm font-medium text-green-800">Success</h3>
+                                <p class="text-sm text-green-700 mt-1">
+                                    Your webhook endpoint has been verified successfully.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 4. Tables (Attributes/Parameters) -->
+            <section>
+                <h2 class="text-2xl font-bold text-slate-900 mb-6 border-b pb-2">Parameter Tables</h2>
+
+                <div class="border border-slate-200 rounded-lg overflow-hidden">
+                    <table class="min-w-full divide-y divide-slate-200">
+                        <thead class="bg-slate-50">
+                            <tr>
+                                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-slate-500 uppercase tracking-wider">Attribute</th>
+                                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-slate-500 uppercase tracking-wider">Type</th>
+                                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-slate-500 uppercase tracking-wider">Description</th>
+                            </tr>
+                        </thead>
+                        <tbody class="bg-white divide-y divide-slate-200">
+                            <tr>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm font-mono font-medium text-indigo-600">id</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-slate-500">string</td>
+                                <td class="px-6 py-4 text-sm text-slate-600">Unique identifier for the object.</td>
+                            </tr>
+                            <tr>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm font-mono font-medium text-indigo-600">amount</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-slate-500">integer</td>
+                                <td class="px-6 py-4 text-sm text-slate-600">Amount intended to be collected (in cents).</td>
+                            </tr>
+                            <tr>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm font-mono font-medium text-indigo-600">currency</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-slate-500">string</td>
+                                <td class="px-6 py-4 text-sm text-slate-600">Three-letter ISO currency code, e.g., <code class="bg-slate-100 px-1 rounded text-xs">usd</code>.</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <!-- 5. Endpoint Badges -->
+            <section>
+                <h2 class="text-2xl font-bold text-slate-900 mb-6 border-b pb-2">Endpoint Definitions</h2>
+
+                <div class="space-y-4">
+                    <!-- GET -->
+                    <div class="flex items-center gap-3 font-mono text-sm">
+                        <span class="px-2.5 py-1 rounded-md bg-blue-100 text-blue-700 font-bold">GET</span>
+                        <span class="text-slate-600">/v1/products</span>
+                    </div>
+
+                    <!-- POST -->
+                    <div class="flex items-center gap-3 font-mono text-sm">
+                        <span class="px-2.5 py-1 rounded-md bg-green-100 text-green-700 font-bold">POST</span>
+                        <span class="text-slate-600">/v1/orders</span>
+                    </div>
+
+                    <!-- DELETE -->
+                    <div class="flex items-center gap-3 font-mono text-sm">
+                        <span class="px-2.5 py-1 rounded-md bg-red-100 text-red-700 font-bold">DELETE</span>
+                        <span class="text-slate-600">/v1/customers/:id</span>
+                    </div>
+                    
+                    <!-- PUT/PATCH -->
+                    <div class="flex items-center gap-3 font-mono text-sm">
+                        <span class="px-2.5 py-1 rounded-md bg-orange-100 text-orange-700 font-bold">PATCH</span>
+                        <span class="text-slate-600">/v1/products/:id</span>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 6. Lists -->
+            <section>
+                <h2 class="text-2xl font-bold text-slate-900 mb-6 border-b pb-2">Lists</h2>
+                
+                <div class="grid grid-cols-2 gap-8">
+                    <!-- Bullet List -->
+                    <div>
+                        <h3 class="text-lg font-semibold text-slate-800 mb-3">Bullet List</h3>
+                        <ul class="list-disc list-inside space-y-2 text-slate-600">
+                            <li>Requires a valid API key</li>
+                            <li>Returns JSON format</li>
+                            <li>Rate limited to 100 req/min</li>
+                        </ul>
+                    </div>
+
+                    <!-- Step List -->
+                    <div>
+                        <h3 class="text-lg font-semibold text-slate-800 mb-3">Step List</h3>
+                        <ol class="list-decimal list-inside space-y-2 text-slate-600">
+                            <li>Create an account</li>
+                            <li>Generate an API key</li>
+                            <li>Make your first request</li>
+                        </ol>
+                    </div>
+                </div>
+            </section>
+
+        </div>
+    </main>
+</div>
+{% endblock content %}

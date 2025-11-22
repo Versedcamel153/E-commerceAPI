@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>API Keys | Developer Dashboard</title>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap');
+        
+        body { font-family: 'Inter', sans-serif; }
+        .font-mono { font-family: 'JetBrains Mono', monospace; }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-800">
+
+    <div class="flex h-screen overflow-hidden">
+
+        <!-- Sidebar -->
+        {% if request.user.is_authenticated %}   
+        <aside class="w-64 bg-slate-900 text-white hidden md:flex flex-col">
+            <div class="p-6 border-b border-slate-800">
+                <div class="flex items-center gap-3">
+                    <div class="w-8 h-8 bg-indigo-500 rounded-lg flex items-center justify-center font-bold">E</div>
+                    <span class="text-lg font-bold tracking-tight">E-Com API</span>
+                </div>
+            </div>
+
+            <nav class="flex-1 p-4 space-y-1 overflow-y-auto">
+                <p class="px-2 text-xs font-semibold text-slate-500 uppercase tracking-wider mb-2">Platform</p>
+                <a href="{% url 'dashboard' %}" class="flex items-center gap-3 px-3 py-2 text-sm font-medium rounded-md {% if request.resolver_match.url_name == 'dashboard' %}bg-indigo-600 text-white{% else %}text-slate-400 hover:text-white hover:bg-slate-800{% endif %}">
+                    <i class="fa-solid fa-chart-line w-5"></i> Dashboard
+                </a>
+                <a href="{% url 'orders' %}" class="flex items-center gap-3 px-3 py-2 text-sm font-medium rounded-md {% if request.resolver_match.url_name == 'orders' %}bg-indigo-600 text-white{% else %}text-slate-400 hover:text-white hover:bg-slate-800{% endif %}">
+                    <i class="fa-solid fa-box w-5"></i> Orders
+                </a>
+                <a href="{% url 'products' %}" class="flex items-center gap-3 px-3 py-2 text-sm font-medium rounded-md {% if request.resolver_match.url_name == 'products' %}bg-indigo-600 text-white{% else %}text-slate-400 hover:text-white hover:bg-slate-800{% endif %}">
+                    <i class="fa-solid fa-tag w-5"></i> Products
+                </a>
+
+                <p class="px-2 text-xs font-semibold text-slate-500 uppercase tracking-wider mt-8 mb-2">Developers</p>
+                <a href="{% url 'api-keys' %}" class="flex items-center gap-3 px-3 py-2 text-sm font-medium rounded-md {% if request.resolver_match.url_name == 'api-keys' %}bg-indigo-600 text-white{% else %}text-slate-400 hover:text-white hover:bg-slate-800{% endif %}">
+                    <i class="fa-solid fa-key w-5"></i> API Keys
+                </a>
+                <a href="{% url 'webhooks' %}" class="flex items-center gap-3 px-3 py-2 text-sm font-medium rounded-md {% if request.resolver_match.url_name == 'webhooks' %}bg-indigo-600 text-white{% else %}text-slate-400 hover:text-white hover:bg-slate-800{% endif %}">
+                    <i class="fa-solid fa-webhook w-5"></i> Webhooks
+                </a>
+                <a href="{% url 'documentation' %}" class="flex items-center gap-3 px-3 py-2 text-sm font-medium rounded-md {% if 'docs' in request.resolver_match.url_name or 'documentation' in request.resolver_match.url_name %}bg-indigo-600 text-white{% else %}text-slate-400 hover:text-white hover:bg-slate-800{% endif %}">
+                    <i class="fa-solid fa-book w-5"></i> Documentation
+                </a>
+            </nav>
+
+            <div class="p-4 border-t border-slate-800">
+                <div class="flex items-center gap-3">
+                    <img src="https://ui-avatars.com/api/?name={{ request.user.username }}&background=random" class="w-8 h-8 rounded-full">
+                    <div class="text-sm">
+                        <p class="font-medium">{{ request.user.username }}</p>
+                        <p class="text-slate-500 text-xs">Free Tier</p>
+                    </div>
+                </div>
+            </div>
+        </aside>
+        {% endif %}
+        <!-- Main Content -->
+        <div class="flex-1 flex flex-col overflow-hidden">
+            
+            <!-- Top Header -->
+            <header class="bg-white border-b border-slate-200 h-16 flex items-center justify-between px-6">
+                <h1 class="text-xl font-semibold text-slate-800">API Keys</h1>
+                
+                <div class="flex items-center gap-4">
+                    <div class="flex items-center bg-slate-100 rounded-lg p-1 border border-slate-200">
+                        <button class="px-3 py-1 text-xs font-medium rounded-md bg-white shadow-sm text-indigo-600">Sandbox</button>
+                        <button class="px-3 py-1 text-xs font-medium rounded-md text-slate-500 hover:text-slate-700">Production</button>
+                    </div>
+                    
+                    <button class="text-slate-400 hover:text-slate-600">
+                        <i class="fa-regular fa-bell text-lg"></i>
+                    </button>
+                </div>
+            </header>
+
+            {% block content %}
+                
+            {% endblock content %}
+
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/htmx.org@2.0.8/dist/htmx.min.js"></script>
+    {% block extra_js %}
+
+    {% endblock extra_js %}
+</body>
+</html>

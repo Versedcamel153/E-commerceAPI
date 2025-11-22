@@ -1,0 +1,117 @@
+{% extends 'developer_auth/dash_base.html' %}
+
+{% block content %}
+            <!-- Scrollable Content -->
+            <main class="flex-1 overflow-y-auto p-6 bg-slate-50">
+                
+                <!-- Filters -->
+                <div class="flex justify-between items-center mb-6">
+                    <div class="flex gap-2">
+                        <div class="relative">
+                            <i class="fa-solid fa-search absolute left-3 top-1/2 transform -translate-y-1/2 text-slate-400 text-sm"></i>
+                            <input type="text" placeholder="Search orders..." class="pl-9 pr-4 py-2 border border-slate-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 w-64">
+                        </div>
+                        <select class="border border-slate-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 bg-white">
+                            <option>All Statuses</option>
+                            <option>Paid</option>
+                            <option>Pending</option>
+                            <option>Failed</option>
+                        </select>
+                    </div>
+                    <button class="bg-indigo-600 hover:bg-indigo-700 text-white px-4 py-2 rounded-lg text-sm font-medium flex items-center gap-2">
+                        <i class="fa-solid fa-download"></i> Export CSV
+                    </button>
+                </div>
+
+                <!-- Orders Table -->
+                <div class="bg-white rounded-xl border border-slate-200 shadow-sm overflow-hidden">
+                    <div class="overflow-x-auto">
+                        <table class="w-full text-sm text-left">
+                            <thead class="text-xs text-slate-500 uppercase bg-slate-50 border-b border-slate-200">
+                                <tr>
+                                    <th class="px-6 py-3">Order ID</th>
+                                    <th class="px-6 py-3">Customer</th>
+                                    <th class="px-6 py-3">Date</th>
+                                    <th class="px-6 py-3">Total</th>
+                                    <th class="px-6 py-3">Status</th>
+                                    <th class="px-6 py-3">Items</th>
+                                    <th class="px-6 py-3"></th>
+                                </tr>
+                            </thead>
+                            <tbody class="divide-y divide-slate-200">
+                                <tr class="hover:bg-slate-50">
+                                    <td class="px-6 py-4 font-mono text-xs font-medium text-indigo-600">#ORD-7829</td>
+                                    <td class="px-6 py-4">
+                                        <div class="flex items-center gap-3">
+                                            <div class="w-6 h-6 rounded-full bg-slate-200 flex items-center justify-center text-xs font-bold text-slate-600">JD</div>
+                                            <span class="font-medium text-slate-700">John Doe</span>
+                                        </div>
+                                    </td>
+                                    <td class="px-6 py-4 text-slate-500">Oct 24, 2023</td>
+                                    <td class="px-6 py-4 font-medium text-slate-800">$124.50</td>
+                                    <td class="px-6 py-4">
+                                        <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800">
+                                            Paid
+                                        </span>
+                                    </td>
+                                    <td class="px-6 py-4 text-slate-500">3 items</td>
+                                    <td class="px-6 py-4 text-right">
+                                        <button class="text-slate-400 hover:text-indigo-600"><i class="fa-solid fa-ellipsis"></i></button>
+                                    </td>
+                                </tr>
+                                <tr class="hover:bg-slate-50">
+                                    <td class="px-6 py-4 font-mono text-xs font-medium text-indigo-600">#ORD-7828</td>
+                                    <td class="px-6 py-4">
+                                        <div class="flex items-center gap-3">
+                                            <div class="w-6 h-6 rounded-full bg-purple-200 flex items-center justify-center text-xs font-bold text-purple-600">AS</div>
+                                            <span class="font-medium text-slate-700">Alice Smith</span>
+                                        </div>
+                                    </td>
+                                    <td class="px-6 py-4 text-slate-500">Oct 24, 2023</td>
+                                    <td class="px-6 py-4 font-medium text-slate-800">$59.00</td>
+                                    <td class="px-6 py-4">
+                                        <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-yellow-100 text-yellow-800">
+                                            Pending
+                                        </span>
+                                    </td>
+                                    <td class="px-6 py-4 text-slate-500">1 item</td>
+                                    <td class="px-6 py-4 text-right">
+                                        <button class="text-slate-400 hover:text-indigo-600"><i class="fa-solid fa-ellipsis"></i></button>
+                                    </td>
+                                </tr>
+                                <tr class="hover:bg-slate-50">
+                                    <td class="px-6 py-4 font-mono text-xs font-medium text-indigo-600">#ORD-7827</td>
+                                    <td class="px-6 py-4">
+                                        <div class="flex items-center gap-3">
+                                            <div class="w-6 h-6 rounded-full bg-blue-200 flex items-center justify-center text-xs font-bold text-blue-600">RJ</div>
+                                            <span class="font-medium text-slate-700">Robert Johnson</span>
+                                        </div>
+                                    </td>
+                                    <td class="px-6 py-4 text-slate-500">Oct 23, 2023</td>
+                                    <td class="px-6 py-4 font-medium text-slate-800">$299.99</td>
+                                    <td class="px-6 py-4">
+                                        <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-red-100 text-red-800">
+                                            Failed
+                                        </span>
+                                    </td>
+                                    <td class="px-6 py-4 text-slate-500">2 items</td>
+                                    <td class="px-6 py-4 text-right">
+                                        <button class="text-slate-400 hover:text-indigo-600"><i class="fa-solid fa-ellipsis"></i></button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    
+                    <!-- Pagination -->
+                    <div class="px-6 py-4 border-t border-slate-200 flex items-center justify-between">
+                        <span class="text-sm text-slate-500">Showing 1-10 of 45 orders</span>
+                        <div class="flex gap-2">
+                            <button class="px-3 py-1 border border-slate-200 rounded-md text-sm text-slate-600 hover:bg-slate-50 disabled:opacity-50">Previous</button>
+                            <button class="px-3 py-1 border border-slate-200 rounded-md text-sm text-slate-600 hover:bg-slate-50">Next</button>
+                        </div>
+                    </div>
+                </div>
+
+            </main>
+{% endblock content %}

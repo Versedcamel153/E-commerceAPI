@@ -1,11 +1,14 @@
+import secrets
 from django.shortcuts import render, redirect, get_object_or_404
 from django.http import JsonResponse
 from django.contrib.auth import login as auth_login, authenticate, logout as auth_logout, get_user_model
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.hashers import make_password, check_password
-from .models import Developer, DeveloperAPIKey
-from .forms import DeveloperRegisterForm, DeveloperLoginForm
 
+from developer_auth.utils import encrypt_key, decrypt_key
+from .models import Developer, APIKey
+from .forms import DeveloperRegisterForm, DeveloperLoginForm
+from django.utils import timezone
 # Create your views here.
 User = get_user_model()
 
@@ -27,18 +30,44 @@ def live_implementation(request):
 def support(request):
     return render(request, 'developer_auth/support.html')
 
-@login_required(login_url='login')
+@login_required(login_url='account_login')
 def dashboard(request):
     developer = request.user
-    api_keys = DeveloperAPIKey.objects.filter(developer=developer)
+    api_key = APIKey.objects.filter(developer=developer, is_active=True).first()
+    api_key.secret_key = decrypt_key(api_key.encrypted_secret_key) if api_key else None
 
-    return render(request, 'developer_auth/dashboard.html', {'api_keys': api_keys})
+    return render(request, 'developer_auth/dashboard.html', {'api_key': api_key})
 
-def revoke_key(request, prefix):
-    key = DeveloperAPIKey.objects.get(prefix=prefix)
-    key.revoked = True
+def order(request):
+    return render(request, 'developer_auth/orders.html')
+
+def products(request):
+    return render(request, 'developer_auth/products.html')
+
+@login_required(login_url='account_login')
+def api_keys(request):
+    keys = APIKey.objects.filter(developer=request.user).order_by('-is_active', '-created_at')
+    for key in keys:
+        key.secret_key = decrypt_key(key.encrypted_secret_key)
+
+    return render(request, 'developer_auth/api_keys.html', {'keys': keys})
+
+def webhooks(request):
+    return render(request, 'developer_auth/webhooks.html')
+
+def documetation(request):
+    return render(request, 'developer_auth/documentation.html')
+
+def revoke_key(request, public_key):
+    user = request.user
+    key = APIKey.objects.get(developer=user, public_key=public_key)
+    key.is_active = False
+    key.revoked_at = timezone.now()
     key.save()
-    return redirect('dashboard')
+    return redirect('api-keys')
+
+def cheat_sheet(request):
+    return render(request, 'developer_auth/docs_components.html')
 
 def products_overview(request):
     return render(request, 'developer_auth/product/product_overview.html')
@@ -164,13 +193,15 @@ def login(request):
 def logout(request):
     request.session.flush()
     auth_logout(request)
-    return redirect('login')
+    return redirect('account_login')
 
-@login_required(login_url='login')
-def create_api_key(request):
+@login_required(login_url='account_login')
+def generate_api_key(request):
     if request.method == 'POST':
         user_email = request.user.email
         name = request.POST.get('api_key_name')
+        password = request.POST.get('password')
+        mode = request.POST.get('mode', 'test')
 
         # Get the developer instance safely
         developer = get_object_or_404(Developer, email=user_email)
@@ -180,16 +211,28 @@ def create_api_key(request):
         #     return JsonResponse({'error': 'Developer already has an API key.'}, status=400)
 
         # Create an API key for the developer
-        api_key, key = DeveloperAPIKey.objects.create_key(developer=developer, name=name)
-
+        authenticated_developer = authenticate(request, email=user_email, password=password)
+        if authenticated_developer is None:
+            return JsonResponse({'error': 'Authentication failed. Incorrect password.'}, status=403)
+        
+        plain_text = f"sk_{mode}_" + secrets.token_urlsafe(48)
+        encryted = encrypt_key(plain_text)
+        public_key = f"pk_{mode}_" + secrets.token_urlsafe(48)
+        key = APIKey.objects.create(
+            name=name,
+            developer=developer,
+            public_key=public_key,
+            encrypted_secret_key=encryted,
+            mode=mode
+        )
         # Return partial template for HTMX updates
-        return render(request, 'developer_auth/key.html', {'key': key})
+        return redirect('api-keys')
     return redirect('dashboard')
 
 def api_key(request):
     return render(request, 'developer_auth/api_key.html')
 
-@login_required(login_url='login')
+@login_required(login_url='account_login')
 def regenerate_api_key(request):
     if request.method == 'POST':
         api_key_id = request.data.get('api_key_id')
