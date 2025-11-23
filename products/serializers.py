@@ -32,7 +32,7 @@ class ProductSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Product
-        fields = '__all__'  # Include all fields from the Product model
+        fields = ['name', 'slug', 'description', 'price', 'category', 'stock_quantity', 'reviews', 'images', 'category_name', 'average_rating', 'total_reviews']  # Include all fields from the Product model
 
     def create(self, validated_data):
         """Override the create method to handle nested images."""

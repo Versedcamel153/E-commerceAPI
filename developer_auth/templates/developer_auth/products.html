@@ -9,70 +9,48 @@
                     <div class="flex gap-2">
                         <div class="relative">
                             <i class="fa-solid fa-search absolute left-3 top-1/2 transform -translate-y-1/2 text-slate-400 text-sm"></i>
-                            <input type="text" placeholder="Search products..." class="pl-9 pr-4 py-2 border border-slate-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 w-64">
+                            <input type="text" 
+                                name="search"
+                                hx-get="{% url 'products' %}"
+                                hx-target="#products-grid"
+                                hx-trigger="keyup changed delay:500ms"
+                                placeholder="Search products..." 
+                                class="pl-9 pr-4 py-2 border border-slate-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 w-64">
                         </div>
-                        <select class="border border-slate-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 bg-white">
-                            <option>All Categories</option>
-                            <option>Electronics</option>
-                            <option>Clothing</option>
-                            <option>Home</option>
+                        <select
+                        hx-get="{% url 'load-categories' %}" 
+                        hx-target="#categorySelect"
+                        hx-trigger="load"
+                        hx-params="none"
+                        class="border border-slate-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 bg-white">
+                        <option>All Categories</option>    
+                            <optgroup id="categorySelect" label="Available Categories">
+                            <option class="bg-bl">
+                                Loading...
+                            </option>
+                            </optgroup>
                         </select>
                     </div>
-                    <button class="bg-indigo-600 hover:bg-indigo-700 text-white px-4 py-2 rounded-lg text-sm font-medium flex items-center gap-2">
-                        <i class="fa-solid fa-plus"></i> Add Product
-                    </button>
+                    <div class="flex gap-3">
+                        <button onclick="openCategoryModal()" class="bg-white border border-slate-200 hover:bg-slate-50 text-slate-700 px-4 py-2 rounded-lg text-sm font-medium flex items-center gap-2 transition-colors">
+                            <i class="fa-solid fa-folder-plus"></i> Add Category
+                        </button>
+                        <button 
+                            hx-get="{% url 'get-product-form' %}" 
+                            hx-target="#productModalContent" 
+                            hx-on::after-request="openProductModal()"
+                            
+                        class="bg-indigo-600 hover:bg-indigo-700 text-white px-4 py-2 rounded-lg text-sm font-medium flex items-center gap-2 transition-colors">
+                            <i class="fa-solid fa-plus"></i> Add Product
+                        </button>
+                    </div>
                 </div>
 
                 <!-- Products Grid -->
-                <div class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-6">
-                    <!-- Product Card 1 -->
-                    <div class="bg-white rounded-xl border border-slate-200 shadow-sm overflow-hidden group hover:shadow-md transition-shadow">
-                        <div class="h-48 bg-slate-100 relative">
-                            <img src="https://images.unsplash.com/photo-1523275335684-37898b6baf30?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=60" alt="Product" class="w-full h-full object-cover">
-                            <div class="absolute top-2 right-2 opacity-0 group-hover:opacity-100 transition-opacity">
-                                <button class="bg-white p-2 rounded-full shadow-sm text-slate-600 hover:text-indigo-600"><i class="fa-solid fa-pen"></i></button>
-                            </div>
-                        </div>
-                        <div class="p-4">
-                            <div class="flex justify-between items-start mb-2">
-                                <h3 class="font-medium text-slate-800 truncate">Minimalist Watch</h3>
-                                <span class="text-sm font-bold text-slate-900">$129.00</span>
-                            </div>
-                            <p class="text-xs text-slate-500 mb-3">SKU: WTC-001</p>
-                            <div class="flex justify-between items-center">
-                                <span class="inline-flex items-center px-2 py-1 rounded-md text-xs font-medium bg-green-50 text-green-700 border border-green-100">
-                                    In Stock (45)
-                                </span>
-                                <span class="text-xs text-slate-400">Electronics</span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Product Card 2 -->
-                    <div class="bg-white rounded-xl border border-slate-200 shadow-sm overflow-hidden group hover:shadow-md transition-shadow">
-                        <div class="h-48 bg-slate-100 relative">
-                            <img src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=60" alt="Product" class="w-full h-full object-cover">
-                            <div class="absolute top-2 right-2 opacity-0 group-hover:opacity-100 transition-opacity">
-                                <button class="bg-white p-2 rounded-full shadow-sm text-slate-600 hover:text-indigo-600"><i class="fa-solid fa-pen"></i></button>
-                            </div>
-                        </div>
-                        <div class="p-4">
-                            <div class="flex justify-between items-start mb-2">
-                                <h3 class="font-medium text-slate-800 truncate">Wireless Headphones</h3>
-                                <span class="text-sm font-bold text-slate-900">$249.00</span>
-                            </div>
-                            <p class="text-xs text-slate-500 mb-3">SKU: AUD-002</p>
-                            <div class="flex justify-between items-center">
-                                <span class="inline-flex items-center px-2 py-1 rounded-md text-xs font-medium bg-yellow-50 text-yellow-700 border border-yellow-100">
-                                    Low Stock (3)
-                                </span>
-                                <span class="text-xs text-slate-400">Audio</span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Product Card 3 -->
-                    <div class="bg-white rounded-xl border border-slate-200 shadow-sm overflow-hidden group hover:shadow-md transition-shadow">
+                <div class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-6" id="products-grid">
+                    {% include 'developer_auth/partials/product_list.html' %}
+                </div>
+                    <!-- <div class="bg-white rounded-xl border border-slate-200 shadow-sm overflow-hidden group hover:shadow-md transition-shadow">
                         <div class="h-48 bg-slate-100 relative">
                             <img src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=60" alt="Product" class="w-full h-full object-cover">
                             <div class="absolute top-2 right-2 opacity-0 group-hover:opacity-100 transition-opacity">
@@ -92,10 +70,10 @@
                                 <span class="text-xs text-slate-400">Footwear</span>
                             </div>
                         </div>
-                    </div>
+                    </div> -->
 
                     <!-- Product Card 4 -->
-                    <div class="bg-white rounded-xl border border-slate-200 shadow-sm overflow-hidden group hover:shadow-md transition-shadow">
+                    <!-- <div class="bg-white rounded-xl border border-slate-200 shadow-sm overflow-hidden group hover:shadow-md transition-shadow">
                         <div class="h-48 bg-slate-100 relative">
                             <img src="https://images.unsplash.com/photo-1586495777744-4413f21062fa?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=60" alt="Product" class="w-full h-full object-cover">
                             <div class="absolute top-2 right-2 opacity-0 group-hover:opacity-100 transition-opacity">
@@ -115,8 +93,211 @@
                                 <span class="text-xs text-slate-400">Accessories</span>
                             </div>
                         </div>
+                    </div> -->
+                </div>
+                <!-- Add Category Modal -->
+            <div id="categoryModal" class="fixed inset-0 bg-slate-900/50 hidden items-center justify-center z-[60] backdrop-blur-sm transition-opacity opacity-0">
+                <div class="bg-white rounded-xl shadow-2xl w-full max-w-md mx-4 transform scale-95 transition-transform duration-200" id="categoryModalContent">
+                    <!-- Header -->
+                    <div class="px-6 py-4 border-b border-slate-100 flex justify-between items-center">
+                        <h3 class="text-lg font-semibold text-slate-800">Create Category</h3>
+                        <button onclick="closeCategoryModal()" class="text-slate-400 hover:text-slate-600 transition-colors">
+                            <i class="fa-solid fa-xmark text-xl"></i>
+                        </button>
+                    </div>
+                    
+                    <!-- Body -->
+                    <form id="categoryForm" class="p-6 space-y-4" hx-post="{% url 'create-category' %}" hx-swap="none">
+                        {% csrf_token %}
+                        <div>
+                            <label class="block text-sm font-medium text-slate-700 mb-1">Category Name</label>
+                            <input type="text" name="name" class="w-full px-3 py-2 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 text-sm" placeholder="e.g. Electronics">
+                        </div>
+                        
+                        <div>
+                            <label class="block text-sm font-medium text-slate-700 mb-1">Description</label>
+                            <textarea name="description" rows="3" class="w-full px-3 py-2 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 text-sm" placeholder="Category description..."></textarea>
+                        </div>
+                    </form>
+
+                    <!-- Footer -->
+                    <div class="px-6 py-4 bg-slate-50 rounded-b-xl flex justify-end gap-3 border-t border-slate-100">
+                        <button onclick="closeCategoryModal()" class="px-4 py-2 text-sm font-medium text-slate-600 hover:text-slate-800 hover:bg-slate-200 rounded-lg transition-colors">
+                            Cancel
+                        </button>
+                        <button form="categoryForm" type="submit" class="px-4 py-2 text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 rounded-lg shadow-sm transition-colors">
+                            Create Category
+                        </button>
                     </div>
                 </div>
+            </div>
+
+            <!-- Add Product Modal -->
+            <div id="productModal" class="fixed inset-0 bg-slate-900/50 hidden items-center justify-center z-50 backdrop-blur-sm transition-opacity opacity-0">
+                <div class="bg-white rounded-xl shadow-2xl w-full max-w-2xl mx-4 transform scale-95 transition-transform duration-200 max-h-[90vh] overflow-y-auto" id="productModalContent">
+                    <!-- Header -->
+                    <div class="px-6 py-4 border-b border-slate-100 flex justify-between items-center sticky top-0 bg-white z-10">
+                        <h3 class="text-lg font-semibold text-slate-800">{% if product %}Edit Product{% else %}Add New Product{% endif %}</h3>
+                        <button onclick="closeProductModal()" class="text-slate-400 hover:text-slate-600 transition-colors">
+                            <i class="fa-solid fa-xmark text-xl"></i>
+                        </button>
+                    </div>
+                    
+                    <!-- Body -->
+                    <form class="p-6 space-y-6" id="productCreate" 
+                        hx-post="{% if product %}{% url 'update-product' product.slug %}{% else %}{% url 'create-product' %}{% endif %}"
+                        hx-target="#productCreate"
+                        hx-swap="innerHTML">
+                        {% csrf_token %}
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div class="col-span-2">
+                                <label class="block text-sm font-medium text-slate-700 mb-1">Product Name</label>
+                                <input type="text" name="name" value="{{ product.name|default:'' }}" class="w-full px-3 py-2 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 text-sm" placeholder="e.g. Premium Leather Wallet">
+                            </div>
+                            
+                            <div class="col-span-2">
+                                <label class="block text-sm font-medium text-slate-700 mb-1">Description</label>
+                                <textarea name="description" rows="3" class="w-full px-3 py-2 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 text-sm" placeholder="Product details...">{{ product.description|default:'' }}</textarea>
+                            </div>
+
+                            <div>
+                                <label class="block text-sm font-medium text-slate-700 mb-1">Price ($)</label>
+                                <input type="number" name="price" value="{{ product.price|default:'' }}" step="0.01" class="w-full px-3 py-2 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 text-sm" placeholder="0.00">
+                            </div>
+
+                            <div>
+                                <label class="block text-sm font-medium text-slate-700 mb-1">Stock Quantity</label>
+                                <input type="number" name="stock_quantity" value="{{ product.stock_quantity|default:'' }}" class="w-full px-3 py-2 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 text-sm" placeholder="0">
+                            </div>
+
+                            <div>
+                                <label class="block text-sm font-medium text-slate-700 mb-1">Category</label>
+                                <select name="category" value="{{ product.category.id|default:'' }}"
+                                hx-get="{% url 'load-categories' %}" 
+                                hx-target="#categorySelect2"
+                                hx-trigger="load"
+                                id="productCategorySelect" onchange="handleCategorySelect(this)" class="w-full select px-3 py-2 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 text-sm bg-white">
+                                <option value="" class="text-slate-500">Select Category</option>    
+                                    <div id="categorySelect2">
+                                    </div>
+                                    <option value="create_new" class="text-indigo-600 font-medium py-1 bg-slate-50">+ Create New Category</option>
+                                </select>
+                            </div>
+
+                            <div>
+                                <label class="block text-sm font-medium text-slate-700 mb-1">SKU</label>
+                                <input type="text" class="w-full px-3 py-2 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 text-sm" placeholder="e.g. PROD-001">
+                            </div>
+
+                            <div class="col-span-2">
+                                <label class="block text-sm font-medium text-slate-700 mb-1">Product Image</label>
+                                <div class="mt-1 flex justify-center px-6 pt-5 pb-6 border-2 border-slate-300 border-dashed rounded-lg hover:bg-slate-50 transition-colors cursor-pointer group">
+                                    <div class="space-y-1 text-center">
+                                        <i class="fa-solid fa-cloud-arrow-up text-slate-400 group-hover:text-indigo-500 text-3xl mb-2 transition-colors"></i>
+                                        <div class="flex text-sm text-slate-600 justify-center">
+                                            <label for="file-upload" class="relative cursor-pointer bg-transparent rounded-md font-medium text-indigo-600 hover:text-indigo-500 focus-within:outline-none">
+                                                <span>Upload files</span>
+                                                <input id="file-upload" name="file-upload" type="file" class="sr-only" multiple>
+                                            </label>
+                                            <p class="pl-1">or drag and drop</p>
+                                        </div>
+                                        <p class="text-xs text-slate-500">PNG, JPG, GIF up to 10MB</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+
+                    <!-- Footer -->
+                    <div class="px-6 py-4 bg-slate-50 rounded-b-xl flex justify-end gap-3 border-t border-slate-100 sticky bottom-0">
+                        <button onclick="closeProductModal()" class="px-4 py-2 text-sm font-medium text-slate-600 hover:text-slate-800 hover:bg-slate-200 rounded-lg transition-colors">
+                            Cancel
+                        </button>
+                        <button form="productCreate" class="px-4 py-2 text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 rounded-lg shadow-sm transition-colors">
+                            {% if product %}Update Product{% else %}Create Product{% endif %}
+                        </button>
+                    </div>
+                </div>
+            </div>
 
             </main>
 {% endblock content %}
+
+{% block extra_js %}
+<script>
+    // --- Category Modal Functions ---
+    function handleCategorySelect(select) {
+        if (select.value === 'create_new') {
+            openCategoryModal();
+            select.value = ''; // Reset to default
+        }
+    }
+
+    function openCategoryModal() {
+        const modal = document.getElementById('categoryModal');
+        const content = document.getElementById('categoryModalContent');
+        modal.classList.remove('hidden');
+        setTimeout(() => {
+            modal.classList.remove('opacity-0');
+            modal.classList.add('flex');
+            content.classList.remove('scale-95');
+            content.classList.add('scale-100');
+        }, 10);
+    }
+
+    function closeCategoryModal() {
+        const modal = document.getElementById('categoryModal');
+        const content = document.getElementById('categoryModalContent');
+        
+        modal.classList.add('opacity-0');
+        content.classList.remove('scale-100');
+        content.classList.add('scale-95');
+        
+        setTimeout(() => {
+            modal.classList.add('hidden');
+            modal.classList.remove('flex');
+        }, 200);
+    }
+
+    document.getElementById('categoryModal').addEventListener('click', function(e) {
+        if (e.target === this) {
+            closeCategoryModal();
+        }
+    });
+
+    // --- Product Modal Functions ---
+    function openProductModal() {
+        const modal = document.getElementById('productModal');
+        const content = document.getElementById('productModalContent');
+        modal.classList.remove('hidden');
+        // Small delay to allow display:flex to apply before opacity transition
+        setTimeout(() => {
+            modal.classList.remove('opacity-0');
+            modal.classList.add('flex');
+            content.classList.remove('scale-95');
+            content.classList.add('scale-100');
+        }, 10);
+    }
+
+    function closeProductModal() {
+        const modal = document.getElementById('productModal');
+        const content = document.getElementById('productModalContent');
+        
+        modal.classList.add('opacity-0');
+        content.classList.remove('scale-100');
+        content.classList.add('scale-95');
+        
+        setTimeout(() => {
+            modal.classList.add('hidden');
+            modal.classList.remove('flex');
+        }, 200); // Match transition duration
+    }
+
+    // Close on backdrop click
+    document.getElementById('productModal').addEventListener('click', function(e) {
+        if (e.target === this) {
+            closeProductModal();
+        }
+    });
+</script>
+{% endblock extra_js %}

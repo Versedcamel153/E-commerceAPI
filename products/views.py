@@ -91,6 +91,12 @@ class ProductCreateView(CreateAPIView):
     serializer_class = ProductSerializer
     permission_classes = [HasAPIKeyView]  # Require authentication 
 
+    def perform_create(self, serializer):
+        developer = self.request.developer
+        
+        serializer.save(developer=developer)
+
+
 class ProductListView(ListAPIView):
     """View for listing all products with pagination and filtering."""
     serializer_class = ProductSerializer
@@ -133,7 +139,7 @@ class ProductDeleteView(DestroyAPIView):
 class ProductImage(CreateAPIView):
     serializer_class = ProductImageSerializer
     queryset = Image
-    permission_classes = [HasAPIKeyView]
+    # permission_classes = [HasAPIKeyView]
 
 class ProductImageList(ListAPIView):
     serializer_class= ProductImageSerializer
@@ -247,6 +253,11 @@ class CategoryListCreateView(ListCreateAPIView):
     queryset = Category.objects.all()
     serializer_class = CategorySerializer
     permission_classes = [HasAPIKeyView]  # Require authentication
+
+    def perform_create(self, serializer):
+        developer = self.request.developer
+        
+        serializer.save(developer=developer)
 
     def get_queryset(self):
        

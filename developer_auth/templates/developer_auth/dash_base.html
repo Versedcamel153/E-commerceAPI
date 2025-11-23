@@ -57,13 +57,13 @@
             </nav>
 
             <div class="p-4 border-t border-slate-800">
-                <div class="flex items-center gap-3">
+                <a href="{% url 'settings' %}" class="flex items-center gap-3 hover:bg-slate-800 p-2 rounded-lg transition-colors group">
                     <img src="https://ui-avatars.com/api/?name={{ request.user.username }}&background=random" class="w-8 h-8 rounded-full">
                     <div class="text-sm">
-                        <p class="font-medium">{{ request.user.username }}</p>
+                        <p class="font-medium group-hover:text-white transition-colors">{{ request.user.username }}</p>
                         <p class="text-slate-500 text-xs">Free Tier</p>
                     </div>
-                </div>
+                </a>
             </div>
         </aside>
         {% endif %}
@@ -92,7 +92,137 @@
 
         </div>
     </div>
+    <!-- Toast Container -->
+    <div id="toast-container" class="fixed top-5 right-5 z-[100] flex flex-col gap-3 pointer-events-none"></div>
+
+    <!-- Django Messages Data -->
+    {% if messages %}
+        <div id="django-messages-data" class="hidden">
+            {% for message in messages %}
+                <div data-message="{{ message }}" data-level="{{ message.tags }}"></div>
+            {% endfor %}
+        </div>
+    {% endif %}
+
     <script src="https://cdn.jsdelivr.net/npm/htmx.org@2.0.8/dist/htmx.min.js"></script>
+
+    <script>
+        // Global Toast System
+        window.Toast = {
+            container: null,
+            
+            init() {
+                this.container = document.getElementById('toast-container');
+            },
+
+            show(message, type = 'info', duration = 4000) {
+                if (!this.container) this.init();
+
+                const icons = {
+                    success: '<i class="fa-solid fa-circle-check text-xl"></i>',
+                    error: '<i class="fa-solid fa-circle-xmark text-xl"></i>',
+                    warning: '<i class="fa-solid fa-triangle-exclamation text-xl"></i>',
+                    info: '<i class="fa-solid fa-circle-info text-xl"></i>'
+                };
+
+                const styles = {
+                    success: 'bg-white border-l-4 border-emerald-500 text-slate-800',
+                    error: 'bg-white border-l-4 border-red-500 text-slate-800',
+                    warning: 'bg-white border-l-4 border-amber-500 text-slate-800',
+                    info: 'bg-white border-l-4 border-blue-500 text-slate-800'
+                };
+
+                const iconColor = {
+                    success: 'text-emerald-500',
+                    error: 'text-red-500',
+                    warning: 'text-amber-500',
+                    info: 'text-blue-500'
+                };
+
+                const toast = document.createElement('div');
+                toast.className = `pointer-events-auto flex items-center w-full max-w-sm p-4 rounded shadow-lg transform transition-all duration-300 translate-x-full opacity-0 ${styles[type] || styles.info} mb-3`;
+                
+                toast.innerHTML = `
+                    <div class="flex-shrink-0 ${iconColor[type] || iconColor.info}">
+                        ${icons[type] || icons.info}
+                    </div>
+                    <div class="ml-3 text-sm font-medium flex-1 break-words">
+                        ${message}
+                    </div>
+                    <button type="button" class="ml-auto -mx-1.5 -my-1.5 bg-transparent text-slate-400 hover:text-slate-900 rounded-lg focus:ring-2 focus:ring-slate-300 p-1.5 hover:bg-slate-100 inline-flex h-8 w-8 justify-center items-center transition-colors" onclick="this.parentElement.remove()">
+                        <i class="fa-solid fa-xmark"></i>
+                    </button>
+                `;
+
+                this.container.appendChild(toast);
+
+                // Animation
+                requestAnimationFrame(() => {
+                    toast.classList.remove('translate-x-full', 'opacity-0');
+                });
+
+                // Auto remove
+                setTimeout(() => {
+                    toast.classList.add('translate-x-full', 'opacity-0');
+                    setTimeout(() => {
+                        if (toast.parentElement) toast.remove();
+                    }, 300);
+                }, duration);
+            },
+
+            success(msg) { this.show(msg, 'success'); },
+            error(msg) { this.show(msg, 'error'); },
+            warning(msg) { this.show(msg, 'warning'); },
+            info(msg) { this.show(msg, 'info'); }
+        };
+
+        // Initialize on load
+        document.addEventListener('DOMContentLoaded', () => {
+            Toast.init();
+            
+            // Handle Django Messages
+            const messages = document.getElementById('django-messages-data');
+            if (messages) {
+                Array.from(messages.children).forEach(msg => {
+                    const type = msg.dataset.level;
+                    const text = msg.dataset.message;
+                    let toastType = 'info';
+                    if (type.includes('success')) toastType = 'success';
+                    else if (type.includes('error')) toastType = 'error';
+                    else if (type.includes('warning')) toastType = 'warning';
+                    
+                    Toast.show(text, toastType);
+                });
+            }
+        });
+
+        // HTMX Event Listeners
+        document.body.addEventListener('showToast', function(evt) {
+            const data = evt.detail;
+            // Handle both simple string and object formats
+            if (typeof data === 'string') {
+                Toast.show(data, 'info');
+            } else {
+                Toast.show(data.message, data.type || 'info');
+            }
+        });
+
+        document.body.addEventListener('closeModal', function(evt) {
+            if (typeof closeProductModal === 'function') closeProductModal();
+            if (typeof closeCategoryModal === 'function') closeCategoryModal();
+        });
+
+        document.body.addEventListener('refreshList', function(evt) {
+            window.location.reload();
+        });
+
+        document.body.addEventListener('refreshCategories', function(evt) {
+             const select = document.querySelector('select[hx-get]');
+             if (select) {
+                 htmx.trigger(select, 'load');
+             }
+        });
+    </script>
     {% block extra_js %}
 
     {% endblock extra_js %}

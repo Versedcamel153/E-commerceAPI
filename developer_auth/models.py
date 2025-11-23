@@ -1,3 +1,4 @@
+import uuid
 from django.db import models
 from django.utils.crypto import get_random_string
 from django.contrib.auth import get_user_model
@@ -74,6 +75,7 @@ class APIKey(models.Model):
         ('live', 'Live'),
         ('test', 'Test'),
     ]
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     mode = models.CharField(max_length=10, choices=MODE_CHOICES, default='test')
     developer = models.ForeignKey(Developer, on_delete=models.CASCADE)
     name = models.CharField(max_length=100)

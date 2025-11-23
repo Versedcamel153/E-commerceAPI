@@ -1,0 +1,77 @@
+<div class="px-6 py-4 border-b border-slate-100 flex justify-between items-center sticky top-0 bg-white z-10">
+                        <h3 class="text-lg font-semibold text-slate-800">{% if product %}Edit Product{% else %}Add New Product{% endif %}</h3>
+                        <button onclick="closeProductModal()" class="text-slate-400 hover:text-slate-600 transition-colors">
+                            <i class="fa-solid fa-xmark text-xl"></i>
+                        </button>
+                    </div>
+<form class="p-6 space-y-6" id="productCreate" hx-post="{% if product %}{% url 'update-product' product.slug %}{% else %}{% url 'create-product' %}{% endif %}" hx-swap="none">
+                        {% csrf_token %}
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div class="col-span-2">
+                                <label class="block text-sm font-medium text-slate-700 mb-1">Product Name</label>
+                                <input type="text" name="name" value="{{ product.name|default:'' }}" class="w-full px-3 py-2 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 text-sm" placeholder="e.g. Premium Leather Wallet">
+                            </div>
+                            
+                            <div class="col-span-2">
+                                <label class="block text-sm font-medium text-slate-700 mb-1">Description</label>
+                                <textarea name="description" rows="3" class="w-full px-3 py-2 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 text-sm" placeholder="Product details...">{{ product.description|default:'' }}</textarea>
+                            </div>
+
+                            <div>
+                                <label class="block text-sm font-medium text-slate-700 mb-1">Price ($)</label>
+                                <input type="number" name="price" step="0.01" value="{{ product.price|default:'' }}" class="w-full px-3 py-2 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 text-sm" placeholder="0.00">
+                            </div>
+
+                            <div>
+                                <label class="block text-sm font-medium text-slate-700 mb-1">Stock Quantity</label>
+                                <input type="number" name="stock_quantity" value="{{ product.stock_quantity|default:'' }}" class="w-full px-3 py-2 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 text-sm" placeholder="0">
+                            </div>
+
+                            <div>
+                                <label class="block text-sm font-medium text-slate-700 mb-1">Category</label>
+                                <select name="category"
+                                hx-get="{% url 'load-categories' %}?selected_id={% if product %}{{ product.category.id|default:product.category|default:'' }}{% endif %}" 
+                                hx-target="#categorySelect2"
+                                hx-trigger="load"
+                                hx-params="none"
+                                hx-swap="innerHTML"
+                                id="productCategorySelect" onchange="handleCategorySelect(this)" class="w-full select px-3 py-2 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 text-sm bg-white">
+                                <option value="" class="text-slate-500">Select Category</option>    
+                                <div id="categorySelect2">
+                                </div>
+                                    <option value="create_new" class="text-indigo-600 font-medium py-1 bg-slate-50">+ Create New Category</option>
+                                </select>
+                            </div>
+
+                            <div>
+                                <label class="block text-sm font-medium text-slate-700 mb-1">SKU</label>
+                                <input type="text" class="w-full px-3 py-2 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 text-sm" placeholder="e.g. PROD-001">
+                            </div>
+
+                            <div class="col-span-2">
+                                <label class="block text-sm font-medium text-slate-700 mb-1">Product Image</label>
+                                <div class="mt-1 flex justify-center px-6 pt-5 pb-6 border-2 border-slate-300 border-dashed rounded-lg hover:bg-slate-50 transition-colors cursor-pointer group">
+                                    <div class="space-y-1 text-center">
+                                        <i class="fa-solid fa-cloud-arrow-up text-slate-400 group-hover:text-indigo-500 text-3xl mb-2 transition-colors"></i>
+                                        <div class="flex text-sm text-slate-600 justify-center">
+                                            <label for="file-upload" class="relative cursor-pointer bg-transparent rounded-md font-medium text-indigo-600 hover:text-indigo-500 focus-within:outline-none">
+                                                <span>Upload files</span>
+                                                <input id="file-upload" name="file-upload" type="file" class="sr-only" multiple>
+                                            </label>
+                                            <p class="pl-1">or drag and drop</p>
+                                        </div>
+                                        <p class="text-xs text-slate-500">PNG, JPG, GIF up to 10MB</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                    <!-- Footer -->
+                    <div class="px-6 py-4 bg-slate-50 rounded-b-xl flex justify-end gap-3 border-t border-slate-100 sticky bottom-0">
+                        <button onclick="closeProductModal()" class="px-4 py-2 text-sm font-medium text-slate-600 hover:text-slate-800 hover:bg-slate-200 rounded-lg transition-colors">
+                            Cancel
+                        </button>
+                        <button form="productCreate" class="px-4 py-2 text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 rounded-lg shadow-sm transition-colors">
+                            {% if product %}Update Product{% else %}Create Product{% endif %}
+                        </button>
+                    </div>

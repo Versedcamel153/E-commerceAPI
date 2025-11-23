@@ -140,7 +140,7 @@
                                             <p class="mt-1 text-amber-700/80">Generating a new key will immediately invalidate the existing Secret Key. You must update your applications immediately.</p>
                                         </div>
                                     </div>
-                                    <form id="generate_key_form-{{ forloop.counter }}" method="POST" action="{% url 'generate-api-key' %}">
+                                    <form id="generate_key_form-{{ forloop.counter }}" hx-swap="none" hx-post="{% url 'generate-api-key' %}">
                                     {% csrf_token %}
                                     <!-- Input Field -->
                                     <input type="hidden" name="mode" value="test">
